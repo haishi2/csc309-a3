@@ -8,7 +8,7 @@ const requiredEnvVars = [
 ] as const;
 
 for (const envVar of requiredEnvVars) {
-    if (!process.env[envVar]) {
+    if (!import.meta.env[envVar]) {
         throw new Error(`Environment variable ${envVar} is not set.`);
     }
 }
@@ -24,7 +24,7 @@ interface AppConfig {
 
 export const config: AppConfig = {
     server: {
-        port: parseInt(process.env.PORT, 10),
-        jwtSecret: process.env.JWT_SECRET,
+        port: parseInt(import.meta.env.PORT, 10),
+        jwtSecret: import.meta.env.JWT_SECRET,
     }
 } as const;
