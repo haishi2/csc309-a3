@@ -1,0 +1,165 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              Int      @id @default(autoincrement())
+  username        String   @unique
+  email           String   @unique
+  password        String
+  name            String
+  isActivated     Boolean  @default(false)
+  role            Role     @default(REGULAR)
+  verifiedStudent Boolean  @default(false)
+  isSuspicious    Boolean  @default(false)
+  pointsBalance   Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt()
+  lastLogin       DateTime?
+  avatarUrl       String?
+  birthday        String?
+
+  transactions        Transaction[] @relation("UserTransactions")
+  cashierTransactions Transaction[] @relation("CashierTransactions")
+  receivedTransfers   Transfer[]    @relation("ReceivedTransfers")
+  sentTransfers       Transfer[]    @relation("SentTransfers")
+  events             Event[]        @relation("ManagedEvents")
+  organizedEvents    Organizer[]
+  rsvps             RSVP[]
+  promotions        Promotion[]     @relation("ManagedPromotions")
+  promotionUses     PromotionUse[]
+}
+
+enum Role {
+  REGULAR
+  CASHIER
+  MANAGER
+  SUPERUSER
+}
+
+model Transaction {
+  id               Int      @id @default(autoincrement())
+  userId           Int
+  user             User     @relation("UserTransactions", fields: [userId], references: [id])
+  type             TransactionType
+  points           Int
+  status           TransactionStatus @default(PENDING)
+  needsVerification Boolean  @default(false)
+  processedBy      Int?
+  processor        User?    @relation("CashierTransactions", fields: [processedBy], references: [id])
+  relatedId        Int?
+  spent            Float?
+  remark           String?
+  createdAt        DateTime @default(now())
+  promotionUses    PromotionUse[]
+}
+
+enum TransactionType {
+  PURCHASE
+  ADJUSTMENT
+  REDEMPTION
+  TRANSFER
+  EVENT
+}
+
+enum TransactionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Transfer {
+  id         Int      @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  points     Int
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentTransfers", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedTransfers", fields: [receiverId], references: [id])
+}
+
+model Event {
+  id              Int      @id @default(autoincrement())
+  name            String
+  description     String
+  location        String
+  startTime       DateTime
+  endTime         DateTime
+  capacity        Int?
+  totalPoints     Int     
+  pointsRemain    Int    
+  pointsAwarded   Int      @default(0)
+  isPublished     Boolean  @default(false)
+  numGuests       Int      @default(0)
+  createdAt       DateTime @default(now())
+
+  managerId       Int
+  manager         User     @relation("ManagedEvents", fields: [managerId], references: [id])
+
+  organizers      Organizer[]
+  guests         RSVP[]
+}
+
+model Organizer {
+  id      Int   @id @default(autoincrement())
+  eventId Int
+  userId  Int
+
+  event   Event @relation(fields: [eventId], references: [id])
+  user    User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
+
+model RSVP {
+  id        Int     @id @default(autoincrement())
+  eventId   Int
+  userId    Int
+  confirmed Boolean @default(false)
+
+  event Event @relation(fields: [eventId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
+
+model Promotion {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  type        PromotionType
+  startTime   DateTime
+  endTime     DateTime
+  minSpend    Float?
+  rate        Float? 
+  points      Int?  
+  createdAt   DateTime     @default(now())
+
+  managerId   Int
+  manager     User         @relation("ManagedPromotions", fields: [managerId], references: [id])
+  uses        PromotionUse[]
+}
+
+model PromotionUse {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  promotionId Int
+  transactionId Int
+  
+  user        User      @relation(fields: [userId], references: [id])
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+  transaction Transaction @relation(fields: [transactionId], references: [id])
+
+  @@unique([userId, promotionId])
+}
+
+enum PromotionType {
+  AUTOMATIC
+  ONE_TIME
+}
