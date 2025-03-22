@@ -1,0 +1,8 @@
+html, body {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}

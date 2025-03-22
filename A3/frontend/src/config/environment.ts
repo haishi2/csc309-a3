@@ -1,15 +1,14 @@
-import { config as dotenvConfig } from "dotenv";
-
-dotenvConfig();
+// import { config as dotenvConfig } from "dotenv";
+// dotenvConfig();
 
 const requiredEnvVars = [
-    "PORT",
-    "JWT_SECRET",
+    "VITE_PORT",
+    "VITE_JWT_SECRET",
 ] as const;
 
 for (const envVar of requiredEnvVars) {
     if (!import.meta.env[envVar]) {
-        throw new Error(`Environment variable ${envVar} is not set.`);
+        throw new Error(`⛔️ Required environment variable ${envVar} is not set! ⛔️`);
     }
 }
 
@@ -24,7 +23,7 @@ interface AppConfig {
 
 export const config: AppConfig = {
     server: {
-        port: parseInt(import.meta.env.PORT, 10),
-        jwtSecret: import.meta.env.JWT_SECRET,
+        port: parseInt(import.meta.env.VITE_PORT, 10),
+        jwtSecret: import.meta.env.VITE_JWT_SECRET,
     }
 } as const;
