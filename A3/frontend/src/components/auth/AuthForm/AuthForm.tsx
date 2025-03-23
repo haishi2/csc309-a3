@@ -1,5 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "sonner";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,11 +16,10 @@ import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import AppTheme from "@/theme/shared-theme/AppTheme";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 import { useAuthStore } from "@/stores/auth-store";
-import { config } from "@/config/environment";
-import axios from "axios";
+import { login as loginApi } from "@/services/api/auth-api";
+import { useQueryClient } from "@tanstack/react-query";
+import { USER_QUERY_KEY } from "@/hooks/useUser";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -78,6 +80,7 @@ export default function AuthForm(props: {
   const [fadeState, setFadeState] = useState(false);
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
+  const queryClient = useQueryClient();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -92,13 +95,15 @@ export default function AuthForm(props: {
 
   const handleSignIn = async (data: FormData) => {
     try {
-      const response = await axios.post(`${config.server.apiUrl}/auth/tokens`, {
-        utorid: data.get("utorid"),
-        password: data.get("password"),
+      const result = await loginApi({
+        utorid: data.get("utorid") as string,
+        password: data.get("password") as string,
       });
 
-      const result = response.data;
       login(result.token);
+
+      // invalidate user query to trigger a fetch
+      queryClient.invalidateQueries({ queryKey: USER_QUERY_KEY });
 
       toast.success("Login successful!", {
         description: "You are now logged in.",
@@ -112,8 +117,10 @@ export default function AuthForm(props: {
     }
   };
 
+  // TODO: Implement signup
   const handleSignUp = async (data: FormData) => {
     try {
+      throw new Error("not implemented");
       // Replace this with your actual signup API call
       // const response = await fetch(`${config.server.apiUrl}/auth/signup`, { ... });
 

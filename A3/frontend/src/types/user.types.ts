@@ -17,9 +17,9 @@ export interface User {
     name: string;
     isActivated: boolean;
     role: Role;
-    verifiedStudent: boolean;
+    verified: boolean;
     isSuspicious: boolean;
-    pointsBalance: number;
+    points: number;
     createdAt: Date;
     updatedAt: Date;
     lastLogin?: Date;
@@ -35,4 +35,14 @@ export interface User {
     rsvps?: RSVP[];
     promotions?: Promotion[];
     promotionUses?: PromotionUse[];
+}
+
+export interface UserResponse {
+    user?: User;
+    
+    id?: number;
+    utorid?: string;
+    name?: string;
+    email?: string;
+    role?: string;
 }
