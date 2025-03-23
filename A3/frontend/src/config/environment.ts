@@ -1,9 +1,6 @@
-// import { config as dotenvConfig } from "dotenv";
-// dotenvConfig();
-
 const requiredEnvVars = [
-    "VITE_PORT",
     "VITE_JWT_SECRET",
+    "VITE_API_URL",
 ] as const;
 
 for (const envVar of requiredEnvVars) {
@@ -16,14 +13,14 @@ export {};
 
 interface AppConfig {
     server: {
-        port: number;
         jwtSecret: string;
+        apiUrl: string;
     }
 }
 
 export const config: AppConfig = {
     server: {
-        port: parseInt(import.meta.env.VITE_PORT, 10),
         jwtSecret: import.meta.env.VITE_JWT_SECRET,
+        apiUrl: import.meta.env.VITE_API_URL,
     }
 } as const;
