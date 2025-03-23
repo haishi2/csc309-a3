@@ -112,7 +112,7 @@ router
     });
     const needsVerification = cashier.isSuspicious;
 
-    let ptsEarned = Math.round(spent / 0.25);
+    let ptsEarned = Math.round(spent * 4);
     let appliedPromotions = [];
 
     if (promotionIds && promotionIds.length > 0) {
@@ -152,7 +152,8 @@ router
         }
 
         if (promotion.type === "PERIOD") {
-          ptsEarned = Math.round(ptsEarned * (promotion.rate || 1));
+          ptsEarned += Math.round(spent * 100 * (promotion.rate || 0));
+          ptsEarned += promotion.points || 0;
           appliedPromotions.push(promotion.id);
         } else if (promotion.type === "ONE_TIME") {
           const used = await prisma.promotionUse.findUnique({
@@ -164,6 +165,7 @@ router
             },
           });
           if (!used) {
+            ptsEarned += Math.round(spent * 100 * (promotion.rate || 0));
             ptsEarned += promotion.points || 0;
             appliedPromotions.push(promotion.id);
           } else {
@@ -213,11 +215,11 @@ router
       id: transaction.id,
       utorid: user.username,
       type: "purchase",
+      spent: spent,
+      earned: needsVerification ? 0 : ptsEarned,
       remark: remark || "",
       promotionIds: appliedPromotions,
       createdBy: cashier.username,
-      spent: spent,
-      earned: ptsEarned,
     };
 
     return sendResult(res, 201, response);
@@ -306,16 +308,8 @@ router
         skip,
         take: limit,
         include: {
-          user: {
-            select: {
-              username: true,
-            },
-          },
-          processor: {
-            select: {
-              username: true,
-            },
-          },
+          user: true,
+          processor: true,
           promotionUses: true,
         },
       }),
@@ -330,7 +324,7 @@ router
 
       if (t.type.toUpperCase() === "PURCHASE") {
         result.utorid = t.user.username;
-        result.amount = t.spent;
+        result.amount = t.points;
         result.spent = t.spent;
         result.promotionIds = t.promotionUses.map((pu) => pu.promotionId);
         result.suspicious = t.needsVerification;
@@ -392,7 +386,7 @@ router
 
     if (transaction.type.toUpperCase() === "PURCHASE") {
       result.utorid = transaction.user.username;
-      result.amount = transaction.spent;
+      result.amount = transaction.points;
       result.spent = transaction.spent;
       result.promotionIds = transaction.promotionUses.map(
         (pu) => pu.promotionId
