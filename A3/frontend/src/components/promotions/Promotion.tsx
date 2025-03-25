@@ -20,9 +20,9 @@ interface PromotionProps {
 
 const formatPromotionType = (type: string) => {
   switch (type) {
-    case "AUTOMATIC":
+    case "automatic":
       return "Automatic";
-    case "ONE_TIME":
+    case "one_time":
       return "One-time";
     default:
       return type;
@@ -36,11 +36,13 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
     user?.role.toUpperCase() === Role.SUPERUSER;
   return (
     <Card
+      //if user's click in on the delete button, do not trigger any other events
       onClick={(e) => {
         if ((e.target as HTMLElement).closest(".delete-button")) {
           e.stopPropagation();
           return;
         }
+        //if user's click is not on the delete button, trigger provided onClick event
         onClick?.();
       }}
       sx={{
@@ -56,11 +58,7 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
         <Typography variant="h5" gutterBottom>
           {promotion.name}
         </Typography>
-        {promotion.description && (
-          <Typography color="text.secondary" gutterBottom>
-            {promotion.description}
-          </Typography>
-        )}
+        {/* box displaying the promotion details */}
         <Box sx={{ mt: 2 }}>
           <Typography variant="body2">
             Type: {formatPromotionType(promotion.type)}
@@ -88,6 +86,7 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
           )}
         </Box>
       </CardContent>
+      {/* if user is a manager and onDelete is provided, display the delete button */}
       {isManager && onDelete && (
         <CardActions
           sx={{

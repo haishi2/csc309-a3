@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePromotions } from "@/hooks/usePromotions";
 import { Promotion as PromotionComponent } from "@/components/promotions/Promotion";
 import { PromotionDetails } from "@/components/promotions/PromotionDetails";
@@ -41,6 +41,7 @@ type CreatePromotionData = Omit<
 >;
 type UpdatePromotionData = Partial<CreatePromotionData> & { id: number };
 
+//formmat the data from the form to the correct type for the backend
 const transformFormData = (
   data: PromotionFormData
 ): Omit<Promotion, "id" | "createdAt" | "managerId" | "severity"> => {
@@ -86,6 +87,7 @@ export default function Promotions() {
     type: typeFilter || undefined,
   });
 
+  //handles user clicking on a promotion
   const handlePromotionClick = (promotion: Promotion) => {
     if (isManager) {
       setSelectedPromotionId(promotion.id);
@@ -94,6 +96,7 @@ export default function Promotions() {
     }
   };
 
+  //reset state of the modal form and view on close
   const handleCloseModal = () => {
     setSelectedPromotionId(null);
     setIsCreateModalOpen(false);
@@ -120,6 +123,7 @@ export default function Promotions() {
   const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this promotion?")) {
       await deletePromotion(id);
+      //if there is only one promotion left on the page before deletion and we are not on the first page, go to the previous page
       if (promotions?.results.length === 1 && page > 1) {
         setPage(page - 1);
       }
@@ -141,6 +145,7 @@ export default function Promotions() {
     setPage(1);
   };
 
+  //display loading spinner if data is still loading
   if (isLoading) {
     return (
       <Box
@@ -154,6 +159,7 @@ export default function Promotions() {
     );
   }
 
+  //display error message if data fails to load
   if (isError) {
     return (
       <Box
@@ -176,6 +182,7 @@ export default function Promotions() {
 
   return (
     <StyledBox>
+      {/* button to create promotion */}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -194,6 +201,7 @@ export default function Promotions() {
         )}
       </Box>
 
+      {/* search and filter section */}
       {isManager && (
         <Box display="flex" gap={2} mb={4}>
           <Box display="flex" gap={1}>
@@ -256,6 +264,7 @@ export default function Promotions() {
         </Grid>
       )}
 
+      {/* pagination controls */}
       {promotions && promotions.count && promotions.count > ITEMS_PER_PAGE && (
         <Box display="flex" justifyContent="center" mt={4}>
           <Pagination
@@ -267,6 +276,7 @@ export default function Promotions() {
         </Box>
       )}
 
+      {/* modal for updating promotions */}
       <Dialog
         open={!!selectedPromotionId}
         onClose={handleCloseModal}
@@ -282,6 +292,7 @@ export default function Promotions() {
         </DialogContent>
       </Dialog>
 
+      {/* modal for creating promotions */}
       <Dialog
         open={isCreateModalOpen}
         onClose={handleCloseModal}
@@ -293,6 +304,7 @@ export default function Promotions() {
         </DialogContent>
       </Dialog>
 
+      {/* modal for displaying promotion details for non manager or superuser users*/}
       {viewingPromotion && (
         <PromotionDetails
           promotion={viewingPromotion}

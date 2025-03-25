@@ -9,6 +9,7 @@ interface PromotionDetailsProps {
   onClose: () => void;
 }
 
+//displays promotion details for non manager or superuser users
 export function PromotionDetails({
   promotion,
   open,

@@ -13,6 +13,7 @@ export interface PromotionsParams {
   type?: string;
 }
 
+
 export const fetchPromotions = async (
   params?: PromotionsParams
 ): Promise<PromotionsResponse> => {

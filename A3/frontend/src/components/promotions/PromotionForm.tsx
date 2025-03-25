@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
-import { usePromotion, usePromotions } from "@/hooks/usePromotions";
+import { usePromotion } from "@/hooks/usePromotions";
 import { PromotionType } from "@/types/shared.types";
 
 export interface PromotionFormData {
@@ -33,7 +33,10 @@ interface PromotionFormProps {
 }
 
 export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
+  //get the existing promotion data for promotion with given id
   const { data: existingPromotion } = usePromotion(id);
+
+  //setup a form state for the promotion form
   const {
     control,
     handleSubmit,
@@ -49,12 +52,15 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
     },
   });
 
+  //  populate the form with existing promotion data when it exists
   useEffect(() => {
     if (existingPromotion) {
       reset({
         name: existingPromotion.name,
         description: existingPromotion.description || "",
-        type: existingPromotion.type.toUpperCase() as PromotionType,
+        type: existingPromotion.type
+          .toUpperCase()
+          .replace("_", "-") as PromotionType,
         startTime: new Date(existingPromotion.startTime),
         endTime: new Date(existingPromotion.endTime),
         minSpending: existingPromotion.minSpending,
@@ -193,7 +199,7 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
                 const val = e.target.value;
                 onChange(val === "" ? undefined : Number(val));
               }}
-              label="Minimum Spend"
+              label="Minimum Spend in Dollars"
               type="number"
               inputProps={{ step: "0.01", min: "0" }}
               error={Boolean(errors.minSpending)}
@@ -220,7 +226,7 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
                 const val = e.target.value;
                 onChange(val === "" ? undefined : Number(val));
               }}
-              label="Rate"
+              label="Rate (0-1)"
               type="number"
               inputProps={{
                 step: "0.01",
@@ -252,7 +258,7 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
                 const val = e.target.value;
                 onChange(val === "" ? undefined : Number(val));
               }}
-              label="Points"
+              label="Points to reward"
               type="number"
               inputProps={{ step: "1", min: "0" }}
               error={Boolean(errors.points)}

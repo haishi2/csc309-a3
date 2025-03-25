@@ -13,6 +13,7 @@ export const PROMOTIONS_QUERY_KEY = ["promotions"];
 export function usePromotions(params?: PromotionsParams) {
   const queryClient = useQueryClient();
 
+  //set up query for promotions with expiration time of 5 minutes
   const {
     data: promotions,
     isLoading,
@@ -27,9 +28,11 @@ export function usePromotions(params?: PromotionsParams) {
     refetchOnWindowFocus: false,
   });
 
+  //set up mutations for create, update, and delete
   const createMutation = useMutation({
     mutationFn: createPromotionApi,
     onSuccess: () => {
+      //clear existing queries to force refetch
       queryClient.invalidateQueries({ queryKey: PROMOTIONS_QUERY_KEY });
     },
   });
@@ -63,6 +66,7 @@ export function usePromotions(params?: PromotionsParams) {
   };
 }
 
+//set up query to get a single promotion by id
 export function usePromotion(id: number | undefined) {
   return useQuery({
     queryKey: [...PROMOTIONS_QUERY_KEY, id],
