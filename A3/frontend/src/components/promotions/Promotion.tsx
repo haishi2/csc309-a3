@@ -34,7 +34,6 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
   const isManager =
     user?.role.toUpperCase() === Role.MANAGER ||
     user?.role.toUpperCase() === Role.SUPERUSER;
-  console.log(isManager);
   return (
     <Card
       onClick={(e) => {

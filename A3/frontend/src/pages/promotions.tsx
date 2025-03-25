@@ -63,18 +63,8 @@ export default function Promotions() {
   );
   const [page, setPage] = useState(1);
   const [nameFilter, setNameFilter] = useState("");
-  const [debouncedNameFilter, setDebouncedNameFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    if (nameFilter) {
-      const timer = setTimeout(() => {
-        setDebouncedNameFilter(nameFilter);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [nameFilter]);
 
   const { user } = useUser();
   const isManager =
@@ -92,7 +82,7 @@ export default function Promotions() {
   } = usePromotions({
     page,
     limit: ITEMS_PER_PAGE,
-    name: debouncedNameFilter || undefined,
+    name: nameFilter || undefined,
     type: typeFilter || undefined,
   });
 
@@ -141,7 +131,7 @@ export default function Promotions() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSearch();
     }
   };
