@@ -21,5 +21,5 @@ export enum TransactionStatus {
 
 export enum PromotionType {
   AUTOMATIC = "AUTOMATIC",
-  ONE_TIME = "ONE_TIME",
+  ONE_TIME = "ONE-TIME",
 }
