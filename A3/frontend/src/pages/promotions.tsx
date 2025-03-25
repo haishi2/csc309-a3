@@ -22,7 +22,7 @@ import {
   InputLabel,
   Pagination,
 } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
+import { Add as AddIcon, Search as SearchIcon } from "@mui/icons-material";
 import { Promotion } from "@/types/promotion.types";
 import { PromotionType, Role } from "@/types/shared.types";
 import { useUser } from "@/hooks/useUser";
@@ -65,13 +65,15 @@ export default function Promotions() {
   const [nameFilter, setNameFilter] = useState("");
   const [debouncedNameFilter, setDebouncedNameFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedNameFilter(nameFilter);
-    }, 500);
-
-    return () => clearTimeout(timer);
+    if (nameFilter) {
+      const timer = setTimeout(() => {
+        setDebouncedNameFilter(nameFilter);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
   }, [nameFilter]);
 
   const { user } = useUser();
@@ -138,6 +140,17 @@ export default function Promotions() {
     setPage(value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const handleSearch = () => {
+    setNameFilter(searchTerm);
+    setPage(1);
+  };
+
   if (isLoading) {
     return (
       <Box
@@ -193,14 +206,23 @@ export default function Promotions() {
 
       {isManager && (
         <Box display="flex" gap={2} mb={4}>
-          <TextField
-            label="Search by name"
-            value={nameFilter}
-            onChange={(e) => {
-              setNameFilter(e.target.value);
-            }}
-            size="small"
-          />
+          <Box display="flex" gap={1}>
+            <TextField
+              label="Search by name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+              size="small"
+            />
+            <Button
+              variant="contained"
+              onClick={handleSearch}
+              startIcon={<SearchIcon />}
+              sx={{ minWidth: 100 }}
+            >
+              Search
+            </Button>
+          </Box>
           <FormControl size="small" sx={{ minWidth: 120 }}>
             <InputLabel>Type</InputLabel>
             <Select
