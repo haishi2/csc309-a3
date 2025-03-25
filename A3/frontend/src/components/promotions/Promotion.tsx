@@ -66,9 +66,11 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
           <Typography variant="body2">
             Type: {formatPromotionType(promotion.type)}
           </Typography>
-          <Typography variant="body2">
-            Start: {format(new Date(promotion.startTime), "PPp")}
-          </Typography>
+          {isManager && (
+            <Typography variant="body2">
+              Start: {format(new Date(promotion.startTime), "PPp")}
+            </Typography>
+          )}
           <Typography variant="body2">
             End: {format(new Date(promotion.endTime), "PPp")}
           </Typography>
