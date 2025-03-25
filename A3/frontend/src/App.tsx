@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import PrivateRoutes from "@/components/hoc/PrivateRoute";
-import AuthForm from "@/components/auth/AuthForm/AuthForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import UserProfile from "@/pages/user-profile";
+import AuthPage from "@/pages/auth";
+import UserProfilePage from "@/pages/user-profile";
 import Promotions from "@/pages/promotions";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -20,12 +20,12 @@ const AppContent = () => {
 
       <Routes>
         {/* public routes */}
-        <Route path="/auth" element={<AuthForm />} />
+        <Route path="/auth" element={<AuthPage />} />
 
         {/* private routes */}
         <Route element={<PrivateRoutes />}>
-          <Route path="/" element={<UserProfile />} />
-          <Route path="/me" element={<UserProfile />} />
+          <Route path="/" element={<UserProfilePage />} />
+          <Route path="/me" element={<UserProfilePage />} />
           <Route path="/promotions" element={<Promotions />} />
         </Route>
       </Routes>
