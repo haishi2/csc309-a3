@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import { Card, Avatar, Box } from "@mui/material";
 
 const ProfileCard = styled(Card)(({ theme }) => ({
-  maxWidth: 600,
+  maxWidth: 1000,
   margin: "0 auto",
   marginTop: theme.spacing(4),
   padding: theme.spacing(3),

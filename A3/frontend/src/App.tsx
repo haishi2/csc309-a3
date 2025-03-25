@@ -7,6 +7,7 @@ import UserProfilePage from "@/pages/user-profile";
 import Promotions from "@/pages/promotions";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import Transactions from "@/pages/transactions";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const AppContent = () => {
           <Route path="/" element={<UserProfilePage />} />
           <Route path="/me" element={<UserProfilePage />} />
           <Route path="/promotions" element={<Promotions />} />
+          <Route path="/transactions" element={<Transactions />} />
         </Route>
       </Routes>
     </>
