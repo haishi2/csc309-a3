@@ -4,6 +4,10 @@ import PrivateRoutes from "@/components/hoc/PrivateRoute";
 import AuthForm from "@/components/auth/AuthForm/AuthForm";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserProfile from "@/pages/user-profile";
+import Promotions from "@/pages/promotions";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+
 const queryClient = new QueryClient();
 
 const AppContent = () => {
@@ -22,6 +26,7 @@ const AppContent = () => {
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<UserProfile />} />
           <Route path="/me" element={<UserProfile />} />
+          <Route path="/promotions" element={<Promotions />} />
         </Route>
       </Routes>
     </>
@@ -31,9 +36,11 @@ const AppContent = () => {
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </LocalizationProvider>
     </QueryClientProvider>
   );
 }

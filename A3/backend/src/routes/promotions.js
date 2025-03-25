@@ -161,7 +161,7 @@ router
     }
 
     if (type) {
-      query.type = type.toUpperCase();
+      query.type = type.toUpperCase().replace("-", "_");
     }
 
     if (isManager) {
@@ -198,6 +198,7 @@ router
     }
 
     const skip = (page - 1) * limit;
+    console.log(query);
 
     const [count, promotions] = await Promise.all([
       prisma.promotion.count({ where: query }),
