@@ -133,7 +133,7 @@ router
       totalPoints: event.totalPoints,
       pointsRemain: event.pointsRemain,
       pointsAwarded: 0,
-      published: false,
+      isPublished: false,
       organizers: event.organizers.map((org) => ({
         id: org.user.id,
         utorid: org.user.username,
@@ -143,7 +143,7 @@ router
     });
   })
   .get(authenticate, requireClearance("REGULAR"), async (req, res) => {
-    let { name, page, limit, started, ended, registered, published } =
+    let { name, page, limit, started, ended, registered, isPublished } =
       req.query;
 
     if (page !== null && page !== undefined) {
@@ -237,9 +237,9 @@ router
       }
     }
 
-    if (published !== null && published !== undefined) {
+    if (isPublished !== null && isPublished !== undefined) {
       if (roles[req.user.role] >= roles.MANAGER) {
-        query.isPublished = published === "true";
+        query.isPublished = isPublished === "true";
       }
       if (roles[req.user.role] < roles.MANAGER) {
         sendResult(res, 403, {
@@ -258,8 +258,17 @@ router
         take: limit,
         include: {
           guests: {
-            select: {
-              userId: true,
+            include: {
+              user: {
+                select: { id: true, username: true, name: true },
+              },
+            },
+          },
+          organizers: {
+            include: {
+              user: {
+                select: { id: true, username: true, name: true },
+              },
             },
           },
         },
@@ -270,17 +279,27 @@ router
       const response = {
         id: event.id,
         name: event.name,
+        description: event.description,
         location: event.location,
         startTime: event.startTime.toISOString(),
         endTime: event.endTime.toISOString(),
         capacity: event.capacity,
         numGuests: event.numGuests,
+        isRegistered: event.guests.some(
+          (guest) => guest.userId === req.user.id
+        ),
       };
 
-      if (roles[req.user.role] >= roles.MANAGER) {
+      if (
+        roles[req.user.role] >= roles.MANAGER ||
+        event.organizers.some((org) => org.userId === req.user.id)
+      ) {
         response.pointsRemain = event.pointsRemain;
         response.pointsAwarded = event.totalPoints - event.pointsRemain;
-        response.published = event.isPublished;
+        response.isPublished = event.isPublished;
+        response.points = event.totalPoints;
+        response.guests = event.guests;
+        response.organizers = event.organizers;
       }
 
       return response;
@@ -355,21 +374,24 @@ router
         name: org.user.name,
       })),
       numGuests: event._count.guests,
+      isRegistered: event.guests.some((guest) => guest.userId === req.user.id),
     };
-
-    console.log(event.organizers);
-
     if (
       roles[req.user.role] >= roles.MANAGER ||
       event.organizers.some((org) => org.userId === req.user.id)
     ) {
       response.pointsRemain = event.pointsRemain;
       response.pointsAwarded = event.totalPoints - event.pointsRemain;
-      response.published = event.isPublished;
+      response.isPublished = event.isPublished;
       response.guests = event.guests.map((guest) => ({
         id: guest.userId,
         utorid: guest.user.username,
         name: guest.user.name,
+      }));
+      response.organizers = event.organizers.map((org) => ({
+        id: org.userId,
+        utorid: org.user.username,
+        name: org.user.name,
       }));
     }
 
@@ -385,7 +407,7 @@ router
       endTime,
       points,
       capacity,
-      published,
+      isPublished,
     } = req.body;
 
     if (isNaN(eventId) || eventId <= 0) {
@@ -525,9 +547,9 @@ router
         });
       }
 
-      if (req.user.role !== "MANAGER") {
+      if (req.user.role !== "MANAGER" && req.user.role !== "SUPERUSER") {
         return sendResult(res, 403, {
-          error: "Only managers can modify points",
+          error: "Only managers and superusers can modify points",
         });
       }
 
@@ -543,22 +565,22 @@ router
       }
     }
 
-    if (published !== null && published !== undefined) {
+    if (isPublished !== null && isPublished !== undefined) {
       if (
-        typeof published !== "boolean" ||
-        (typeof published === "boolean" && published === false)
+        typeof isPublished !== "boolean" ||
+        (typeof isPublished === "boolean" && isPublished === false)
       ) {
         return sendResult(res, 400, { error: "published must be true" });
       }
 
-      if (req.user.role !== "MANAGER") {
+      if (req.user.role !== "MANAGER" && req.user.role !== "SUPERUSER") {
         return sendResult(res, 403, {
           error: "Only managers can publish events",
         });
       }
 
       if (roles[req.user.role] >= roles.MANAGER) {
-        updateData.isPublished = published;
+        updateData.isPublished = isPublished;
       }
     }
 
@@ -614,7 +636,7 @@ router
       response.registered = updatedEvent._count.guests;
     }
     if (updateData.isPublished) {
-      response.published = updatedEvent.isPublished;
+      response.isPublished = updatedEvent.isPublished;
     }
     sendResult(res, 200, response);
   })

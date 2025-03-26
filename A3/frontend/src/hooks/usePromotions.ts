@@ -60,9 +60,6 @@ export function usePromotions(params?: PromotionsParams) {
     createPromotion: createMutation.mutate,
     updatePromotion: updateMutation.mutate,
     deletePromotion: deleteMutation.mutate,
-    createPromotionAsync: createMutation.mutateAsync,
-    updatePromotionAsync: updateMutation.mutateAsync,
-    deletePromotionAsync: deleteMutation.mutateAsync,
   };
 }
 
