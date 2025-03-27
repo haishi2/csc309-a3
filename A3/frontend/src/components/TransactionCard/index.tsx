@@ -1,23 +1,16 @@
 import {
     Card,
     CardContent,
-    Typography,
-    Box,
     TextField,
     Button,
     Stack,
     Alert,
     Tabs,
     Tab,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
     Autocomplete,
     Chip,
   } from "@mui/material";
   import { useState } from "react";
-  import { useUser } from "@/hooks/useUser";
   import { usePromotions } from "@/hooks/usePromotions";
   import { toast } from "sonner";
   import { createPurchase, processRedemption } from "@/services/api/transactions-api";
@@ -36,7 +29,6 @@ import {
   }
   
   export default function TransactionCard() {
-    const { user } = useUser();
     const [activeTab, setActiveTab] = useState(0);
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
