@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import PrivateRoutes from "@/components/hoc/PrivateRoute";
+import RoleRestrictedRoute from "@/components/hoc/RoleRestrictedRoute";
 import AuthPage from "@/pages/auth";
 import UserProfilePage from "@/pages/user-profile";
 import Promotions from "@/pages/promotions";
@@ -10,6 +11,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Events from "@/pages/events";
 import Transactions from "@/pages/transactions";
 import Users from "@/pages/users";
+import { Role } from "@/types/shared.types";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +33,17 @@ const AppContent = () => {
           <Route path="/me" element={<UserProfilePage />} />
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/transactions" element={<Transactions />} />
+
+          {/* role protected route */}
+          <Route
+            element={
+              <RoleRestrictedRoute
+                allowedRoles={[Role.CASHIER, Role.MANAGER, Role.SUPERUSER]}
+              />
+            }
+          >
+            <Route path="/transactions" element={<Transactions />} />
+          </Route>
           <Route path="/users" element={<Users />} />
         </Route>
       </Routes>
