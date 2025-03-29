@@ -15,6 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -185,6 +186,37 @@ export default function PrimarySearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/events"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              textDecoration: "none",
+              color: "inherit",
+              cursor: "pointer",
+              marginRight: "1%",
+            }}
+          >
+            Events
+          </Typography>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/promotions"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              textDecoration: "none",
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            Promotions
+          </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
