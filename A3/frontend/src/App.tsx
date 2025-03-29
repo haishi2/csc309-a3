@@ -12,6 +12,9 @@ import Events from "@/pages/events";
 import Transactions from "@/pages/transactions";
 import Users from "@/pages/users";
 import { Role } from "@/types/shared.types";
+import TransactionHistory from "@/components/TransactionHistory";
+import AllTransactions from "@/pages/all-transactions";
+import TransactionDetails from "@/pages/transaction-details";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +46,12 @@ const AppContent = () => {
             }
           >
             <Route path="/transactions" element={<Transactions />} />
+            <Route
+              path="/transactions/history"
+              element={<TransactionHistory />}
+            />
+            <Route path="/transactions/all" element={<AllTransactions />} />
+            <Route path="/transactions/:id" element={<TransactionDetails />} />
           </Route>
           <Route path="/users" element={<Users />} />
         </Route>
