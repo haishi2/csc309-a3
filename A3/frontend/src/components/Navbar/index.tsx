@@ -15,6 +15,7 @@ export default function Navbar() {
     { path: "/promotions", label: "Promotions" },
     { path: "/events", label: "Events" },
     { path: "/transactions", label: "Transactions" },
+    { path: "/transactions/history", label: "Transaction History" },
   ];
 
   return (
