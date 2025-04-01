@@ -219,7 +219,7 @@ router
     } else {
       const now = new Date();
       now.setMilliseconds(0);
-      query.startTime = { gt: now };
+      query.endTime = { gt: now };
       if (registered !== null && registered !== undefined) {
         if (registered === "true") {
           query.registrations = {
@@ -253,7 +253,9 @@ router
     const [count, events] = await Promise.all([
       prisma.event.count({ where: query }),
       prisma.event.findMany({
-        where: query,
+        where: {
+          OR: [query, { organizers: { some: { userId: req.user.id } } }],
+        },
         skip: skip,
         take: limit,
         include: {

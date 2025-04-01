@@ -140,7 +140,10 @@ router
     const query = {};
 
     if (name) {
-      query.OR = [{ username: { equals: name } }, { name: { equals: name } }];
+      query.OR = [
+        { username: { contains: name } },
+        { name: { contains: name } },
+      ];
     }
 
     if (role) {
@@ -177,6 +180,7 @@ router
       createdAt: user.createdAt,
       lastLogin: user.lastLogin ? user.lastLogin.toISOString() : "",
       verified: user.verifiedStudent,
+      isActivated: user.isActivated,
       avatarUrl: user.avatarUrl || null,
     }));
 
@@ -305,6 +309,7 @@ router
           ? updatedUser.lastLogin.toISOString()
           : "",
         verified: updatedUser.verifiedStudent,
+        isActivated: updatedUser.isActivated,
         avatarUrl: updatedUser.avatarUrl || null,
       });
     }
@@ -394,6 +399,7 @@ router
         createdAt: user.createdAt,
         lastLogin: user.lastLogin ? user.lastLogin.toISOString() : "",
         verified: user.verifiedStudent,
+        isActivated: user.isActivated,
         avatarUrl: user.avatarUrl || null,
         promotions: availablePromotions.map((promotion) => ({
           id: promotion.id,
@@ -411,6 +417,7 @@ router
         name: user.name,
         points: user.pointsBalance,
         verified: user.verifiedStudent,
+        isActivated: user.isActivated,
         promotions: availablePromotions.map((promotion) => ({
           id: promotion.id,
           name: promotion.name,

@@ -16,6 +16,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
+import { useUser } from "@/hooks/useUser";
+import { Role } from "@/types/shared.types";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,6 +63,11 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const { user } = useUser();
+  const isManagerOrSuperuser =
+    user?.role.toUpperCase() === Role.MANAGER ||
+    user?.role.toUpperCase() === Role.SUPERUSER;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -213,10 +220,29 @@ export default function PrimarySearchAppBar() {
               textDecoration: "none",
               color: "inherit",
               cursor: "pointer",
+              marginRight: "1%",
             }}
           >
             Promotions
           </Typography>
+
+          {isManagerOrSuperuser && (
+            <Typography
+              variant="h6"
+              noWrap
+              component={Link}
+              to="/users"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                textDecoration: "none",
+                color: "inherit",
+                cursor: "pointer",
+              }}
+            >
+              Users
+            </Typography>
+          )}
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

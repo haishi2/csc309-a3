@@ -5,9 +5,10 @@ import {
   Box,
   IconButton,
   CardActions,
+  Chip,
 } from "@mui/material";
 import { Promotion as PromotionType } from "@/types/promotion.types";
-import { format } from "date-fns";
+import { format, isFuture, isPast, isWithinInterval } from "date-fns";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import { useUser } from "@/hooks/useUser";
 import { Role } from "@/types/shared.types";
@@ -34,6 +35,29 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
   const isManager =
     user?.role.toUpperCase() === Role.MANAGER ||
     user?.role.toUpperCase() === Role.SUPERUSER;
+
+  const getPromotionStatus = () => {
+    const now = new Date();
+    const startTime = new Date(promotion.startTime);
+    const endTime = new Date(promotion.endTime);
+
+    if (isFuture(startTime)) {
+      return { label: "Not Started", color: "info" };
+    } else if (isPast(endTime)) {
+      return { label: "Ended", color: "error" };
+    } else if (isWithinInterval(now, { start: startTime, end: endTime })) {
+      return { label: "Active", color: "success" };
+    }
+    return { label: "Unknown", color: "default" };
+  };
+
+  let status;
+  if (isManager) {
+    status = getPromotionStatus();
+  } else {
+    status = { label: "Active", color: "success" };
+  }
+
   return (
     <Card
       //if user's click in on the delete button, do not trigger any other events
@@ -85,30 +109,29 @@ export function Promotion({ promotion, onDelete, onClick }: PromotionProps) {
             <Typography variant="body2">Points: {promotion.points}</Typography>
           )}
         </Box>
+        {isManager && onDelete && (
+          <CardActions sx={{ position: "absolute", bottom: 4, right: 4 }}>
+            <IconButton
+              className="delete-button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(promotion.id);
+              }}
+              color="error"
+              size="small"
+            >
+              <DeleteIcon />
+            </IconButton>
+          </CardActions>
+        )}
       </CardContent>
+      <Chip
+        sx={{ position: "absolute", top: 16, right: 12 }}
+        label={status.label}
+        color={status.color as "info" | "error" | "success" | "default"}
+        size="small"
+      />
       {/* if user is a manager and onDelete is provided, display the delete button */}
-      {isManager && onDelete && (
-        <CardActions
-          sx={{
-            position: "absolute",
-            top: 8,
-            right: 8,
-            padding: 0,
-          }}
-        >
-          <IconButton
-            className="delete-button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(promotion.id);
-            }}
-            color="error"
-            size="small"
-          >
-            <DeleteIcon />
-          </IconButton>
-        </CardActions>
-      )}
     </Card>
   );
 }
