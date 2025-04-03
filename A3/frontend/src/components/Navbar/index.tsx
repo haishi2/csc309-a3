@@ -3,11 +3,14 @@ import Toolbar from "@mui/material/Toolbar";
 import { Button, Stack } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth-store";
+import { Role } from "@/types/shared.types";
+import { useUser } from "@/hooks/useUser";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = useAuthStore((state) => state.logout);
+  const { user } = useUser();
 
   const navItems = [
     { path: "/", label: "Home" },
@@ -15,6 +18,11 @@ export default function Navbar() {
     { path: "/promotions", label: "Promotions" },
     { path: "/events", label: "Events" },
     { path: "/transactions", label: "Transactions" },
+    { path: "/transactions/history", label: "Transaction History" },
+    ...(user?.role.toUpperCase() === Role.MANAGER ||
+    user?.role.toUpperCase() === Role.SUPERUSER
+      ? [{ path: "/users", label: "Users" }]
+      : []),
   ];
 
   return (
