@@ -23,6 +23,7 @@ export default function Navbar() {
     user?.role.toUpperCase() === Role.SUPERUSER
       ? [{ path: "/users", label: "Users" }]
       : []),
+    { path: "/reset-password", label: "Reset Password" },
   ];
 
   return (
