@@ -18,7 +18,7 @@ import TransactionDetails from "@/pages/transaction-details";
 import PasswordResetPage from "@/pages/password-reset";
 import SignupPage from "@/pages/signup";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const AppContent = () => {
   const location = useLocation();
