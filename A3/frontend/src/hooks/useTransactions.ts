@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import apiClient from "@/services/api/api-client";
-import type { TransactionResponse } from "@/types";
+import type { TransactionResponse, Transaction } from "@/types";
 
 export interface TransactionFilters {
   type?: string;
@@ -18,17 +18,38 @@ export function useTransactions(filters: TransactionFilters = {}) {
   return useQuery({
     queryKey: [...TRANSACTIONS_QUERY_KEY, filters],
     queryFn: async () => {
-      const params = new URLSearchParams();
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined) {
-          params.append(key, value.toString());
-        }
-      });
-
       const response = await apiClient.get<TransactionResponse>(
-        `/users/me/transactions?${params.toString()}`
+        "/users/me/transactions"
       );
       return response.data;
+    },
+  });
+}
+
+export function useCreateRedemption() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      amount,
+      remark,
+    }: {
+      amount: number;
+      remark?: string;
+    }) => {
+      const response = await apiClient.post<Transaction>(
+        "/users/me/transactions",
+        {
+          type: "redemption",
+          amount,
+          remark,
+        }
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      // Invalidate and refetch transactions after successful creation
+      queryClient.invalidateQueries({ queryKey: TRANSACTIONS_QUERY_KEY });
     },
   });
 }
