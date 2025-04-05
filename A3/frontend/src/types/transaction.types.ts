@@ -9,6 +9,7 @@ export interface Transaction {
   relatedId?: number;
   utorid: string;
   suspicious?: boolean;
+  processedBy?: string | null;
 }
 
 export interface TransactionResponse {

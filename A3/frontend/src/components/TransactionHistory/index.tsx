@@ -21,6 +21,7 @@ import {
   DialogContent,
   Tabs,
   Tab,
+  DialogActions,
 } from "@mui/material";
 import { useState } from "react";
 import { useTransactions, useCreateRedemption } from "@/hooks/useTransactions";
@@ -33,6 +34,7 @@ import {
   useTransaction,
   useToggleSuspicious,
 } from "@/hooks/useAllTransactions";
+import { QRCodeSVG } from "qrcode.react";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -128,6 +130,9 @@ export default function TransactionHistory() {
 
   const createRedemption = useCreateRedemption();
 
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [selectedQRTransaction, setSelectedQRTransaction] = useState<Transaction | null>(null);
+
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -170,6 +175,10 @@ export default function TransactionHistory() {
     } catch (error) {
       toast.error("Failed to update suspicious status");
     }
+  };
+
+  const isUnprocessedRedemption = (transaction: Transaction) => {
+    return transaction.type === "redemption" && !transaction.processedBy;
   };
 
   const renderTransactionDetails = (transaction: Transaction) => {
@@ -351,6 +360,19 @@ export default function TransactionHistory() {
                     color={typeColors[transaction.type] || "default"}
                     variant="filled"
                   />
+                  {isUnprocessedRedemption(transaction) && (
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedQRTransaction(transaction);
+                        setShowQRCode(true);
+                      }}
+                    >
+                      View QR
+                    </Button>
+                  )}
                   {isManager && (
                     <Chip
                       label={transaction.suspicious ? "Suspicious" : "Verified"}
@@ -505,6 +527,48 @@ export default function TransactionHistory() {
             </Stack>
           </form>
         </Box>
+      </Dialog>
+
+      {/* Add QR Code Dialog */}
+      <Dialog
+        open={showQRCode}
+        onClose={() => {
+          setShowQRCode(false);
+          setSelectedQRTransaction(null);
+        }}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogContent>
+          <Stack spacing={2} alignItems="center">
+            <Typography variant="h6">
+              Redemption Request #{selectedQRTransaction?.id}
+            </Typography>
+            {selectedQRTransaction && (
+              <>
+                <QRCodeSVG
+                  value={JSON.stringify({
+                    type: "redemption",
+                    id: selectedQRTransaction.id,
+                    amount: selectedQRTransaction.amount
+                  })}
+                  size={256}
+                />
+                <Typography>
+                  Amount: {Math.abs(selectedQRTransaction.amount)} points
+                </Typography>
+              </>
+            )}
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+            setShowQRCode(false);
+            setSelectedQRTransaction(null);
+          }}>
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );
