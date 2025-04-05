@@ -11,6 +11,8 @@ export interface PromotionsParams {
   limit?: number;
   name?: string;
   type?: string;
+  started?: string;
+  ended?: string;
 }
 
 export const fetchPromotions = async (
@@ -21,6 +23,8 @@ export const fetchPromotions = async (
   if (params?.limit) searchParams.append("limit", params.limit.toString());
   if (params?.name) searchParams.append("name", params.name);
   if (params?.type) searchParams.append("type", params.type);
+  if (params?.started) searchParams.append("started", params.started);
+  if (params?.ended) searchParams.append("ended", params.ended);
 
   const response = await apiClient.get(
     `/promotions?${searchParams.toString()}`

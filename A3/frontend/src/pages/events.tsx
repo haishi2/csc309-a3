@@ -23,6 +23,8 @@ import {
   Pagination,
   Tabs,
   Tab,
+  FormControlLabel,
+  Switch,
 } from "@mui/material";
 import { Add as AddIcon, Search as SearchIcon } from "@mui/icons-material";
 import { Event } from "@/types/event.types";
@@ -69,7 +71,17 @@ export default function Events() {
   const [page, setPage] = useState(1);
   const [nameFilter, setNameFilter] = useState("");
   const [publishedFilter, setPublishedFilter] = useState<string>("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [startedFilter, setStartedFilter] = useState<string>("");
+  const [endedFilter, setEndedFilter] = useState<string>("");
+  const [showFullFilter, setShowFullFilter] = useState<boolean>(true);
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [publishedInput, setPublishedInput] = useState<string>("");
+  const [locationInput, setLocationInput] = useState("");
+  const [startedInput, setStartedInput] = useState<string>("");
+  const [endedInput, setEndedInput] = useState<string>("");
+  const [showFullInput, setShowFullInput] = useState<boolean>(true);
   const [tabValue, setTabValue] = useState(0);
   const [selectedEventForGuests, setSelectedEventForGuests] =
     useState<Event | null>(null);
@@ -114,11 +126,21 @@ export default function Events() {
         : publishedFilter === "draft"
         ? false
         : undefined,
+    location: locationFilter || undefined,
+    started:
+      startedFilter === "started"
+        ? true
+        : startedFilter === "notStarted"
+        ? false
+        : undefined,
+    ended:
+      endedFilter === "ended"
+        ? true
+        : endedFilter === "notEnded"
+        ? false
+        : undefined,
+    showFull: showFullFilter !== undefined ? showFullFilter : undefined,
   });
-
-  useEffect(() => {
-    refetch();
-  }, [publishedFilter, refetch]);
 
   const handleEventClick = (event: Event) => {
     if (!isManager && !event.organizers?.some((o) => o.userId === user?.id)) {
@@ -172,13 +194,38 @@ export default function Events() {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      handleSearch();
+      handleApplyFilters();
     }
   };
 
-  const handleSearch = () => {
-    setNameFilter(searchTerm);
+  const handleClearFilters = () => {
+    setNameFilter("");
+    setPublishedFilter("");
+    setLocationFilter("");
+    setStartedFilter("");
+    setEndedFilter("");
+    setShowFullFilter(true);
+
+    setSearchTerm("");
+    setPublishedInput("");
+    setLocationInput("");
+    setStartedInput("");
+    setEndedInput("");
+    setShowFullInput(true);
+
     setPage(1);
+    refetch();
+  };
+
+  const handleApplyFilters = () => {
+    setNameFilter(searchTerm);
+    setPublishedFilter(publishedInput);
+    setLocationFilter(locationInput);
+    setStartedFilter(startedInput);
+    setEndedFilter(endedInput);
+    setShowFullFilter(showFullInput);
+    setPage(1);
+    refetch();
   };
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -388,33 +435,22 @@ export default function Events() {
         )}
       </Box>
 
-      {isManager && (
-        <Box display="flex" gap={2} mb={4}>
-          <Box display="flex" gap={1}>
-            <TextField
-              label="Search by name"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              size="small"
-            />
-            <Button
-              variant="contained"
-              onClick={handleSearch}
-              startIcon={<SearchIcon />}
-              sx={{ minWidth: 100 }}
-            >
-              Search
-            </Button>
-          </Box>
+      <Box display="flex" gap={1}>
+        <TextField
+          label="Search by name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+          size="small"
+        />
+        {isManager && (
           <FormControl size="small" sx={{ minWidth: 120 }}>
             <InputLabel>Status</InputLabel>
             <Select
-              value={publishedFilter}
+              value={publishedInput}
               label="Status"
               onChange={(e) => {
-                setPublishedFilter(e.target.value);
-                setPage(1);
+                setPublishedInput(e.target.value);
               }}
             >
               <MenuItem value="">All</MenuItem>
@@ -422,8 +458,77 @@ export default function Events() {
               <MenuItem value="draft">Draft</MenuItem>
             </Select>
           </FormControl>
-        </Box>
-      )}
+        )}
+
+        <TextField
+          label="Location"
+          value={locationInput}
+          onChange={(e) => {
+            setLocationInput(e.target.value);
+          }}
+          size="small"
+          sx={{ minWidth: 150 }}
+        />
+
+        <FormControl size="small" sx={{ minWidth: 120 }}>
+          <InputLabel>Started</InputLabel>
+          <Select
+            value={startedInput}
+            label="Started"
+            onChange={(e) => {
+              setStartedInput(e.target.value);
+            }}
+          >
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="started">Started</MenuItem>
+            <MenuItem value="notStarted">Not Started</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl size="small" sx={{ minWidth: 120 }}>
+          <InputLabel>Ended</InputLabel>
+          <Select
+            value={endedInput}
+            label="Ended"
+            onChange={(e) => {
+              setEndedInput(e.target.value);
+            }}
+          >
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="ended">Ended</MenuItem>
+            <MenuItem value="notEnded">Not Ended</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showFullInput}
+              onChange={(e) => {
+                setShowFullInput(e.target.checked);
+              }}
+            />
+          }
+          label="Show Full Events"
+        />
+        <Button
+          variant="contained"
+          onClick={handleApplyFilters}
+          startIcon={<SearchIcon />}
+          sx={{ minWidth: 100 }}
+        >
+          Apply Filters
+        </Button>
+
+        <Button
+          variant="outlined"
+          onClick={handleClearFilters}
+          size="small"
+          sx={{ minWidth: 120 }}
+        >
+          Clear Filters
+        </Button>
+      </Box>
 
       {!isManager && (
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -449,7 +554,7 @@ export default function Events() {
         </TabPanel>
       )}
 
-      {events && events.count > 0 && (
+      {events && events.count > 0 && events.count > ITEMS_PER_PAGE && (
         <Box display="flex" justifyContent="center" mt={4}>
           <Pagination
             count={Math.ceil(events.count / ITEMS_PER_PAGE)}

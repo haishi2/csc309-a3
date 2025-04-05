@@ -80,7 +80,12 @@ export default function Promotions() {
   const [page, setPage] = useState(1);
   const [nameFilter, setNameFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("");
+  const [startedFilter, setStartedFilter] = useState<string>("");
+  const [endedFilter, setEndedFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [typeTerm, setTypeTerm] = useState<string>("");
+  const [startedTerm, setStartedTerm] = useState<string>("");
+  const [endedTerm, setEndedTerm] = useState<string>("");
 
   const { user } = useUser();
   const isManager =
@@ -100,6 +105,8 @@ export default function Promotions() {
     limit: ITEMS_PER_PAGE,
     name: nameFilter || undefined,
     type: typeFilter || undefined,
+    started: startedFilter || undefined,
+    ended: endedFilter || undefined,
   });
 
   //handles user clicking on a promotion
@@ -166,6 +173,9 @@ export default function Promotions() {
 
   const handleSearch = () => {
     setNameFilter(searchTerm);
+    setTypeFilter(typeTerm);
+    setStartedFilter(startedTerm);
+    setEndedFilter(endedTerm);
     setPage(1);
   };
 
@@ -224,42 +234,67 @@ export default function Promotions() {
         )}
       </Box>
 
-      {isManager && (
-        <Box display="flex" gap={2} mb={4}>
-          <Box display="flex" gap={1}>
-            <TextField
-              label="Search by name"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              size="small"
-            />
-            <Button
-              variant="contained"
-              onClick={handleSearch}
-              startIcon={<SearchIcon />}
-              sx={{ minWidth: 100 }}
-            >
-              Search
-            </Button>
-          </Box>
-          <FormControl size="small" sx={{ minWidth: 120 }}>
-            <InputLabel>Type</InputLabel>
-            <Select
-              value={typeFilter}
-              label="Type"
-              onChange={(e) => {
-                setTypeFilter(e.target.value);
-                setPage(1);
-              }}
-            >
-              <MenuItem value="">All</MenuItem>
-              <MenuItem value="automatic">Automatic</MenuItem>
-              <MenuItem value="one-time">One-time</MenuItem>
-            </Select>
-          </FormControl>
+      <Box display="flex" gap={2} mb={4}>
+        <Box display="flex" gap={1}>
+          <TextField
+            label="Search by name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+            size="small"
+          />
+          <Button
+            variant="contained"
+            onClick={handleSearch}
+            startIcon={<SearchIcon />}
+            sx={{ minWidth: 100 }}
+          >
+            Search
+          </Button>
         </Box>
-      )}
+        <FormControl size="small" sx={{ minWidth: 120 }}>
+          <InputLabel>Type</InputLabel>
+          <Select
+            value={typeTerm}
+            label="Type"
+            onChange={(e) => {
+              setTypeTerm(e.target.value);
+            }}
+          >
+            <MenuItem value="">All</MenuItem>
+            <MenuItem value="automatic">Automatic</MenuItem>
+            <MenuItem value="one-time">One-time</MenuItem>
+          </Select>
+        </FormControl>
+        {isManager && (
+          <>
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Started</InputLabel>
+              <Select
+                value={startedTerm}
+                label="Started"
+                onChange={(e) => setStartedTerm(e.target.value)}
+              >
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="started">Started</MenuItem>
+                <MenuItem value="notStarted">Not Started</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl size="small" sx={{ minWidth: 120 }}>
+              <InputLabel>Ended</InputLabel>
+              <Select
+                value={endedTerm}
+                label="Ended"
+                onChange={(e) => setEndedTerm(e.target.value)}
+              >
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="ended">Ended</MenuItem>
+                <MenuItem value="notEnded">Not Ended</MenuItem>
+              </Select>
+            </FormControl>
+          </>
+        )}
+      </Box>
 
       {promotions?.results?.length === 0 ? (
         <Box

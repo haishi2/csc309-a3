@@ -7,6 +7,10 @@ export interface EventsParams {
   limit?: number;
   name?: string;
   isPublished?: boolean;
+  location?: string;
+  started?: boolean;
+  ended?: boolean;
+  showFull?: boolean;
 }
 
 export const fetchEvents = async (params?: EventsParams) => {

@@ -143,8 +143,17 @@ router
     });
   })
   .get(authenticate, requireClearance("REGULAR"), async (req, res) => {
-    let { name, page, limit, started, ended, registered, isPublished } =
-      req.query;
+    let {
+      name,
+      location,
+      page,
+      limit,
+      started,
+      ended,
+      registered,
+      isPublished,
+      showFull,
+    } = req.query;
 
     if (page !== null && page !== undefined) {
       page = parseInt(page);
@@ -170,6 +179,14 @@ router
 
     if (name !== null && name !== undefined && typeof name !== "string") {
       return sendResult(res, 400, { error: "name must be a string" });
+    }
+
+    if (
+      location !== null &&
+      location !== undefined &&
+      typeof location !== "string"
+    ) {
+      return sendResult(res, 400, { error: "location must be a string" });
     }
 
     if (
@@ -200,10 +217,22 @@ router
       });
     }
 
+    if (
+      registered !== null &&
+      registered !== undefined &&
+      !["true", "false"].includes(registered)
+    ) {
+      return sendResult(res, 400, {
+        error: "showFull must be 'true' or 'false'",
+      });
+    }
+
     const skip = (page - 1) * limit;
     const query = {};
 
     if (name) query.name = { contains: name };
+
+    if (location) query.location = { contains: location };
 
     if (started !== null && started !== undefined) {
       const now = new Date();
@@ -229,7 +258,7 @@ router
       query.isPublished = true;
     }
 
-    const [count, events] = await Promise.all([
+    let [count, events] = await Promise.all([
       prisma.event.count({ where: query }),
       prisma.event.findMany({
         where:
@@ -258,6 +287,12 @@ router
         },
       }),
     ]);
+
+    if (showFull !== null && showFull !== undefined && showFull === "false") {
+      events = events.filter(
+        (event) => event.numGuests < event.capacity || !event.capacity
+      );
+    }
 
     const results = events.map((event) => {
       const response = {

@@ -184,9 +184,9 @@ router
       query.startTime = { lte: now };
       query.endTime = { gt: now };
 
-      if (type === "one-time" && roles[req.user.role] < roles.MANAGER) {
+      if (type === "one-time") {
         query.NOT = {
-          promotionUses: {
+          uses: {
             some: {
               userId: req.user.id,
             },
