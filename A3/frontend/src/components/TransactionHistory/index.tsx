@@ -19,7 +19,6 @@ import {
 import { useState } from "react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { TransactionType } from "@/types/shared.types";
-import { format } from "date-fns";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -125,8 +124,12 @@ export default function TransactionHistory() {
                   Transaction #{transaction.id}
                 </Typography>
                 <Chip
-                  label={transaction.type.toLowerCase()}
-                  color={typeColors[transaction.type]}
+                  label={transaction.type}
+                  color={
+                    typeColors[
+                      transaction.type.toUpperCase() as TransactionType
+                    ]
+                  }
                   variant="filled"
                 />
               </Box>
@@ -142,8 +145,8 @@ export default function TransactionHistory() {
                     </>
                   ) : (
                     <>
-                      Points: {transaction.points > 0 ? "+" : ""}
-                      {transaction.points}
+                      Points: {transaction.amount > 0 ? "+" : ""}
+                      {transaction.amount}
                     </>
                   )}
                 </Typography>
@@ -154,16 +157,11 @@ export default function TransactionHistory() {
                   </Typography>
                 )}
 
-                <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-                  utorid: {transaction.utorid}
-                </Typography>
-
-                <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-                  Created:{" "}
-                  {transaction.createdAt
-                    ? format(new Date(transaction.createdAt), "PPp")
-                    : "N/A"}
-                </Typography>
+                {transaction.utorid && (
+                  <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+                    UTORid: {transaction.utorid}
+                  </Typography>
+                )}
               </Box>
             </CardContent>
           </Card>
