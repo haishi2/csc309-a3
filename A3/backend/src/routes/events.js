@@ -253,9 +253,12 @@ router
     const [count, events] = await Promise.all([
       prisma.event.count({ where: query }),
       prisma.event.findMany({
-        where: {
-          OR: [query, { organizers: { some: { userId: req.user.id } } }],
-        },
+        where:
+          roles[req.user.role] >= roles.MANAGER
+            ? query
+            : {
+                OR: [query, { organizers: { some: { userId: req.user.id } } }],
+              },
         skip: skip,
         take: limit,
         include: {

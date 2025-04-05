@@ -319,46 +319,50 @@ export default function Users() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {sortedUsers.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell>{user.id}</TableCell>
+                {sortedUsers.map((u) => (
+                  <TableRow key={u.id}>
+                    <TableCell>{u.id}</TableCell>
                     <TableCell>
-                      <Typography variant="body1">{user.name}</Typography>
+                      <Typography variant="body1">{u.name}</Typography>
                       <Typography variant="body2" color="textSecondary">
-                        {user.username}
+                        {u.utorid}
                       </Typography>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.role}</TableCell>
-                    <TableCell>{user.verified ? "Yes" : "No"}</TableCell>
-                    <TableCell>{user.isActivated ? "Yes" : "No"}</TableCell>
-                    <TableCell>{user.points}</TableCell>
+                    <TableCell>{u.email}</TableCell>
+                    <TableCell>{u.role}</TableCell>
+                    <TableCell>{u.verified ? "Yes" : "No"}</TableCell>
+                    <TableCell>{u.isActivated ? "Yes" : "No"}</TableCell>
+                    <TableCell>{u.points}</TableCell>
                     <TableCell>
-                      {user.lastLogin
-                        ? format(new Date(user.lastLogin), "MMM d, yyyy HH:mm")
+                      {u.lastLogin
+                        ? format(new Date(u.lastLogin), "MMM d, yyyy HH:mm")
                         : "Never"}
                     </TableCell>
                     <TableCell>
-                      {!user.verified && (
+                      {!u.verified && (
                         <Tooltip title="Verify User">
                           <IconButton
                             color="primary"
-                            onClick={() => handleVerifyUser(user)}
+                            onClick={() => handleVerifyUser(u)}
                             disabled={isUpdating}
                           >
                             <VerifiedIcon />
                           </IconButton>
                         </Tooltip>
                       )}
-                      <Tooltip title="Change Role">
-                        <IconButton
-                          color="secondary"
-                          onClick={() => openRoleDialog(user)}
-                          disabled={isUpdating}
-                        >
-                          <ManageAccountsIcon />
-                        </IconButton>
-                      </Tooltip>
+                      {u.utorid !== user?.utorid &&
+                        (user?.role.toUpperCase() !== Role.MANAGER ||
+                          u.role.toUpperCase() !== Role.SUPERUSER) && (
+                          <Tooltip title="Change Role">
+                            <IconButton
+                              color="secondary"
+                              onClick={() => openRoleDialog(u)}
+                              disabled={isUpdating}
+                            >
+                              <ManageAccountsIcon />
+                            </IconButton>
+                          </Tooltip>
+                        )}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -385,7 +389,7 @@ export default function Users() {
             {selectedUser && (
               <Typography gutterBottom>
                 Change role for: <strong>{selectedUser.name}</strong> (
-                {selectedUser.username})
+                {selectedUser.utorid})
               </Typography>
             )}
             <FormControl fullWidth sx={{ mt: 2 }}>

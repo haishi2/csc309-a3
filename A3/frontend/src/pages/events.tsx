@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useEvents } from "@/hooks/useEvents";
 import { Event as EventComponent } from "@/components/events/Event";
 import {
@@ -115,6 +115,10 @@ export default function Events() {
         ? false
         : undefined,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [publishedFilter, refetch]);
 
   const handleEventClick = (event: Event) => {
     if (!isManager && !event.organizers?.some((o) => o.userId === user?.id)) {

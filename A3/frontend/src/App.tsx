@@ -10,7 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Events from "@/pages/events";
 import Transactions from "@/pages/transactions";
-import Users from "@/pages/users";
+import Users from "@/pages/all-users";
 import { Role } from "@/types/shared.types";
 import TransactionHistory from "@/components/TransactionHistory";
 import AllTransactions from "@/pages/all-transactions";

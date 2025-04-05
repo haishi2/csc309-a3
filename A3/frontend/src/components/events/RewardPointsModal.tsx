@@ -100,7 +100,7 @@ export function RewardPointsModal({
         <List>
           {event.guests?.map((guest) => (
             <ListItem key={guest.userId}>
-              <ListItemText primary={guest.user?.username} />
+              <ListItemText primary={guest.user?.utorid} />
             </ListItem>
           ))}
           {(!event.guests || event.guests.length === 0) && (
