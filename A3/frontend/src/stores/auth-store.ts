@@ -1,3 +1,4 @@
+import { queryClient } from '@/App';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -14,7 +15,10 @@ export const useAuthStore = create<AuthState>()(
             token: null,
             isAuthenticated: false,
             login: (token: string) => set({ token, isAuthenticated: true }),
-            logout: () => set({ token: null, isAuthenticated: false }),
+            logout: () => {
+                queryClient.clear();    
+                set({ token: null, isAuthenticated: false });
+            },
         }),
         {
             name: 'auth-storage',
