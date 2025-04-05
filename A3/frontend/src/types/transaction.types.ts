@@ -1,28 +1,25 @@
-import type { User, PromotionUse } from "./index.ts";
-import { TransactionType, TransactionStatus } from "./shared.types";
-
 export interface Transaction {
   id: number;
-  userId: number;
-  user?: User;
-  type: TransactionType;
-  points: number;
-  status: TransactionStatus;
-  needsVerification: boolean;
-  processedBy?: number;
-  processor?: User;
-  relatedId?: number;
+  type: "purchase" | "adjustment" | "transfer" | "redemption" | "event";
   spent?: number;
-  remark?: string;
-  createdAt: Date;
-  promotionUses?: PromotionUse[];
-  utorid: string;
   amount: number;
+  promotionIds?: number[];
+  remark?: string;
   createdBy: string;
-  suspicious: boolean;
+  relatedId?: number;
 }
 
 export interface TransactionResponse {
   count: number;
   results: Transaction[];
+}
+
+export interface TransactionFilters {
+  type?: string;
+  relatedId?: number;
+  promotionId?: number;
+  amount?: number;
+  operator?: "gte" | "lte";
+  page?: number;
+  limit?: number;
 }
