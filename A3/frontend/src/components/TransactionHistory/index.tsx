@@ -155,7 +155,14 @@ export default function TransactionHistory() {
                 )}
 
                 <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-                  Created: {transaction.createdAt ? format(new Date(transaction.createdAt), "PPp") : "N/A"}
+                  utorid: {transaction.utorid}
+                </Typography>
+
+                <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+                  Created:{" "}
+                  {transaction.createdAt
+                    ? format(new Date(transaction.createdAt), "PPp")
+                    : "N/A"}
                 </Typography>
               </Box>
             </CardContent>
