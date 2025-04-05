@@ -6,32 +6,60 @@ import { useAuthStore } from "@/stores/auth-store";
 import { Role } from "@/types/shared.types";
 import { useUser } from "@/hooks/useUser";
 
+interface NavItem {
+  path: string;
+  label: string;
+  requiredRoles?: Role[];
+}
+
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = useAuthStore((state) => state.logout);
   const { user } = useUser();
+  const userRole = user?.role.toUpperCase() as Role;
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { path: "/", label: "Home" },
     { path: "/me", label: "Profile" },
     { path: "/promotions", label: "Promotions" },
     { path: "/events", label: "Events" },
-    { path: "/transactions", label: "Transactions" },
-    { path: "/transactions/history", label: "Transaction History" },
-    ...(user?.role.toUpperCase() === Role.MANAGER ||
-    user?.role.toUpperCase() === Role.SUPERUSER
-      ? [{ path: "/users", label: "Users" }]
-      : []),
+    { 
+      path: "/transactions", 
+      label: "Transactions",
+      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
+    },
+    { 
+      path: "/transactions/history", 
+      label: "Transaction History",
+      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
+    },
+    { 
+      path: "/users", 
+      label: "Users",
+      requiredRoles: [Role.MANAGER, Role.SUPERUSER]
+    },
+    { 
+      path: "/signup", 
+      label: "Create User",
+      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
+    },
     { path: "/reset-password", label: "Reset Password" },
-    { path: "/signup", label: "Signup" },
   ];
+
+  const hasAccess = (item: NavItem): boolean => {
+    if (!item.requiredRoles) return true;
+    if (!user) return false;
+    return item.requiredRoles.includes(userRole);
+  };
+
+  const visibleNavItems = navItems.filter(item => hasAccess(item));
 
   return (
     <AppBar position="sticky">
       <Toolbar>
         <Stack direction="row" spacing={2} sx={{ flexGrow: 1 }}>
-          {navItems.map((item) => (
+          {visibleNavItems.map((item) => (
             <Button
               key={item.path}
               color="inherit"

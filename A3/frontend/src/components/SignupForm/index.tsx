@@ -46,7 +46,9 @@ export default function SignupPage() {
 
   const validatePassword = (password: string) => {
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]{8,20}$/;
+      console.log(password)
+      console.log(passwordRegex.test(password))
     return passwordRegex.test(password);
   };
 
