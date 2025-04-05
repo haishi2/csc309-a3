@@ -24,7 +24,6 @@ router
       points,
     } = req.body;
 
-    // Validate required fields
     if (!name || typeof name !== "string") {
       return sendResult(res, 400, { error: "name must be a string" });
     }
@@ -84,7 +83,6 @@ router
         error: "points must be a positive integer",
       });
     }
-    console.log(PromotionType[typeMapping[type]]);
     const promotion = await prisma.promotion.create({
       data: {
         name,
@@ -186,7 +184,7 @@ router
       query.startTime = { lte: now };
       query.endTime = { gt: now };
 
-      if (type === "one-time") {
+      if (type === "one-time" && roles[req.user.role] < roles.MANAGER) {
         query.NOT = {
           promotionUses: {
             some: {

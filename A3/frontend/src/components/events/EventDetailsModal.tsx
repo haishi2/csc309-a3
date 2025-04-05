@@ -9,7 +9,7 @@ import {
   Chip,
 } from "@mui/material";
 import { Event } from "@/types/event.types";
-import { format } from "date-fns";
+import { format, isPast, isFuture, isWithinInterval } from "date-fns";
 
 interface EventDetailsModalProps {
   event: Event;
@@ -32,6 +32,23 @@ export function EventDetailsModal({
 }: EventDetailsModalProps) {
   const canRegister =
     !isRegistered && (!event.capacity || event.numGuests < event.capacity);
+
+  const getEventStatus = () => {
+    const now = new Date();
+    const startTime = new Date(event.startTime);
+    const endTime = new Date(event.endTime);
+
+    if (isFuture(startTime)) {
+      return "Not Started";
+    } else if (isPast(endTime)) {
+      return "Ended";
+    } else if (isWithinInterval(now, { start: startTime, end: endTime })) {
+      return "Active";
+    }
+    return "Unknown";
+  };
+
+  const status = getEventStatus();
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -67,17 +84,19 @@ export function EventDetailsModal({
           </Typography>
         </Box>
 
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            Points
-          </Typography>
-          <Typography variant="body1">
-            {event.pointsAwarded} points per attendee
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {event.pointsRemain} points remaining
-          </Typography>
-        </Box>
+        {event.points && (
+          <Box sx={{ mb: 2 }}>
+            <Typography variant="subtitle2" color="text.secondary">
+              Points
+            </Typography>
+            <Typography variant="body1">
+              {event.pointsAwarded} points per attendee
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {event.pointsRemain} points remaining
+            </Typography>
+          </Box>
+        )}
 
         {event.capacity && (
           <Box sx={{ mb: 2 }}>
@@ -89,28 +108,31 @@ export function EventDetailsModal({
             </Typography>
           </Box>
         )}
-
-        <Box sx={{ mt: 3, display: "flex", gap: 1, alignItems: "center" }}>
-          <Chip
-            label={
-              isRegistered ? "You are registered" : "You are not registered"
-            }
-            color="primary"
-            size="small"
-          />
-        </Box>
+        {(status === "Not Started" || status === "Active") && (
+          <Box sx={{ mt: 3, display: "flex", gap: 1, alignItems: "center" }}>
+            <Chip
+              label={
+                isRegistered ? "You are registered" : "You are not registered"
+              }
+              color="primary"
+              size="small"
+            />
+          </Box>
+        )}
       </DialogContent>
       <DialogActions>
-        {canRegister && onRegister && (
-          <Button
-            onClick={onRegister}
-            disabled={isLoading}
-            variant="contained"
-            color="primary"
-          >
-            {isLoading ? "Registering..." : "Register for Event"}
-          </Button>
-        )}
+        {canRegister &&
+          onRegister &&
+          (status === "Not Started" || status === "Active") && (
+            <Button
+              onClick={onRegister}
+              disabled={isLoading}
+              variant="contained"
+              color="primary"
+            >
+              {isLoading ? "Registering..." : "Register for Event"}
+            </Button>
+          )}
         {isRegistered && onUnregister && (
           <Button
             onClick={onUnregister}

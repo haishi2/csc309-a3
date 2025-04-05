@@ -205,36 +205,15 @@ router
 
     if (name) query.name = { contains: name };
 
-    if (roles[req.user.role] >= roles.MANAGER) {
-      if (started !== null && started !== undefined) {
-        const now = new Date();
-        now.setMilliseconds(0);
-        query.startTime = started === "true" ? { lte: now } : { gt: now };
-      }
-      if (ended !== null && ended !== undefined) {
-        const now = new Date();
-        now.setMilliseconds(0);
-        query.endTime = ended === "true" ? { lte: now } : { gt: now };
-      }
-    } else {
+    if (started !== null && started !== undefined) {
       const now = new Date();
       now.setMilliseconds(0);
-      query.endTime = { gt: now };
-      if (registered !== null && registered !== undefined) {
-        if (registered === "true") {
-          query.registrations = {
-            some: {
-              userId: req.user.id,
-            },
-          };
-        } else if (registered === "false") {
-          query.registrations = {
-            none: {
-              userId: req.user.id,
-            },
-          };
-        }
-      }
+      query.startTime = started === "true" ? { lte: now } : { gt: now };
+    }
+    if (ended !== null && ended !== undefined) {
+      const now = new Date();
+      now.setMilliseconds(0);
+      query.endTime = ended === "true" ? { lte: now } : { gt: now };
     }
 
     if (isPublished !== null && isPublished !== undefined) {
@@ -480,7 +459,7 @@ router
       (org) => org.userId === req.user.id
     );
 
-    if (req.user.role !== "MANAGER" && !isOrganizer) {
+    if (roles[req.user.role] < roles.MANAGER && !isOrganizer) {
       return sendResult(res, 403, {
         error: "Only managers and organizers can modify events",
       });
@@ -662,7 +641,7 @@ router
       return sendResult(res, 404, { error: "Event not found" });
     }
 
-    if (event.isPublished === true) {
+    if (event.isPublished === true && event.endTime > new Date()) {
       return sendResult(res, 400, {
         error: "Cannot delete a published event",
       });

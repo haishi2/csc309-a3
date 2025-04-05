@@ -365,17 +365,6 @@ export default function Events() {
           ))}
         </Grid>
       )}
-
-      {events && events.length > ITEMS_PER_PAGE && (
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Pagination
-            count={Math.ceil(events.length / ITEMS_PER_PAGE)}
-            page={page}
-            onChange={handlePageChange}
-            color="primary"
-          />
-        </Box>
-      )}
     </>
   );
 
@@ -458,6 +447,17 @@ export default function Events() {
             false
           )}
         </TabPanel>
+      )}
+
+      {events && events.count > 0 && (
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Pagination
+            count={Math.ceil(events.count / ITEMS_PER_PAGE)}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Box>
       )}
 
       <Dialog
