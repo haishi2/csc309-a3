@@ -24,14 +24,10 @@ export default function Navbar() {
     { path: "/me", label: "Profile" },
     { path: "/promotions", label: "Promotions" },
     { path: "/events", label: "Events" },
+    { path: "/transactions/history", label: "Transaction History" },
     { 
       path: "/transactions", 
-      label: "Transactions",
-      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
-    },
-    { 
-      path: "/transactions/history", 
-      label: "Transaction History",
+      label: "Process Transactions",
       requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
     },
     { 

@@ -38,6 +38,10 @@ const AppContent = () => {
           <Route path="/me" element={<UserProfilePage />} />
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/events" element={<Events />} />
+          <Route
+            path="/transactions/history"
+            element={<TransactionHistory />}
+          />
 
           {/* role protected route */}
           <Route
@@ -48,10 +52,6 @@ const AppContent = () => {
             }
           >
             <Route path="/transactions" element={<Transactions />} />
-            <Route
-              path="/transactions/history"
-              element={<TransactionHistory />}
-            />
             <Route path="/transactions/all" element={<AllTransactions />} />
             <Route path="/transactions/:id" element={<TransactionDetails />} />
           </Route>
