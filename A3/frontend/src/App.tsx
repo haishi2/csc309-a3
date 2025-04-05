@@ -12,7 +12,7 @@ import Events from "@/pages/events";
 import Transactions from "@/pages/transactions";
 import Users from "@/pages/users";
 import { Role } from "@/types/shared.types";
-import TransactionHistory from "@/components/TransactionHistory";
+import TransactionHistoryPage from "@/pages/transaction-history";
 import AllTransactions from "@/pages/all-transactions";
 import TransactionDetails from "@/pages/transaction-details";
 import PasswordResetPage from "@/pages/password-reset";
@@ -40,7 +40,7 @@ const AppContent = () => {
           <Route path="/events" element={<Events />} />
           <Route
             path="/transactions/history"
-            element={<TransactionHistory />}
+            element={<TransactionHistoryPage />}
           />
 
           {/* role protected route */}
