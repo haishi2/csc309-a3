@@ -17,11 +17,22 @@ import {
   InputAdornment,
   Button,
   Dialog,
+  DialogTitle,
+  DialogContent,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import { useState } from "react";
 import { useTransactions, useCreateRedemption } from "@/hooks/useTransactions";
 import { toast } from "sonner";
 import type { Transaction } from "@/types/transaction.types";
+import { useUser } from "@/hooks/useUser";
+import { Role } from "@/types/shared.types";
+import {
+  useAllTransactions,
+  useTransaction,
+  useToggleSuspicious,
+} from "@/hooks/useAllTransactions";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -45,6 +56,15 @@ const transactionTypes = [
 ];
 
 export default function TransactionHistory() {
+  const { user } = useUser();
+  const isManager =
+    user?.role.toUpperCase() === Role.MANAGER || user?.role.toUpperCase() === Role.SUPERUSER;
+
+  const [activeTab, setActiveTab] = useState(0);
+  const [selectedTransaction, setSelectedTransaction] = useState<number | null>(
+    null
+  );
+
   const [page, setPage] = useState(1);
   const [typeFilter, setTypeFilter] = useState<string>("");
   const [amountFilter, setAmountFilter] = useState<string>("");
@@ -53,13 +73,58 @@ export default function TransactionHistory() {
   const [redemptionAmount, setRedemptionAmount] = useState("");
   const [redemptionRemark, setRedemptionRemark] = useState("");
 
-  const { data, isLoading, isError } = useTransactions({
-    page,
-    limit: ITEMS_PER_PAGE,
-    type: typeFilter || undefined,
-    amount: amountFilter ? parseInt(amountFilter) : undefined,
-    operator: amountFilter ? operator : undefined,
-  });
+  // Manager-only filters
+  const [nameFilter, setNameFilter] = useState("");
+  const [createdByFilter, setCreatedByFilter] = useState("");
+  const [suspiciousFilter, setSuspiciousFilter] = useState<boolean | undefined>(
+    undefined
+  );
+
+  // Use different hooks based on user role
+  const {
+    data: managerData,
+    isLoading: managerLoading,
+    isError: managerError,
+  } = useAllTransactions(
+    isManager
+      ? {
+          page,
+          limit: ITEMS_PER_PAGE,
+          name: nameFilter || undefined,
+          createdBy: createdByFilter || undefined,
+          suspicious: suspiciousFilter,
+          type: typeFilter || undefined,
+          amount: amountFilter ? parseInt(amountFilter) : undefined,
+          operator: amountFilter ? operator : undefined,
+        }
+      : undefined
+  );
+
+  const {
+    data: userTransactions,
+    isLoading: userLoading,
+    isError: userError,
+  } = useTransactions(
+    !isManager
+      ? {
+          page,
+          limit: ITEMS_PER_PAGE,
+          type: typeFilter || undefined,
+          amount: amountFilter ? parseInt(amountFilter) : undefined,
+          operator: amountFilter ? operator : undefined,
+        }
+      : undefined
+  );
+
+  const { data: selectedTransactionData, isLoading: transactionLoading } =
+    useTransaction(selectedTransaction || 0);
+
+  const toggleSuspiciousMutation = useToggleSuspicious();
+
+  // Use appropriate data based on role
+  const data = isManager ? managerData : userTransactions;
+  const isLoading = isManager ? managerLoading : userLoading;
+  const isError = isManager ? managerError : userError;
 
   const createRedemption = useCreateRedemption();
 
@@ -88,6 +153,22 @@ export default function TransactionHistory() {
       toast.error(
         error instanceof Error ? error.message : "Failed to create redemption"
       );
+    }
+  };
+
+  const handleToggleSuspicious = async (id: number, currentStatus: boolean) => {
+    try {
+      await toggleSuspiciousMutation.mutateAsync({
+        id,
+        suspicious: !currentStatus,
+      });
+      toast.success(
+        `Transaction marked as ${
+          !currentStatus ? "suspicious" : "not suspicious"
+        }`
+      );
+    } catch (error) {
+      toast.error("Failed to update suspicious status");
     }
   };
 
@@ -133,23 +214,64 @@ export default function TransactionHistory() {
 
   return (
     <Box sx={{ p: 3, maxWidth: 1200, mx: "auto" }}>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={4}
-      >
-        <Typography variant="h4">Transaction History</Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setIsCreatingRedemption(true)}
+      {isManager && (
+        <Tabs
+          value={activeTab}
+          onChange={(_, value) => setActiveTab(value)}
+          sx={{ mb: 3 }}
         >
-          Create Redemption
-        </Button>
-      </Box>
+          <Tab label="My Transactions" />
+          <Tab label="All Transactions" />
+        </Tabs>
+      )}
 
-      {/* Filters */}
+      {/* Manager-only filters */}
+      {isManager && activeTab === 1 && (
+        <Grid container spacing={2} sx={{ mb: 4 }}>
+          <Grid item xs={12} sm={6} md={4}>
+            <TextField
+              fullWidth
+              label="Search by Name/UTORid"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <TextField
+              fullWidth
+              label="Created By"
+              value={createdByFilter}
+              onChange={(e) => setCreatedByFilter(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <InputLabel>Suspicious Status</InputLabel>
+              <Select
+                value={
+                  suspiciousFilter === undefined
+                    ? ""
+                    : suspiciousFilter.toString()
+                }
+                label="Suspicious Status"
+                onChange={(e) =>
+                  setSuspiciousFilter(
+                    e.target.value === ""
+                      ? undefined
+                      : e.target.value === "true"
+                  )
+                }
+              >
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="true">Suspicious</MenuItem>
+                <MenuItem value="false">Not Suspicious</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      )}
+
+      {/* Regular filters */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={4}>
           <FormControl fullWidth>
@@ -205,7 +327,13 @@ export default function TransactionHistory() {
             sx={{
               borderLeft: 6,
               borderColor: `${typeColors[transaction.type]}.main`,
+              cursor: isManager ? "pointer" : "default",
             }}
+            onClick={
+              isManager
+                ? () => setSelectedTransaction(transaction.id)
+                : undefined
+            }
           >
             <CardContent>
               <Box
@@ -215,12 +343,28 @@ export default function TransactionHistory() {
               >
                 <Typography variant="h6">
                   Transaction #{transaction.id}
+                  {isManager && ` - ${transaction.utorid}`}
                 </Typography>
-                <Chip
-                  label={transaction.type}
-                  color={typeColors[transaction.type] || "default"}
-                  variant="filled"
-                />
+                <Stack direction="row" spacing={1}>
+                  <Chip
+                    label={transaction.type}
+                    color={typeColors[transaction.type] || "default"}
+                    variant="filled"
+                  />
+                  {isManager && (
+                    <Chip
+                      label={transaction.suspicious ? "Suspicious" : "Verified"}
+                      color={transaction.suspicious ? "error" : "success"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleSuspicious(
+                          transaction.id,
+                          transaction.suspicious || false
+                        );
+                      }}
+                    />
+                  )}
+                </Stack>
               </Box>
               {renderTransactionDetails(transaction)}
             </CardContent>
@@ -238,6 +382,75 @@ export default function TransactionHistory() {
             color="primary"
           />
         </Box>
+      )}
+
+      {/* Transaction Detail Dialog */}
+      {(isManager) && (
+        <Dialog
+          open={!!selectedTransaction}
+          onClose={() => setSelectedTransaction(null)}
+          maxWidth="md"
+          fullWidth
+        >
+          {transactionLoading ? (
+            <DialogContent>
+              <CircularProgress />
+            </DialogContent>
+          ) : selectedTransactionData ? (
+            <>
+              <DialogTitle>
+                Transaction #{selectedTransactionData.id} -{" "}
+                {selectedTransactionData.utorid}
+              </DialogTitle>
+              <DialogContent>
+                <Stack spacing={2}>
+                  <Typography>Type: {selectedTransactionData.type}</Typography>
+                  <Typography>
+                    Amount: {selectedTransactionData.amount} points
+                    {selectedTransactionData.spent !== undefined &&
+                      ` (Spent: $${selectedTransactionData.spent.toFixed(2)})`}
+                  </Typography>
+                  {selectedTransactionData.relatedId && (
+                    <Typography>
+                      Related Transaction: #{selectedTransactionData.relatedId}
+                    </Typography>
+                  )}
+                  <Typography>
+                    Created by: {selectedTransactionData.createdBy}
+                  </Typography>
+                  {selectedTransactionData.remark && (
+                    <Typography>
+                      Remark: {selectedTransactionData.remark}
+                    </Typography>
+                  )}
+                  <Box>
+                    <Button
+                      variant="contained"
+                      color={
+                        selectedTransactionData.suspicious ? "primary" : "error"
+                      }
+                      onClick={() =>
+                        handleToggleSuspicious(
+                          selectedTransactionData.id,
+                          selectedTransactionData.suspicious || false
+                        )
+                      }
+                    >
+                      Mark as{" "}
+                      {selectedTransactionData.suspicious
+                        ? "Not Suspicious"
+                        : "Suspicious"}
+                    </Button>
+                  </Box>
+                </Stack>
+              </DialogContent>
+            </>
+          ) : (
+            <DialogContent>
+              <Alert severity="error">Transaction not found</Alert>
+            </DialogContent>
+          )}
+        </Dialog>
       )}
 
       {/* Create Redemption Dialog */}

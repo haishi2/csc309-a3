@@ -7,6 +7,8 @@ export interface Transaction {
   remark?: string;
   createdBy: string;
   relatedId?: number;
+  utorid: string;
+  suspicious?: boolean;
 }
 
 export interface TransactionResponse {
