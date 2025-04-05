@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useEvents } from "@/hooks/useEvents";
 import { Event as EventComponent } from "@/components/events/Event";
 import {

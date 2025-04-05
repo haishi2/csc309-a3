@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "@/config/environment";
 import { useAuthStore } from "@/stores/auth-store";
-
+import { toast } from "sonner";
 const apiClient = axios.create({
   baseURL: config.server.apiUrl,
 });
@@ -20,9 +20,15 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      useAuthStore.getState().logout();
+    if (error.response) {
+      if (error.response.status === 401) {
+        useAuthStore.getState().logout();
+      }
+
+      const errorMessage = error.response.data?.error || "An error occurred";
+      toast.error(errorMessage);
     }
+
     return Promise.reject(error);
   }
 );

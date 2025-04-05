@@ -17,7 +17,7 @@ import AllTransactions from "@/pages/all-transactions";
 import TransactionDetails from "@/pages/transaction-details";
 import PasswordResetPage from "@/pages/password-reset";
 import SignupPage from "@/pages/signup";
-
+import { Toaster } from "sonner";
 export const queryClient = new QueryClient();
 
 const AppContent = () => {
@@ -78,6 +78,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <BrowserRouter>
+          <Toaster position="bottom-center" richColors />
           <AppContent />
         </BrowserRouter>
       </LocalizationProvider>
