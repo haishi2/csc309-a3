@@ -16,6 +16,7 @@ import TransactionHistory from "@/components/TransactionHistory";
 import AllTransactions from "@/pages/all-transactions";
 import TransactionDetails from "@/pages/transaction-details";
 import PasswordResetPage from "@/pages/password-reset";
+import SignupPage from "@/pages/signup";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,15 @@ const AppContent = () => {
             <Route path="/transactions/:id" element={<TransactionDetails />} />
           </Route>
           <Route path="/users" element={<Users />} />
+          <Route
+            element={
+              <RoleRestrictedRoute
+                allowedRoles={[Role.CASHIER, Role.MANAGER, Role.SUPERUSER]}
+              />
+            }
+          >
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
         </Route>
 
         <Route path="/reset-password" element={<PasswordResetPage />} />

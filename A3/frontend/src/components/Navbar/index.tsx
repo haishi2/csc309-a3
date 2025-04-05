@@ -24,6 +24,7 @@ export default function Navbar() {
       ? [{ path: "/users", label: "Users" }]
       : []),
     { path: "/reset-password", label: "Reset Password" },
+    { path: "/signup", label: "Signup" },
   ];
 
   return (
