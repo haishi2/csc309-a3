@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Box,
@@ -14,6 +14,7 @@ import {
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { usePromotion } from "@/hooks/usePromotions";
 import { PromotionType } from "@/types/shared.types";
+import { isEqual } from "date-fns";
 
 export interface PromotionFormData {
   name: string;
@@ -26,36 +27,40 @@ export interface PromotionFormData {
   points?: number;
 }
 
+export type PromotionFormUpdate = Partial<PromotionFormData>;
+
 interface PromotionFormProps {
   id?: number;
-  onSubmit: (data: PromotionFormData) => void;
+  onSubmit: (data: PromotionFormData | PromotionFormUpdate) => Promise<void>;
   onCancel: () => void;
 }
 
 export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
-  //get the existing promotion data for promotion with given id
   const { data: existingPromotion } = usePromotion(id);
+  const [initialValues, setInitialValues] = useState<PromotionFormData>({
+    name: "",
+    description: "",
+    type: PromotionType.AUTOMATIC,
+    startTime: new Date(),
+    endTime: new Date(),
+  });
 
-  //setup a form state for the promotion form
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
+    getValues,
+    watch,
   } = useForm<PromotionFormData>({
-    defaultValues: {
-      name: "",
-      description: "",
-      type: PromotionType.AUTOMATIC,
-      startTime: new Date(),
-      endTime: new Date(),
-    },
+    defaultValues: initialValues,
   });
 
-  //  populate the form with existing promotion data when it exists
+  const formValues = watch();
+
   useEffect(() => {
     if (existingPromotion) {
-      reset({
+      const values = {
         name: existingPromotion.name,
         description: existingPromotion.description || "",
         type: existingPromotion.type
@@ -66,21 +71,78 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
         minSpending: existingPromotion.minSpending,
         rate: existingPromotion.rate,
         points: existingPromotion.points,
-      });
+      };
+      reset(values);
+      setInitialValues(values);
     }
   }, [existingPromotion, reset]);
+
+  const handleFormSubmit = (data: PromotionFormData) => {
+    if (!id) {
+      onSubmit(data);
+      return;
+    }
+
+    const changes: PromotionFormUpdate = {};
+    const current = getValues();
+
+    if (current.name !== initialValues.name) {
+      changes.name = current.name;
+    }
+    if (current.description !== initialValues.description) {
+      changes.description = current.description;
+    }
+    if (current.type !== initialValues.type) {
+      changes.type = current.type;
+    }
+    if (!isEqual(current.startTime, initialValues.startTime)) {
+      changes.startTime = current.startTime;
+    }
+    if (!isEqual(current.endTime, initialValues.endTime)) {
+      changes.endTime = current.endTime;
+    }
+    if (current.minSpending !== initialValues.minSpending) {
+      changes.minSpending = current.minSpending;
+    }
+    if (current.rate !== initialValues.rate) {
+      changes.rate = current.rate;
+    }
+    if (current.points !== initialValues.points) {
+      changes.points = current.points;
+    }
+
+    onSubmit(changes);
+  };
+
+  const isFieldChanged = (fieldName: keyof PromotionFormData): boolean => {
+    if (!id) return true;
+
+    const currentValue = formValues[fieldName];
+    const initialValue = initialValues[fieldName];
+
+    if (currentValue === undefined && initialValue === undefined) return false;
+    if (currentValue === undefined || initialValue === undefined) return true;
+
+    if (fieldName === "startTime" || fieldName === "endTime") {
+      return !isEqual(currentValue as Date, initialValue as Date);
+    }
+
+    return currentValue !== initialValue;
+  };
 
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleFormSubmit)}
       sx={{ maxWidth: 600, mx: "auto", mt: 4 }}
     >
       <Stack spacing={3}>
         <Controller
           name="name"
           control={control}
-          rules={{ required: "Name is required" }}
+          rules={{
+            required: isFieldChanged("name") ? "Name is required" : undefined,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -96,7 +158,11 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
         <Controller
           name="description"
           control={control}
-          rules={{ required: "Description is required" }}
+          rules={{
+            required: isFieldChanged("description")
+              ? "Description is required"
+              : undefined,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -114,7 +180,9 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
         <Controller
           name="type"
           control={control}
-          rules={{ required: "Type is required" }}
+          rules={{
+            required: isFieldChanged("type") ? "Type is required" : undefined,
+          }}
           render={({ field }) => (
             <FormControl error={Boolean(errors.type)} fullWidth>
               <InputLabel>Type</InputLabel>
@@ -133,10 +201,14 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="startTime"
           control={control}
           rules={{
-            required: "Start time is required",
+            required: isFieldChanged("startTime")
+              ? "Start time is required"
+              : undefined,
             validate: (value) => {
+              if (!isFieldChanged("startTime")) return true;
               const now = new Date();
               now.setSeconds(0, 0);
+              value.setSeconds(0, 0);
               return value > now || "Start time must be in the future";
             },
           }}
@@ -159,8 +231,11 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="endTime"
           control={control}
           rules={{
-            required: "End time is required",
+            required: isFieldChanged("endTime")
+              ? "End time is required"
+              : undefined,
             validate: (value, formValues) => {
+              if (!isFieldChanged("endTime")) return true;
               if (!value || !formValues.startTime) return true;
               return (
                 value > formValues.startTime ||
@@ -187,9 +262,15 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="minSpending"
           control={control}
           rules={{
-            min: { value: 0, message: "Minimum spend must be positive" },
-            validate: (value) =>
-              !value || !isNaN(Number(value)) || "Must be a valid number",
+            min: isFieldChanged("minSpending")
+              ? { value: 0, message: "Minimum spend must be positive" }
+              : undefined,
+            validate: (value) => {
+              if (!isFieldChanged("minSpending")) return true;
+              return (
+                !value || !isNaN(Number(value)) || "Must be a valid number"
+              );
+            },
           }}
           render={({ field: { onChange, value, ...field } }) => (
             <TextField
@@ -213,10 +294,18 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="rate"
           control={control}
           rules={{
-            min: { value: 0, message: "Rate must be positive" },
-            max: { value: 1, message: "Rate must be between 0 and 1" },
-            validate: (value) =>
-              !value || !isNaN(Number(value)) || "Must be a valid number",
+            min: isFieldChanged("rate")
+              ? { value: 0, message: "Rate must be positive" }
+              : undefined,
+            max: isFieldChanged("rate")
+              ? { value: 1, message: "Rate must be between 0 and 1" }
+              : undefined,
+            validate: (value) => {
+              if (!isFieldChanged("rate")) return true;
+              return (
+                !value || !isNaN(Number(value)) || "Must be a valid number"
+              );
+            },
           }}
           render={({ field: { onChange, value, ...field } }) => (
             <TextField
@@ -244,11 +333,20 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="points"
           control={control}
           rules={{
-            min: { value: 0, message: "Points must be positive" },
-            validate: (value) =>
-              !value ||
-              (!isNaN(Number(value)) && Number.isInteger(Number(value))) ||
-              "Must be a valid integer",
+            required: isFieldChanged("points")
+              ? "Points is required"
+              : undefined,
+            min: isFieldChanged("points")
+              ? { value: 0, message: "Points must be positive" }
+              : undefined,
+            validate: (value) => {
+              if (!isFieldChanged("points")) return true;
+              return (
+                !value ||
+                (!isNaN(Number(value)) && Number.isInteger(Number(value))) ||
+                "Must be a valid integer"
+              );
+            },
           }}
           render={({ field: { onChange, value, ...field } }) => (
             <TextField

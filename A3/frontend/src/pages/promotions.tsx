@@ -5,6 +5,7 @@ import { PromotionDetails } from "@/components/promotions/PromotionDetails";
 import {
   PromotionForm,
   PromotionFormData,
+  PromotionFormUpdate,
 } from "@/components/promotions/PromotionForm";
 import {
   Box,
@@ -39,19 +40,33 @@ type CreatePromotionData = Omit<
   Promotion,
   "id" | "createdAt" | "managerId" | "severity"
 >;
+
 type UpdatePromotionData = Partial<CreatePromotionData> & { id: number };
 
-//formmat the data from the form to the correct type for the backend
+//format the data from the form to the correct type for the backend
 const transformFormData = (
-  data: PromotionFormData
-): Omit<Promotion, "id" | "createdAt" | "managerId" | "severity"> => {
-  return {
-    ...data,
-    minSpending: data.minSpending ? Number(data.minSpending) : undefined,
-    rate: data.rate ? Number(data.rate) : undefined,
-    points: data.points ? Number(data.points) : undefined,
-    type: data.type.toLowerCase() as PromotionType,
-  };
+  data: PromotionFormData | PromotionFormUpdate
+): Partial<CreatePromotionData> => {
+  const transformed: Partial<CreatePromotionData> = {};
+
+  if ("name" in data && data.name) transformed.name = data.name;
+  if ("description" in data && data.description)
+    transformed.description = data.description;
+  if ("type" in data && data.type)
+    transformed.type = data.type.toLowerCase() as PromotionType;
+  if ("startTime" in data && data.startTime)
+    transformed.startTime = data.startTime;
+  if ("endTime" in data && data.endTime) transformed.endTime = data.endTime;
+  if ("minSpending" in data)
+    transformed.minSpending = data.minSpending
+      ? Number(data.minSpending)
+      : undefined;
+  if ("rate" in data)
+    transformed.rate = data.rate ? Number(data.rate) : undefined;
+  if ("points" in data)
+    transformed.points = data.points ? Number(data.points) : undefined;
+
+  return transformed;
 };
 
 export default function Promotions() {
@@ -103,21 +118,30 @@ export default function Promotions() {
     setViewingPromotion(null);
   };
 
-  const handleUpdate = async (data: PromotionFormData) => {
-    if (selectedPromotionId) {
-      const updateData: UpdatePromotionData = {
-        ...transformFormData(data),
-        id: selectedPromotionId,
-      };
-      await updatePromotion(updateData as Promotion);
+  const handleSubmit = async (
+    data: PromotionFormData | PromotionFormUpdate
+  ) => {
+    try {
+      if (selectedPromotionId) {
+        if (Object.keys(data).length <= 0) {
+          setIsCreateModalOpen(false);
+          setSelectedPromotionId(null);
+          return;
+        }
+        const updateData: UpdatePromotionData = {
+          ...transformFormData(data),
+          id: selectedPromotionId,
+        };
+        await updatePromotion(updateData);
+      } else {
+        const createData = transformFormData(data) as CreatePromotionData;
+        await createPromotion(createData as Promotion);
+      }
       handleCloseModal();
+      refetch();
+    } catch (error) {
+      console.error("Failed to save promotion:", error);
     }
-  };
-
-  const handleCreate = async (data: PromotionFormData) => {
-    const createData = transformFormData(data);
-    await createPromotion(createData as Promotion);
-    handleCloseModal();
   };
 
   const handleDelete = async (id: number) => {
@@ -182,7 +206,6 @@ export default function Promotions() {
 
   return (
     <StyledBox>
-      {/* button to create promotion */}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -201,7 +224,6 @@ export default function Promotions() {
         )}
       </Box>
 
-      {/* search and filter section */}
       {isManager && (
         <Box display="flex" gap={2} mb={4}>
           <Box display="flex" gap={1}>
@@ -286,7 +308,7 @@ export default function Promotions() {
         <DialogContent>
           <PromotionForm
             id={selectedPromotionId || undefined}
-            onSubmit={handleUpdate}
+            onSubmit={handleSubmit}
             onCancel={handleCloseModal}
           />
         </DialogContent>
@@ -300,11 +322,11 @@ export default function Promotions() {
         fullWidth
       >
         <DialogContent>
-          <PromotionForm onSubmit={handleCreate} onCancel={handleCloseModal} />
+          <PromotionForm onSubmit={handleSubmit} onCancel={handleCloseModal} />
         </DialogContent>
       </Dialog>
 
-      {/* modal for displaying promotion details for non manager or superuser users*/}
+      {/* modal for viewing promotion details */}
       {viewingPromotion && (
         <PromotionDetails
           promotion={viewingPromotion}

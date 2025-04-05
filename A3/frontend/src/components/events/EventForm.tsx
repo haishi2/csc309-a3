@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { useEvent } from "@/hooks/useEvents";
-import { useUser } from "@/hooks/useUser";
-import { Role } from "@/types/shared.types";
 import { isEqual } from "date-fns";
 
 export interface EventFormData {
@@ -35,10 +33,6 @@ interface EventFormProps {
 
 export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
   const { data: existingEvent } = useEvent(id);
-  const { user } = useUser();
-  const isManager =
-    user?.role.toUpperCase() === Role.MANAGER ||
-    user?.role.toUpperCase() === Role.SUPERUSER;
 
   const defaultValues: EventFormData = {
     name: "",
@@ -57,12 +51,14 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
     reset,
     formState: { errors },
     getValues,
+    watch,
   } = useForm<EventFormData>({
     defaultValues,
   });
 
   const [initialValues, setInitialValues] =
     useState<EventFormData>(defaultValues);
+  const formValues = watch();
 
   useEffect(() => {
     if (existingEvent) {
@@ -115,9 +111,23 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
       changes.isPublished = current.isPublished;
     }
 
-    if (Object.keys(changes).length > 0) {
-      onSubmit(changes);
+    onSubmit(changes);
+  };
+
+  const isFieldChanged = (fieldName: keyof EventFormData): boolean => {
+    if (!id) return true;
+
+    const currentValue = formValues[fieldName];
+    const initialValue = initialValues[fieldName];
+
+    if (currentValue === undefined && initialValue === undefined) return false;
+    if (currentValue === undefined || initialValue === undefined) return true;
+
+    if (fieldName === "startTime" || fieldName === "endTime") {
+      return !isEqual(currentValue as Date, initialValue as Date);
     }
+
+    return currentValue !== initialValue;
   };
 
   return (
@@ -130,7 +140,9 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
         <Controller
           name="name"
           control={control}
-          rules={{ required: "Name is required" }}
+          rules={{
+            required: isFieldChanged("name") ? "Name is required" : undefined,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -146,7 +158,11 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
         <Controller
           name="description"
           control={control}
-          rules={{ required: "Description is required" }}
+          rules={{
+            required: isFieldChanged("description")
+              ? "Description is required"
+              : undefined,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -164,7 +180,11 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
         <Controller
           name="location"
           control={control}
-          rules={{ required: "Location is required" }}
+          rules={{
+            required: isFieldChanged("location")
+              ? "Location is required"
+              : undefined,
+          }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -181,10 +201,14 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
           name="startTime"
           control={control}
           rules={{
-            required: "Start time is required",
+            required: isFieldChanged("startTime")
+              ? "Start time is required"
+              : undefined,
             validate: (value) => {
+              if (!isFieldChanged("startTime")) return true;
               const now = new Date();
               now.setSeconds(0, 0);
+              value.setSeconds(0, 0);
               return value > now || "Start time must be in the future";
             },
           }}
@@ -207,8 +231,11 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
           name="endTime"
           control={control}
           rules={{
-            required: "End time is required",
+            required: isFieldChanged("endTime")
+              ? "End time is required"
+              : undefined,
             validate: (value, formValues) => {
+              if (!isFieldChanged("endTime")) return true;
               if (!value || !formValues.startTime) return true;
               return (
                 value > formValues.startTime ||
@@ -235,11 +262,17 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
           name="capacity"
           control={control}
           rules={{
-            min: { value: 0, message: "Capacity must be positive" },
-            validate: (value) =>
-              !value ||
-              (!isNaN(Number(value)) && Number.isInteger(Number(value))) ||
-              "Must be a valid integer",
+            min: isFieldChanged("capacity")
+              ? { value: 0, message: "Capacity must be positive" }
+              : undefined,
+            validate: (value) => {
+              if (!isFieldChanged("capacity")) return true;
+              return (
+                !value ||
+                (!isNaN(Number(value)) && Number.isInteger(Number(value))) ||
+                "Must be a valid integer"
+              );
+            },
           }}
           render={({ field: { onChange, value, ...field } }) => (
             <TextField
@@ -258,35 +291,42 @@ export function EventForm({ id, onSubmit, onCancel }: EventFormProps) {
             />
           )}
         />
-        {isManager && (
-          <Controller
-            name="points"
-            control={control}
-            rules={{
-              required: "Points is required",
-              min: { value: 0, message: "Points must be positive" },
-              validate: (value) =>
+
+        <Controller
+          name="points"
+          control={control}
+          rules={{
+            required: isFieldChanged("points")
+              ? "Points is required"
+              : undefined,
+            min: isFieldChanged("points")
+              ? { value: 0, message: "Points must be positive" }
+              : undefined,
+            validate: (value) => {
+              if (!isFieldChanged("points")) return true;
+              return (
                 (!isNaN(Number(value)) && Number.isInteger(Number(value))) ||
-                "Must be a valid integer",
-            }}
-            render={({ field: { onChange, value, ...field } }) => (
-              <TextField
-                {...field}
-                value={value || ""}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  onChange(val === "" ? 0 : Number(val));
-                }}
-                label="Points"
-                type="number"
-                inputProps={{ step: "1", min: "0" }}
-                error={Boolean(errors.points)}
-                helperText={errors.points?.message}
-                fullWidth
-              />
-            )}
-          />
-        )}
+                "Must be a valid integer"
+              );
+            },
+          }}
+          render={({ field: { onChange, value, ...field } }) => (
+            <TextField
+              {...field}
+              value={value ?? ""}
+              onChange={(e) => {
+                const val = e.target.value;
+                onChange(val === "" ? undefined : Number(val));
+              }}
+              label="Points"
+              type="number"
+              inputProps={{ step: "1", min: "0" }}
+              error={Boolean(errors.points)}
+              helperText={errors.points?.message}
+              fullWidth
+            />
+          )}
+        />
 
         {id && !existingEvent?.isPublished && (
           <Controller

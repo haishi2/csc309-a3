@@ -137,6 +137,11 @@ export default function Events() {
   const handleSubmit = async (data: EventFormData | EventFormUpdate) => {
     try {
       if (selectedEventId) {
+        if (Object.keys(data).length <= 0) {
+          setIsCreateModalOpen(false);
+          setSelectedEventId(null);
+          return;
+        }
         await updateEvent({
           id: selectedEventId,
           ...data,
