@@ -239,6 +239,7 @@ router
     } = req.query;
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
+    amount = amount ? parseInt(amount) : null;
     const skip = (page - 1) * limit;
     const query = {};
 
