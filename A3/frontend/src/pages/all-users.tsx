@@ -72,15 +72,14 @@ export default function Users() {
   const isSuperuser = user?.role.toUpperCase() === Role.SUPERUSER;
   const isManager = user?.role.toUpperCase() === Role.MANAGER || isSuperuser;
 
-  const { users, isLoading, isError, refetch, updateUser, isUpdating } =
-    useUsers({
-      page,
-      limit: ITEMS_PER_PAGE,
-      name: nameFilter || undefined,
-      role: roleFilter || undefined,
-      verified: verifiedFilter,
-      activated: activatedFilter,
-    });
+  const { users, isLoading, isError, updateUser, isUpdating } = useUsers({
+    page,
+    limit: ITEMS_PER_PAGE,
+    name: nameFilter || undefined,
+    role: roleFilter || undefined,
+    verified: verifiedFilter,
+    activated: activatedFilter,
+  });
 
   const sortedUsers = useMemo(() => {
     if (!users?.results) return [];

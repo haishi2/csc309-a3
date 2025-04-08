@@ -1,6 +1,5 @@
 //code from:
 //https://github.com/mui/material-ui/tree/v7.0.1/docs/data/material/getting-started/templates/sign-in
-
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -120,7 +119,7 @@ export default function AuthForm(props: {
   };
 
   // TODO: Implement signup
-  const handleSignUp = async (data: FormData) => {
+  const handleSignUp = async (_: FormData) => {
     try {
       throw new Error("not implemented");
       // Replace this with your actual signup API call
