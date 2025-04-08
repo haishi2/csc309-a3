@@ -19,20 +19,6 @@ async function seed() {
     console.log("Creating users...");
     // Create 10 users with different roles
     const users = await Promise.all([
-        // Superuser
-        prisma.user.create({
-            data: {
-                username: "clive123",
-                email: "clive123@mail.utoronto.ca",
-                password: "123456aA!",
-                name: "Clive",
-                isActivated: true,
-                role: Role.SUPERUSER,
-                verifiedStudent: true,
-                pointsBalance: 1000,
-                birthday: "1990-01-01"
-            }
-        }),
         // Manager
         prisma.user.create({
             data: {
