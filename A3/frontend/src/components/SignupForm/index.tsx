@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Role } from "@/types/shared.types";
 import apiClient from "@/services/api/api-client";
 import {
   Box,
@@ -27,7 +25,6 @@ interface UserRegistrationResponse {
 }
 
 export default function SignupPage() {
-  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [error, setError] = useState("");
   const [registrationData, setRegistrationData] = useState({
