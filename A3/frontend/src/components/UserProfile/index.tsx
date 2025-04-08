@@ -194,15 +194,6 @@ export default function UserProfile() {
 
           <Box>
             <Typography variant="body2" color="text.secondary">
-              Account Status
-            </Typography>
-            <Typography variant="body1">
-              {user.isActivated ? "Active" : "Inactive"}
-            </Typography>
-          </Box>
-
-          <Box>
-            <Typography variant="body2" color="text.secondary">
               Role
             </Typography>
             <Typography variant="body1" sx={{ textTransform: "capitalize" }}>
@@ -225,26 +216,6 @@ export default function UserProfile() {
                 Birthday
               </Typography>
               <Typography variant="body1">{user.birthday}</Typography>
-            </Box>
-          )}
-
-          <Box>
-            <Typography variant="body2" color="text.secondary">
-              Member Since
-            </Typography>
-            <Typography variant="body1">
-              {new Date(user.createdAt).toLocaleDateString()}
-            </Typography>
-          </Box>
-
-          {user.lastLogin && (
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                Last Login
-              </Typography>
-              <Typography variant="body1">
-                {new Date(user.lastLogin).toLocaleString()}
-              </Typography>
             </Box>
           )}
         </Stack>
