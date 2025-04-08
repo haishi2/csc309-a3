@@ -163,9 +163,6 @@ export default function UserProfile() {
           <Typography variant="h4" gutterBottom>
             {user.name}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            @{user.username}
-          </Typography>
         </Box>
 
         <Divider sx={{ my: 2 }} />

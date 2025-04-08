@@ -14,6 +14,7 @@ import {
   StepLabel,
   Paper,
 } from "@mui/material";
+import { toast } from "sonner";
 
 interface UserRegistrationResponse {
   id: number;
@@ -47,8 +48,6 @@ export default function SignupPage() {
   const validatePassword = (password: string) => {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]{8,20}$/;
-      console.log(password)
-      console.log(passwordRegex.test(password))
     return passwordRegex.test(password);
   };
 
@@ -113,12 +112,19 @@ export default function SignupPage() {
         password: password,
       });
 
-      // Show success message and redirect to login
-      navigate("/auth", {
-        state: {
-          message: "Account created successfully! You can now log in.",
-        },
+      // Show toast instead of redirecting
+      toast.success("User created successfully!");
+      
+      // Reset the form
+      setRegistrationData({
+        utorid: "",
+        name: "",
+        email: "",
       });
+      setPassword("");
+      setConfirmPassword("");
+      setActiveStep(0);
+      
     } catch (err: any) {
       if (err.response?.status === 404) {
         setError("Invalid reset token");
