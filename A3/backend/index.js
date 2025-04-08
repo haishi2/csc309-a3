@@ -28,7 +28,14 @@ const port = process.env.PORT || 8080;
 const FRONTEND_URL = process.env.FRONTEND_URL || `http://localhost:5173`;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(
   expressJwt({
