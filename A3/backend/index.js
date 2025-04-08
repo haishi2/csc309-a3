@@ -25,12 +25,12 @@ const { expressjwt: expressJwt } = require("express-jwt");
 const { cleanupRateLimits, sendResult } = require("./src/utils");
 const { JWT_SECRET, rateLimits } = require("./src/config");
 const port = process.env.PORT || 8080;
-const FRONTEND_URL = process.env.FRONTEND_URL || `http://localhost:${port}`;
+const FRONTEND_URL = process.env.FRONTEND_URL || `http://localhost:5173`;
 
 app.use(express.json());
 app.use(
   cors({
-    origin: [FRONTEND_URL],
+    origin: "https://csc309-a3-production-e042.up.railway.app",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
