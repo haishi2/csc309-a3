@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient, TransactionType } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { authenticate, requireClearance } = require("../middleware");
 const { sendResult } = require("../utils");
@@ -266,7 +266,7 @@ router
     }
 
     if (type) {
-      query.type = type;
+      query.type = TransactionType[type.toUpperCase()];
     }
 
     if (relatedId && type !== "PURCHASE") {
