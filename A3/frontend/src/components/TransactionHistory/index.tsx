@@ -82,13 +82,9 @@ export default function TransactionHistory() {
     undefined
   );
 
-  // Use different hooks based on user role
-  const {
-    data: managerData,
-    isLoading: managerLoading,
-    isError: managerError,
-  } = useAllTransactions(
-    isManager
+  // Only call useAllTransactions if user is manager and tab is active
+  const managerData = useAllTransactions(
+    isManager && activeTab === 1
       ? {
           page,
           limit: ITEMS_PER_PAGE,
@@ -99,34 +95,27 @@ export default function TransactionHistory() {
           amount: amountFilter ? parseInt(amountFilter) : undefined,
           operator: amountFilter ? operator : undefined,
         }
-      : undefined
+      : null // Pass null to disable the query
   );
 
-  const {
-    data: userTransactions,
-    isLoading: userLoading,
-    isError: userError,
-  } = useTransactions(
-    !isManager
-      ? {
-          page,
-          limit: ITEMS_PER_PAGE,
-          type: typeFilter || undefined,
-          amount: amountFilter ? parseInt(amountFilter) : undefined,
-          operator: amountFilter ? operator : undefined,
-        }
-      : undefined
-  );
+  // Always fetch user transactions
+  const userTransactions = useTransactions({
+    page,
+    limit: ITEMS_PER_PAGE,
+    type: typeFilter || undefined,
+    amount: amountFilter ? parseInt(amountFilter) : undefined,
+    operator: amountFilter ? operator : undefined,
+  });
 
   const { data: selectedTransactionData, isLoading: transactionLoading } =
     useTransaction(selectedTransaction || 0);
 
   const toggleSuspiciousMutation = useToggleSuspicious();
 
-  // Use appropriate data based on role
-  const data = isManager ? managerData : userTransactions;
-  const isLoading = isManager ? managerLoading : userLoading;
-  const isError = isManager ? managerError : userError;
+  // Use appropriate data based on role and active tab
+  const data = (isManager && activeTab === 1) ? managerData.data : userTransactions.data;
+  const isLoading = (isManager && activeTab === 1) ? managerData.isLoading : userTransactions.isLoading;
+  const isError = (isManager && activeTab === 1) ? managerData.isError : userTransactions.isError;
 
   const createRedemption = useCreateRedemption();
 
@@ -210,7 +199,7 @@ export default function TransactionHistory() {
         )}
 
         <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-          Created by: {transaction.createdBy}
+          Created by: {transaction.createBy}
         </Typography>
       </Box>
     );
@@ -223,6 +212,7 @@ export default function TransactionHistory() {
 
   return (
     <Box sx={{ p: 3, maxWidth: 1200, mx: "auto" }}>
+      {/* Only show tabs for managers */}
       {isManager && (
         <Tabs
           value={activeTab}
@@ -280,7 +270,7 @@ export default function TransactionHistory() {
         </Grid>
       )}
 
-      {/* Regular filters */}
+      {/* Regular filters - always visible */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={4}>
           <FormControl fullWidth>
@@ -438,7 +428,7 @@ export default function TransactionHistory() {
                     </Typography>
                   )}
                   <Typography>
-                    Created by: {selectedTransactionData.createdBy}
+                    Created by: {selectedTransactionData.createBy}
                   </Typography>
                   {selectedTransactionData.remark && (
                     <Typography>

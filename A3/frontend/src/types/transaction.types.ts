@@ -5,7 +5,7 @@ export interface Transaction {
   amount: number;
   promotionIds?: number[];
   remark?: string;
-  createdBy: string;
+  createBy: string;
   relatedId?: number;
   utorid: string;
   suspicious?: boolean;

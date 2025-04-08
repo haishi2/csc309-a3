@@ -9,7 +9,7 @@ interface PurchaseResponse {
   earned: number;
   remark: string;
   promotionIds: number[];
-  createdBy: string;
+  createBy: string;
 }
 
 interface PurchaseTransaction {
