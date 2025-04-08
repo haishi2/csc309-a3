@@ -4,3 +4,70 @@
 
 # 1. All the packages you need to install
 # 2. How to configure various servers (e.g., Nginx, Apache, etc)
+
+PACKAGES USED:
+├── @emotion/react@11.14.0
+├── @emotion/styled@11.14.0
+├── @eslint/js@9.23.0
+├── @hookform/resolvers@4.1.3
+├── @mui/icons-material@6.4.8
+├── @mui/material@6.4.8
+├── @mui/x-date-pickers@7.28.0
+├── @radix-ui/react-label@2.1.2
+├── @radix-ui/react-navigation-menu@1.2.5
+├── @radix-ui/react-slot@1.1.2
+├── @tailwindcss/postcss@4.0.15
+├── @tailwindcss/vite@4.0.15
+├── @tanstack/react-query@5.69.0
+├── @types/node@22.13.11
+├── @types/react-dom@19.0.4
+├── @types/react@19.0.12
+├── @vitejs/plugin-react@4.3.4
+├── autoprefixer@10.4.21
+├── axios@1.8.4
+├── class-variance-authority@0.7.1
+├── clsx@2.1.1
+├── date-fns@2.29.3
+├── dotenv@16.4.7
+├── eslint-plugin-react-hooks@5.2.0
+├── eslint-plugin-react-refresh@0.4.19
+├── eslint@9.23.0
+├── globals@15.15.0
+├── lucide-react@0.483.0
+├── next-themes@0.4.6
+├── path@0.12.7
+├── postcss-custom-selectors@8.0.4
+├── qrcode.react@4.2.0
+├── react-dom@19.0.0
+├── react-hook-form@7.54.2
+├── react-router-dom@7.4.0
+├── react@19.0.0
+├── sonner@2.0.1
+├── tailwind-merge@3.0.2
+├── tailwindcss@4.0.15
+├── tw-animate-css@1.2.4
+├── typescript-eslint@8.27.0
+├── typescript@5.7.3
+├── vite@6.2.2
+├── zod@3.24.2
+└── zustand@5.0.3
+
+To install these packages, run the following command in the frontend directory: npm install
+
+
+Setting Up the Project (Locally):
+1. Go into the backend and frontend directories and run npm install
+2. In the backend directory, run node index.js to start server 
+(if you would like to change port, uncomment the code at the top of index.js and run with node index.js <port>, make sure to update frontend url if this is done)
+3. In the frontend directory, run npm run dev to start the frontend
+NOTE: To createa a superuser, run node prisma/createsu.js
+
+Deploying the Project: 
+
+
+
+AI USE:
+We used AI tools to assist with site styling and debugging, any section with sx was genereated by AI and then modified by us if required.
+
+Component Attribution:
+The majority of the components used in our frontend code are components from Material-UI.
