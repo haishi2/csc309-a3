@@ -235,23 +235,13 @@ export default function Promotions() {
       </Box>
 
       <Box display="flex" gap={2} mb={4}>
-        <Box display="flex" gap={1}>
-          <TextField
-            label="Search by name"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleKeyDown}
-            size="small"
-          />
-          <Button
-            variant="contained"
-            onClick={handleSearch}
-            startIcon={<SearchIcon />}
-            sx={{ minWidth: 100 }}
-          >
-            Search
-          </Button>
-        </Box>
+        <TextField
+          label="Search by name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+          size="small"
+        />
         <FormControl size="small" sx={{ minWidth: 120 }}>
           <InputLabel>Type</InputLabel>
           <Select
@@ -294,6 +284,14 @@ export default function Promotions() {
             </FormControl>
           </>
         )}
+        <Button
+          variant="contained"
+          onClick={handleSearch}
+          startIcon={<SearchIcon />}
+          sx={{ minWidth: 100 }}
+        >
+          Apply Filters
+        </Button>
       </Box>
 
       {promotions?.results?.length === 0 ? (
