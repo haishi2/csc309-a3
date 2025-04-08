@@ -385,35 +385,41 @@ router
       remark: transaction.remark || "",
     };
 
-    if (t.type.toUpperCase() === "PURCHASE") {
-      result.utorid = t.user.username;
-      result.amount = t.points;
-      result.spent = t.spent;
-      result.promotionIds = t.promotionUses.map((pu) => pu.promotionId);
-      result.suspicious = t.needsVerification;
-      result.createBy = t.processor?.username;
-    } else if (t.type.toUpperCase() === "ADJUSTMENT") {
-      result.utorid = t.user.username;
-      result.amount = t.points;
-      result.relatedId = t.relatedId;
-      result.promotionIds = t.promotionUses.map((pu) => pu.promotionId);
-      result.suspicious = t.needsVerification;
-      result.createBy = t.processor?.username;
-    } else if (t.type.toUpperCase() === "REDEMPTION") {
-      result.utorid = t.user.username;
-      result.amount = t.points;
-      result.relatedId = t.relatedId;
-      result.promotionIds = t.promotionUses.map((pu) => pu.promotionId);
-      result.redeemed = -t.points;
-      result.createBy = t.processor?.username;
-    } else if (t.type.toUpperCase() === "TRANSFER") {
-      result.amount = t.points;
-      result.utorid = t.user.username;
-      result.relatedId = t.relatedId;
-    } else if (t.type.toUpperCase() === "EVENT") {
-      result.amount = t.points;
-      result.relatedId = t.relatedId;
-      result.createBy = t.processor?.username;
+    if (transaction.type.toUpperCase() === "PURCHASE") {
+      result.utorid = transaction.user.username;
+      result.amount = transaction.points;
+      result.spent = transaction.spent;
+      result.promotionIds = transaction.promotionUses.map(
+        (pu) => pu.promotionId
+      );
+      result.suspicious = transaction.needsVerification;
+      result.createBy = transaction.processor?.username;
+    } else if (transaction.type.toUpperCase() === "ADJUSTMENT") {
+      result.utorid = transaction.user.username;
+      result.amount = transaction.points;
+      result.relatedId = transaction.relatedId;
+      result.promotionIds = transaction.promotionUses.map(
+        (pu) => pu.promotionId
+      );
+      result.suspicious = transaction.needsVerification;
+      result.createBy = transaction.processor?.username;
+    } else if (transaction.type.toUpperCase() === "REDEMPTION") {
+      result.utorid = transaction.user.username;
+      result.amount = transaction.points;
+      result.relatedId = transaction.relatedId;
+      result.promotionIds = transaction.promotionUses.map(
+        (pu) => pu.promotionId
+      );
+      result.redeemed = -transaction.points;
+      result.createBy = transaction.processor?.username;
+    } else if (transaction.type.toUpperCase() === "TRANSFER") {
+      result.amount = transaction.points;
+      result.utorid = transaction.user.username;
+      result.relatedId = transaction.relatedId;
+    } else if (transaction.type.toUpperCase() === "EVENT") {
+      result.amount = transaction.points;
+      result.relatedId = transaction.relatedId;
+      result.createBy = transaction.processor?.username;
     }
 
     return sendResult(res, 200, result);
