@@ -1,8 +1,7 @@
 //code from:
 //https://github.com/mui/material-ui/tree/v7.0.1/docs/data/material/getting-started/templates/sign-in
 import * as React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { toast } from "sonner";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -64,21 +63,9 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const FadeTransition = styled("div")({
-  transition: "opacity 0.4s ease-in-out",
-  opacity: 1,
-  "&.fade-out": {
-    opacity: 0,
-  },
-});
-
 export default function AuthForm(props: {
   disableCustomTheme?: boolean;
-  initialMode?: "signin" | "signup";
 }) {
-  const { initialMode = "signup" } = props;
-  const [isSignIn, setIsSignIn] = useState(initialMode === "signin");
-  const [fadeState, setFadeState] = useState(false);
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
   const queryClient = useQueryClient();
@@ -86,12 +73,7 @@ export default function AuthForm(props: {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    if (isSignIn) {
-      handleSignIn(data);
-    } else {
-      handleSignUp(data);
-    }
+    handleSignIn(data);
   };
 
   const handleSignIn = async (data: FormData) => {
@@ -118,56 +100,18 @@ export default function AuthForm(props: {
     }
   };
 
-  // TODO: Implement signup
-  const handleSignUp = async (_: FormData) => {
-    try {
-      throw new Error("not implemented");
-      // Replace this with your actual signup API call
-      // const response = await fetch(`${config.server.apiUrl}/auth/signup`, { ... });
-
-      toast.success("Account created successfully!", {
-        description: "You can now sign in with your new account.",
-      });
-
-      // Toggle to sign in mode after successful registration
-      toggleMode();
-    } catch (error) {
-      toast.error("Registration failed", {
-        description:
-          "There was a problem creating your account. Please try again.",
-      });
-    }
-  };
-
-  // Toggle between sign-in and sign-up modes with animation
-  const toggleMode = () => {
-    setFadeState(true);
-
-    // After fade out completes, change the mode
-    setTimeout(() => {
-      setIsSignIn(!isSignIn);
-
-      // Fade back in
-      setTimeout(() => {
-        setFadeState(false);
-      }, 50);
-    }, 400);
-  };
-
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <FadeTransition className={fadeState ? "fade-out" : ""}>
-            <Typography
-              component="h1"
-              variant="h4"
-              sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
-            >
-              {isSignIn ? "Sign in" : "Sign up"}
-            </Typography>
-          </FadeTransition>
+          <Typography
+            component="h1"
+            variant="h4"
+            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+          >
+            Sign in
+          </Typography>
 
           <Box
             component="form"
@@ -193,15 +137,13 @@ export default function AuthForm(props: {
                 name="password"
                 type="password"
                 id="password"
-                autoComplete={isSignIn ? "current-password" : "new-password"}
+                autoComplete="current-password"
                 variant="outlined"
               />
             </FormControl>
 
             <Button type="submit" fullWidth variant="contained">
-              <FadeTransition className={fadeState ? "fade-out" : ""}>
-                {isSignIn ? "Sign in" : "Sign up"}
-              </FadeTransition>
+              Sign in
             </Button>
           </Box>
 
@@ -210,22 +152,17 @@ export default function AuthForm(props: {
           </Divider>
 
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <FadeTransition className={fadeState ? "fade-out" : ""}>
-              <Typography sx={{ textAlign: "center" }}>
-                {isSignIn
-                  ? "Don't have an account?"
-                  : "Already have an account?"}{" "}
-                <Link
-                  component="button"
-                  type="button"
-                  onClick={toggleMode}
-                  variant="body2"
-                  sx={{ alignSelf: "center" }}
-                >
-                  {isSignIn ? "Sign up" : "Sign in"}
-                </Link>
-              </Typography>
-            </FadeTransition>
+            <Typography sx={{ textAlign: "center" }}>
+              New user? {" "}
+              <Link
+                component={RouterLink}
+                to="/set-password"
+                variant="body2"
+                sx={{ alignSelf: "center" }}
+              >
+                Set your password
+              </Link>
+            </Typography>
           </Box>
         </Card>
       </SignUpContainer>

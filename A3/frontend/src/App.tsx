@@ -18,11 +18,12 @@ import TransactionDetails from "@/pages/transaction-details";
 import PasswordResetPage from "@/pages/password-reset";
 import SignupPage from "@/pages/signup";
 import { Toaster } from "sonner";
+import SetPasswordPage from "@/pages/set-password";
 export const queryClient = new QueryClient();
 
 const AppContent = () => {
   const location = useLocation();
-  const isAuthPage = location.pathname === "/auth";
+  const isAuthPage = location.pathname === "/auth" || location.pathname === "/set-password";
 
   return (
     <>
@@ -31,6 +32,7 @@ const AppContent = () => {
       <Routes>
         {/* public routes */}
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/set-password" element={<SetPasswordPage />} />
 
         {/* private routes */}
         <Route element={<PrivateRoutes />}>
