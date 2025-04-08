@@ -1,18 +1,18 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { 
-  Button, 
-  Stack, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
-  ListItemButton, 
+import {
+  Button,
+  Stack,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
   ListItemText,
   useTheme,
   useMediaQuery,
   Box,
-  Typography
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
@@ -32,9 +32,10 @@ export default function Navbar() {
   const location = useLocation();
   const logout = useAuthStore((state) => state.logout);
   const { user } = useUser();
-  const userRole = user?.role.toUpperCase() as Role;
+  const roleString = user?.role.toUpperCase();
+  const userRole = roleString as Role;
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems: NavItem[] = [
@@ -43,20 +44,20 @@ export default function Navbar() {
     { path: "/promotions", label: "Promotions" },
     { path: "/events", label: "Events" },
     { path: "/transactions/history", label: "Transaction History" },
-    { 
-      path: "/transactions", 
+    {
+      path: "/transactions",
       label: "Process Transactions",
-      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
+      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER],
     },
-    { 
-      path: "/users", 
+    {
+      path: "/users",
       label: "Users",
-      requiredRoles: [Role.MANAGER, Role.SUPERUSER]
+      requiredRoles: [Role.MANAGER, Role.SUPERUSER],
     },
-    { 
-      path: "/signup", 
+    {
+      path: "/signup",
       label: "Create User",
-      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER]
+      requiredRoles: [Role.CASHIER, Role.MANAGER, Role.SUPERUSER],
     },
     { path: "/reset-password", label: "Reset Password" },
   ];
@@ -67,7 +68,7 @@ export default function Navbar() {
     return item.requiredRoles.includes(userRole);
   };
 
-  const visibleNavItems = navItems.filter(item => hasAccess(item));
+  const visibleNavItems = navItems.filter((item) => hasAccess(item));
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -93,9 +94,10 @@ export default function Navbar() {
               onClick={() => handleNavigation(item.path)}
               selected={location.pathname === item.path}
               sx={{
-                backgroundColor: location.pathname === item.path
-                  ? "rgba(255, 255, 255, 0.1)"
-                  : "transparent",
+                backgroundColor:
+                  location.pathname === item.path
+                    ? "rgba(255, 255, 255, 0.1)"
+                    : "transparent",
                 "&:hover": {
                   backgroundColor: "rgba(255, 255, 255, 0.2)",
                 },
@@ -142,7 +144,7 @@ export default function Navbar() {
                 sx: {
                   backgroundColor: theme.palette.primary.main,
                   color: theme.palette.primary.contrastText,
-                }
+                },
               }}
             >
               {drawer}
@@ -170,10 +172,7 @@ export default function Navbar() {
                 </Button>
               ))}
             </Stack>
-            <Button
-              color="inherit"
-              onClick={handleLogout}
-            >
+            <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
           </>
