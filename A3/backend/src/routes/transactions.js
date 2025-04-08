@@ -286,15 +286,15 @@ router
     }
 
     if (amount && operator) {
-      if (operator === "=") {
+      if (operator === "=" || operator === "eq") {
         query.points = amount;
-      } else if (operator === ">") {
+      } else if (operator === ">" || operator === "gt") {
         query.points = { gt: amount };
-      } else if (operator === "<") {
+      } else if (operator === "<" || operator === "lt") {
         query.points = { lt: amount };
-      } else if (operator === ">=") {
+      } else if (operator === ">=" || operator === "gte") {
         query.points = { gte: amount };
-      } else if (operator === "<=") {
+      } else if (operator === "<=" || operator === "lte") {
         query.points = { lte: amount };
       } else {
         return sendResult(res, 400, { error: "Invalid operator" });
