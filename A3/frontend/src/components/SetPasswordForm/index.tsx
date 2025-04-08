@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { toast } from "sonner";
 import apiClient from "@/services/api/api-client";
 import {
@@ -10,6 +10,7 @@ import {
   Typography,
   Alert,
   Paper,
+  Divider,
 } from "@mui/material";
 import { useResetTokenStore } from "@/stores/reset-token-store";
 
@@ -145,6 +146,21 @@ export default function SetPasswordForm() {
               sx={{ mt: 3, mb: 2 }}
             >
               Set Password
+            </Button>
+          </Box>
+          
+          <Divider sx={{ my: 2 }}>
+            <Typography sx={{ color: "text.secondary" }}>or</Typography>
+          </Divider>
+          
+          <Box sx={{ textAlign: "center" }}>
+            <Button
+              component={RouterLink}
+              to="/auth"
+              variant="outlined"
+              fullWidth
+            >
+              Back to Sign In
             </Button>
           </Box>
         </Paper>
