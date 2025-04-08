@@ -28,14 +28,7 @@ const port = process.env.PORT || 8080;
 const FRONTEND_URL = process.env.FRONTEND_URL || `http://localhost:5173`;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://csc309-a3-production-e042.up.railway.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(
   expressJwt({
