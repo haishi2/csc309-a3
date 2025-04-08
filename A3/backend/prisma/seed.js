@@ -22,10 +22,10 @@ async function seed() {
         // Superuser
         prisma.user.create({
             data: {
-                username: "sarahlee",
-                email: "sarahlee@mail.utoronto.ca",
+                username: "clive123",
+                email: "clive123@mail.utoronto.ca",
                 password: "123456aA!",
-                name: "Sarah Lee",
+                name: "Clive",
                 isActivated: true,
                 role: Role.SUPERUSER,
                 verifiedStudent: true,
