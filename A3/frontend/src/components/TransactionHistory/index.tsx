@@ -60,7 +60,8 @@ const transactionTypes = [
 export default function TransactionHistory() {
   const { user } = useUser();
   const isManager =
-    user?.role.toUpperCase() === Role.MANAGER || user?.role.toUpperCase() === Role.SUPERUSER;
+    user?.role.toUpperCase() === Role.MANAGER ||
+    user?.role.toUpperCase() === Role.SUPERUSER;
 
   const [activeTab, setActiveTab] = useState(0);
   const [selectedTransaction, setSelectedTransaction] = useState<number | null>(
@@ -113,14 +114,22 @@ export default function TransactionHistory() {
   const toggleSuspiciousMutation = useToggleSuspicious();
 
   // Use appropriate data based on role and active tab
-  const data = (isManager && activeTab === 1) ? managerData.data : userTransactions.data;
-  const isLoading = (isManager && activeTab === 1) ? managerData.isLoading : userTransactions.isLoading;
-  const isError = (isManager && activeTab === 1) ? managerData.isError : userTransactions.isError;
+  const data =
+    isManager && activeTab === 1 ? managerData.data : userTransactions.data;
+  const isLoading =
+    isManager && activeTab === 1
+      ? managerData.isLoading
+      : userTransactions.isLoading;
+  const isError =
+    isManager && activeTab === 1
+      ? managerData.isError
+      : userTransactions.isError;
 
   const createRedemption = useCreateRedemption();
 
   const [showQRCode, setShowQRCode] = useState(false);
-  const [selectedQRTransaction, setSelectedQRTransaction] = useState<Transaction | null>(null);
+  const [selectedQRTransaction, setSelectedQRTransaction] =
+    useState<Transaction | null>(null);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -397,7 +406,7 @@ export default function TransactionHistory() {
       )}
 
       {/* Transaction Detail Dialog */}
-      {(isManager) && (
+      {isManager && (
         <Dialog
           open={!!selectedTransaction}
           onClose={() => setSelectedTransaction(null)}
@@ -540,7 +549,7 @@ export default function TransactionHistory() {
                   value={JSON.stringify({
                     type: "redemption",
                     id: selectedQRTransaction.id,
-                    amount: selectedQRTransaction.amount
+                    amount: selectedQRTransaction.amount,
                   })}
                   size={256}
                 />
@@ -552,10 +561,12 @@ export default function TransactionHistory() {
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => {
-            setShowQRCode(false);
-            setSelectedQRTransaction(null);
-          }}>
+          <Button
+            onClick={() => {
+              setShowQRCode(false);
+              setSelectedQRTransaction(null);
+            }}
+          >
             Close
           </Button>
         </DialogActions>
