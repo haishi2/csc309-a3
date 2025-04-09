@@ -686,7 +686,7 @@ router
 
       if (t.type.toUpperCase() === "PURCHASE") {
         result.utorid = t.user.username;
-        result.amount = t.points;
+        result.amount = t.spent;
         result.spent = t.spent;
         result.promotionIds = t.promotionUses.map((pu) => pu.promotionId);
         result.suspicious = t.needsVerification;
@@ -707,13 +707,11 @@ router
         result.createBy = t.processor?.username;
       } else if (t.type.toUpperCase() === "TRANSFER") {
         result.amount = t.points;
-        result.utorid = t.user.username;
         result.relatedId = t.relatedId;
       } else if (t.type.toUpperCase() === "EVENT") {
-        result.amount = t.points;
-        result.utorid = t.user.username;
+        result.awarded = t.points;
         result.relatedId = t.relatedId;
-        result.createBy = t.processor?.username;
+        result.createdBy = t.processor?.username;
       }
 
       return result;
