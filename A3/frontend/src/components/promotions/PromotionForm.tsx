@@ -333,9 +333,6 @@ export function PromotionForm({ id, onSubmit, onCancel }: PromotionFormProps) {
           name="points"
           control={control}
           rules={{
-            required: isFieldChanged("points")
-              ? "Points is required"
-              : undefined,
             min: isFieldChanged("points")
               ? { value: 0, message: "Points must be positive" }
               : undefined,
