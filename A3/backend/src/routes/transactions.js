@@ -240,6 +240,11 @@ router
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
     amount = amount ? parseInt(amount) : null;
+
+    if (suspicious !== null && suspicious !== undefined) {
+      suspicious = suspicious === "true";
+    }
+
     const skip = (page - 1) * limit;
     const query = {};
 

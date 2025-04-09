@@ -1,573 +1,583 @@
-=== Seed Log Started at 2025-04-08T20:01:27.634Z ===
-2025-04-08T20:01:27.636Z - INFO: Starting database seeding...
-2025-04-08T20:01:27.637Z - INFO: Clearing existing data...
-2025-04-08T20:01:27.640Z - INFO: Prisma Info: Starting a sqlite pool with 17 connections.
-2025-04-08T20:01:27.641Z - INFO: Query: DELETE FROM `main`.`PromotionUse` WHERE 1=1
-2025-04-08T20:01:27.641Z - INFO: Params: []
-2025-04-08T20:01:27.641Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.642Z - INFO: Query: DELETE FROM `main`.`Promotion` WHERE 1=1
-2025-04-08T20:01:27.642Z - INFO: Params: []
-2025-04-08T20:01:27.642Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.643Z - INFO: Query: DELETE FROM `main`.`RSVP` WHERE 1=1
-2025-04-08T20:01:27.643Z - INFO: Params: []
-2025-04-08T20:01:27.643Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.643Z - INFO: Query: DELETE FROM `main`.`Organizer` WHERE 1=1
-2025-04-08T20:01:27.643Z - INFO: Params: []
-2025-04-08T20:01:27.644Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.644Z - INFO: Query: DELETE FROM `main`.`Event` WHERE 1=1
-2025-04-08T20:01:27.644Z - INFO: Params: []
-2025-04-08T20:01:27.644Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.644Z - INFO: Query: DELETE FROM `main`.`Transfer` WHERE 1=1
-2025-04-08T20:01:27.644Z - INFO: Params: []
-2025-04-08T20:01:27.644Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.645Z - INFO: Query: DELETE FROM `main`.`Transaction` WHERE 1=1
-2025-04-08T20:01:27.645Z - INFO: Params: []
-2025-04-08T20:01:27.645Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.645Z - INFO: Query: DELETE FROM `main`.`User` WHERE 1=1
-2025-04-08T20:01:27.645Z - INFO: Params: []
-2025-04-08T20:01:27.646Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.646Z - INFO: Creating users one by one to identify problematic user...
-2025-04-08T20:01:27.646Z - INFO: Creating superuser...
-2025-04-08T20:01:27.648Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.648Z - INFO: Params: ["sarahlee","sarahlee@mail.utoronto.ca","123456aA!","Sarah Lee",true,"SUPERUSER",true,false,1000,"2025-04-08 20:01:27.647 UTC","2025-04-08 20:01:27.647 UTC","1990-01-01"]
-2025-04-08T20:01:27.648Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.648Z - INFO: Created superuser: sarahlee, ID: 51
-2025-04-08T20:01:27.648Z - INFO: Creating manager...
-2025-04-08T20:01:27.649Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.649Z - INFO: Params: ["mikejohn","mikejohn@mail.utoronto.ca","123456aA!","Mike Johnson",true,"MANAGER",true,false,500,"2025-04-08 20:01:27.649 UTC","2025-04-08 20:01:27.649 UTC","1991-01-01"]
-2025-04-08T20:01:27.649Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.649Z - INFO: Created manager: mikejohn, ID: 52
-2025-04-08T20:01:27.649Z - INFO: Creating cashier...
-2025-04-08T20:01:27.650Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.650Z - INFO: Params: ["amysmith","amysmith@mail.utoronto.ca","123456aA!","Amy Smith",true,"CASHIER",true,false,300,"2025-04-08 20:01:27.650 UTC","2025-04-08 20:01:27.650 UTC","1992-01-01"]
-2025-04-08T20:01:27.650Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.650Z - INFO: Created cashier: amysmith, ID: 53
-2025-04-08T20:01:27.650Z - INFO: Creating regular user: johndoe1...
-2025-04-08T20:01:27.650Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.650Z - INFO: Params: ["johndoe1","johndoe1@mail.utoronto.ca","123456aA!","John Doe",true,"REGULAR",true,false,100,"2025-04-08 20:01:27.650 UTC","2025-04-08 20:01:27.650 UTC","1993-01-01"]
-2025-04-08T20:01:27.650Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.651Z - INFO: Created regular user: johndoe1, ID: 54
-2025-04-08T20:01:27.651Z - INFO: Creating regular user: emilywu2...
-2025-04-08T20:01:27.652Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.652Z - INFO: Params: ["emilywu2","emilywu2@mail.utoronto.ca","123456aA!","Emily Wu",true,"REGULAR",true,false,200,"2025-04-08 20:01:27.651 UTC","2025-04-08 20:01:27.651 UTC","1994-01-01"]
-2025-04-08T20:01:27.652Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.652Z - INFO: Created regular user: emilywu2, ID: 55
-2025-04-08T20:01:27.652Z - INFO: Creating regular user: alexng12...
-2025-04-08T20:01:27.653Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.653Z - INFO: Params: ["alexng12","alexng12@mail.utoronto.ca","123456aA!","Alex Ng",true,"REGULAR",true,false,300,"2025-04-08 20:01:27.653 UTC","2025-04-08 20:01:27.653 UTC","1995-01-01"]
-2025-04-08T20:01:27.653Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.653Z - INFO: Created regular user: alexng12, ID: 56
-2025-04-08T20:01:27.653Z - INFO: Creating regular user: juliakim...
-2025-04-08T20:01:27.654Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.654Z - INFO: Params: ["juliakim","juliakim@mail.utoronto.ca","123456aA!","Julia Kim",true,"REGULAR",true,false,400,"2025-04-08 20:01:27.654 UTC","2025-04-08 20:01:27.654 UTC","1996-01-01"]
-2025-04-08T20:01:27.655Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.655Z - INFO: Created regular user: juliakim, ID: 57
-2025-04-08T20:01:27.655Z - INFO: Creating regular user: ryanpark...
-2025-04-08T20:01:27.655Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.655Z - INFO: Params: ["ryanpark","ryanpark@mail.utoronto.ca","123456aA!","Ryan Park",true,"REGULAR",true,false,500,"2025-04-08 20:01:27.655 UTC","2025-04-08 20:01:27.655 UTC","1997-01-01"]
-2025-04-08T20:01:27.655Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.655Z - INFO: Created regular user: ryanpark, ID: 58
-2025-04-08T20:01:27.655Z - INFO: Creating regular user: liachen...
-2025-04-08T20:01:27.656Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.656Z - INFO: Params: ["liachen","liachen@mail.utoronto.ca","123456aA!","Lia Chen",true,"REGULAR",false,false,600,"2025-04-08 20:01:27.656 UTC","2025-04-08 20:01:27.656 UTC","1998-01-01"]
-2025-04-08T20:01:27.656Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.656Z - INFO: Created regular user: liachen, ID: 59
-2025-04-08T20:01:27.656Z - INFO: Creating regular user: davidlee...
-2025-04-08T20:01:27.657Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
-2025-04-08T20:01:27.657Z - INFO: Params: ["davidlee","davidlee@mail.utoronto.ca","123456aA!","David Lee",true,"REGULAR",false,false,700,"2025-04-08 20:01:27.657 UTC","2025-04-08 20:01:27.657 UTC","1999-01-01"]
-2025-04-08T20:01:27.657Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.657Z - INFO: Created regular user: davidlee, ID: 60
-2025-04-08T20:01:27.657Z - INFO: Created 10 users
-2025-04-08T20:01:27.657Z - INFO: User IDs: 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
-2025-04-08T20:01:27.657Z - INFO: Creating events...
-2025-04-08T20:01:27.658Z - INFO: Creating event with manager ID: 52
-2025-04-08T20:01:27.659Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.659Z - INFO: Params: ["Event 1","Description for event 1","Location 1","2025-04-08 20:01:27.658 UTC","2025-04-08 23:01:27.658 UTC",50,1000,1000,0,true,0,"2025-04-08 20:01:27.658 UTC",52]
-2025-04-08T20:01:27.659Z - INFO: Duration: 1ms
-2025-04-08T20:01:27.659Z - INFO: Created event: Event 1, ID: 26
-2025-04-08T20:01:27.659Z - INFO: Creating event with manager ID: 53
-2025-04-08T20:01:27.660Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.660Z - INFO: Params: ["Event 2","Description for event 2","Location 2","2025-04-15 20:01:27.659 UTC","2025-04-15 23:01:27.659 UTC",50,1000,1000,0,true,0,"2025-04-08 20:01:27.660 UTC",53]
-2025-04-08T20:01:27.660Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.660Z - INFO: Created event: Event 2, ID: 27
-2025-04-08T20:01:27.660Z - INFO: Creating event with manager ID: 52
-2025-04-08T20:01:27.661Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.661Z - INFO: Params: ["Event 3","Description for event 3","Location 3","2025-04-22 20:01:27.660 UTC","2025-04-22 23:01:27.660 UTC",50,1000,1000,0,true,0,"2025-04-08 20:01:27.661 UTC",52]
-2025-04-08T20:01:27.661Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.661Z - INFO: Created event: Event 3, ID: 28
-2025-04-08T20:01:27.661Z - INFO: Creating event with manager ID: 53
-2025-04-08T20:01:27.662Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.662Z - INFO: Params: ["Event 4","Description for event 4","Location 4","2025-04-29 20:01:27.661 UTC","2025-04-29 23:01:27.661 UTC",50,1000,1000,0,false,0,"2025-04-08 20:01:27.662 UTC",53]
-2025-04-08T20:01:27.662Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.662Z - INFO: Created event: Event 4, ID: 29
-2025-04-08T20:01:27.662Z - INFO: Creating event with manager ID: 52
-2025-04-08T20:01:27.663Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.663Z - INFO: Params: ["Event 5","Description for event 5","Location 5","2025-05-06 20:01:27.662 UTC","2025-05-06 23:01:27.662 UTC",50,1000,1000,0,false,0,"2025-04-08 20:01:27.663 UTC",52]
-2025-04-08T20:01:27.663Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.663Z - INFO: Created event: Event 5, ID: 30
-2025-04-08T20:01:27.663Z - INFO: Created 5 events
-2025-04-08T20:01:27.663Z - INFO: Creating event organizers...
-2025-04-08T20:01:27.663Z - INFO: Available users: 10, Available events: 5
-2025-04-08T20:01:27.663Z - INFO: User IDs: 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
-2025-04-08T20:01:27.663Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.663Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.663Z - INFO: Using organizer indices: 3, 4
-2025-04-08T20:01:27.663Z - INFO: Creating organizer with event ID: 26, user ID: 54
-2025-04-08T20:01:27.664Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.664Z - INFO: Params: [26,54]
-2025-04-08T20:01:27.664Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.664Z - INFO: Created organizer for event 26, user 54
-2025-04-08T20:01:27.664Z - INFO: Creating organizer with event ID: 26, user ID: 55
-2025-04-08T20:01:27.664Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.665Z - INFO: Params: [26,55]
-2025-04-08T20:01:27.665Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.665Z - INFO: Created organizer for event 26, user 55
-2025-04-08T20:01:27.665Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.665Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.665Z - INFO: Using organizer indices: 3, 4
-2025-04-08T20:01:27.665Z - INFO: Creating organizer with event ID: 27, user ID: 54
-2025-04-08T20:01:27.665Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.665Z - INFO: Params: [27,54]
-2025-04-08T20:01:27.666Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.666Z - INFO: Created organizer for event 27, user 54
-2025-04-08T20:01:27.666Z - INFO: Creating organizer with event ID: 27, user ID: 55
-2025-04-08T20:01:27.666Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.666Z - INFO: Params: [27,55]
-2025-04-08T20:01:27.666Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.666Z - INFO: Created organizer for event 27, user 55
-2025-04-08T20:01:27.666Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.666Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.666Z - INFO: Using organizer indices: 3, 4
-2025-04-08T20:01:27.666Z - INFO: Creating organizer with event ID: 28, user ID: 54
-2025-04-08T20:01:27.667Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.667Z - INFO: Params: [28,54]
-2025-04-08T20:01:27.667Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.667Z - INFO: Created organizer for event 28, user 54
-2025-04-08T20:01:27.667Z - INFO: Creating organizer with event ID: 28, user ID: 55
-2025-04-08T20:01:27.668Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.668Z - INFO: Params: [28,55]
-2025-04-08T20:01:27.668Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.669Z - INFO: Created organizer for event 28, user 55
-2025-04-08T20:01:27.669Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.669Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.669Z - INFO: Using organizer indices: 3, 4
-2025-04-08T20:01:27.669Z - INFO: Creating organizer with event ID: 29, user ID: 54
-2025-04-08T20:01:27.669Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.669Z - INFO: Params: [29,54]
-2025-04-08T20:01:27.669Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.669Z - INFO: Created organizer for event 29, user 54
-2025-04-08T20:01:27.669Z - INFO: Creating organizer with event ID: 29, user ID: 55
-2025-04-08T20:01:27.670Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.670Z - INFO: Params: [29,55]
-2025-04-08T20:01:27.670Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.670Z - INFO: Created organizer for event 29, user 55
-2025-04-08T20:01:27.670Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.670Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
-2025-04-08T20:01:27.670Z - INFO: Using organizer indices: 3, 4
-2025-04-08T20:01:27.670Z - INFO: Creating organizer with event ID: 30, user ID: 54
-2025-04-08T20:01:27.671Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.671Z - INFO: Params: [30,54]
-2025-04-08T20:01:27.671Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.671Z - INFO: Created organizer for event 30, user 54
-2025-04-08T20:01:27.671Z - INFO: Creating organizer with event ID: 30, user ID: 55
-2025-04-08T20:01:27.671Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
-2025-04-08T20:01:27.671Z - INFO: Params: [30,55]
-2025-04-08T20:01:27.671Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.671Z - INFO: Created organizer for event 30, user 55
-2025-04-08T20:01:27.671Z - INFO: Created 10 event organizers
-2025-04-08T20:01:27.671Z - INFO: Creating RSVPs...
-2025-04-08T20:01:27.671Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.672Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.672Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.672Z - INFO: Creating RSVP with event ID: 26, user ID: 56
-2025-04-08T20:01:27.672Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.672Z - INFO: Params: [26,56,false]
-2025-04-08T20:01:27.672Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.672Z - INFO: Created RSVP for event 26, user 56
-2025-04-08T20:01:27.672Z - INFO: Creating RSVP with event ID: 26, user ID: 57
-2025-04-08T20:01:27.673Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.673Z - INFO: Params: [26,57,true]
-2025-04-08T20:01:27.673Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.673Z - INFO: Created RSVP for event 26, user 57
-2025-04-08T20:01:27.673Z - INFO: Creating RSVP with event ID: 26, user ID: 58
-2025-04-08T20:01:27.674Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.674Z - INFO: Params: [26,58,false]
-2025-04-08T20:01:27.674Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.674Z - INFO: Created RSVP for event 26, user 58
-2025-04-08T20:01:27.674Z - INFO: Creating RSVP with event ID: 26, user ID: 59
-2025-04-08T20:01:27.675Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.675Z - INFO: Params: [26,59,true]
-2025-04-08T20:01:27.675Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.675Z - INFO: Created RSVP for event 26, user 59
-2025-04-08T20:01:27.675Z - INFO: Creating RSVP with event ID: 26, user ID: 60
-2025-04-08T20:01:27.675Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.675Z - INFO: Params: [26,60,false]
-2025-04-08T20:01:27.675Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.676Z - INFO: Created RSVP for event 26, user 60
-2025-04-08T20:01:27.676Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.676Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.676Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.676Z - INFO: Creating RSVP with event ID: 27, user ID: 56
-2025-04-08T20:01:27.676Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.676Z - INFO: Params: [27,56,false]
-2025-04-08T20:01:27.676Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.676Z - INFO: Created RSVP for event 27, user 56
-2025-04-08T20:01:27.676Z - INFO: Creating RSVP with event ID: 27, user ID: 57
-2025-04-08T20:01:27.677Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.677Z - INFO: Params: [27,57,true]
-2025-04-08T20:01:27.677Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.677Z - INFO: Created RSVP for event 27, user 57
-2025-04-08T20:01:27.677Z - INFO: Creating RSVP with event ID: 27, user ID: 58
-2025-04-08T20:01:27.678Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.678Z - INFO: Params: [27,58,false]
-2025-04-08T20:01:27.678Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.678Z - INFO: Created RSVP for event 27, user 58
-2025-04-08T20:01:27.678Z - INFO: Creating RSVP with event ID: 27, user ID: 59
-2025-04-08T20:01:27.678Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.678Z - INFO: Params: [27,59,true]
-2025-04-08T20:01:27.678Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.679Z - INFO: Created RSVP for event 27, user 59
-2025-04-08T20:01:27.679Z - INFO: Creating RSVP with event ID: 27, user ID: 60
-2025-04-08T20:01:27.679Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.679Z - INFO: Params: [27,60,false]
-2025-04-08T20:01:27.679Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.679Z - INFO: Created RSVP for event 27, user 60
-2025-04-08T20:01:27.679Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.679Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.679Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.680Z - INFO: Creating RSVP with event ID: 28, user ID: 56
-2025-04-08T20:01:27.680Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.680Z - INFO: Params: [28,56,false]
-2025-04-08T20:01:27.680Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.680Z - INFO: Created RSVP for event 28, user 56
-2025-04-08T20:01:27.680Z - INFO: Creating RSVP with event ID: 28, user ID: 57
-2025-04-08T20:01:27.681Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.681Z - INFO: Params: [28,57,true]
-2025-04-08T20:01:27.681Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.681Z - INFO: Created RSVP for event 28, user 57
-2025-04-08T20:01:27.681Z - INFO: Creating RSVP with event ID: 28, user ID: 58
-2025-04-08T20:01:27.681Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.681Z - INFO: Params: [28,58,false]
-2025-04-08T20:01:27.682Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.682Z - INFO: Created RSVP for event 28, user 58
-2025-04-08T20:01:27.682Z - INFO: Creating RSVP with event ID: 28, user ID: 59
-2025-04-08T20:01:27.682Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.682Z - INFO: Params: [28,59,true]
-2025-04-08T20:01:27.682Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.682Z - INFO: Created RSVP for event 28, user 59
-2025-04-08T20:01:27.683Z - INFO: Creating RSVP with event ID: 28, user ID: 60
-2025-04-08T20:01:27.683Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.683Z - INFO: Params: [28,60,false]
-2025-04-08T20:01:27.683Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.683Z - INFO: Created RSVP for event 28, user 60
-2025-04-08T20:01:27.683Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.683Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.683Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.684Z - INFO: Creating RSVP with event ID: 29, user ID: 56
-2025-04-08T20:01:27.684Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.684Z - INFO: Params: [29,56,false]
-2025-04-08T20:01:27.684Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.684Z - INFO: Created RSVP for event 29, user 56
-2025-04-08T20:01:27.684Z - INFO: Creating RSVP with event ID: 29, user ID: 57
-2025-04-08T20:01:27.685Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.685Z - INFO: Params: [29,57,true]
-2025-04-08T20:01:27.685Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.685Z - INFO: Created RSVP for event 29, user 57
-2025-04-08T20:01:27.685Z - INFO: Creating RSVP with event ID: 29, user ID: 58
-2025-04-08T20:01:27.685Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.685Z - INFO: Params: [29,58,false]
-2025-04-08T20:01:27.685Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.686Z - INFO: Created RSVP for event 29, user 58
-2025-04-08T20:01:27.686Z - INFO: Creating RSVP with event ID: 29, user ID: 59
-2025-04-08T20:01:27.686Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.686Z - INFO: Params: [29,59,true]
-2025-04-08T20:01:27.686Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.686Z - INFO: Created RSVP for event 29, user 59
-2025-04-08T20:01:27.686Z - INFO: Creating RSVP with event ID: 29, user ID: 60
-2025-04-08T20:01:27.687Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.687Z - INFO: Params: [29,60,false]
-2025-04-08T20:01:27.687Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.687Z - INFO: Created RSVP for event 29, user 60
-2025-04-08T20:01:27.687Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.687Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.687Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
-2025-04-08T20:01:27.687Z - INFO: Creating RSVP with event ID: 30, user ID: 56
-2025-04-08T20:01:27.688Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.688Z - INFO: Params: [30,56,false]
-2025-04-08T20:01:27.688Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.688Z - INFO: Created RSVP for event 30, user 56
-2025-04-08T20:01:27.688Z - INFO: Creating RSVP with event ID: 30, user ID: 57
-2025-04-08T20:01:27.688Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.688Z - INFO: Params: [30,57,true]
-2025-04-08T20:01:27.688Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.688Z - INFO: Created RSVP for event 30, user 57
-2025-04-08T20:01:27.688Z - INFO: Creating RSVP with event ID: 30, user ID: 58
-2025-04-08T20:01:27.689Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.689Z - INFO: Params: [30,58,false]
-2025-04-08T20:01:27.689Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.689Z - INFO: Created RSVP for event 30, user 58
-2025-04-08T20:01:27.689Z - INFO: Creating RSVP with event ID: 30, user ID: 59
-2025-04-08T20:01:27.689Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.690Z - INFO: Params: [30,59,true]
-2025-04-08T20:01:27.690Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.690Z - INFO: Created RSVP for event 30, user 59
-2025-04-08T20:01:27.690Z - INFO: Creating RSVP with event ID: 30, user ID: 60
-2025-04-08T20:01:27.690Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
-2025-04-08T20:01:27.690Z - INFO: Params: [30,60,false]
-2025-04-08T20:01:27.690Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.690Z - INFO: Created RSVP for event 30, user 60
-2025-04-08T20:01:27.690Z - INFO: Created 25 RSVPs
-2025-04-08T20:01:27.690Z - INFO: Creating promotions...
-2025-04-08T20:01:27.690Z - INFO: Creating promotion with manager ID: 52
-2025-04-08T20:01:27.691Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.691Z - INFO: Params: ["Promo 1","Description for promo 1","AUTOMATIC","2025-04-03 20:01:27.690 UTC","2025-04-18 20:01:27.690 UTC",10,0.1,null,"2025-04-08 20:01:27.691 UTC",52]
-2025-04-08T20:01:27.691Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.691Z - INFO: Created promotion: Promo 1, ID: 21
-2025-04-08T20:01:27.691Z - INFO: Creating promotion with manager ID: 52
-2025-04-08T20:01:27.692Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.692Z - INFO: Params: ["Promo 2","Description for promo 2","ONE_TIME","2025-04-04 20:01:27.691 UTC","2025-04-23 20:01:27.691 UTC",15,null,100,"2025-04-08 20:01:27.692 UTC",52]
-2025-04-08T20:01:27.692Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.692Z - INFO: Created promotion: Promo 2, ID: 22
-2025-04-08T20:01:27.692Z - INFO: Creating promotion with manager ID: 52
-2025-04-08T20:01:27.693Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.693Z - INFO: Params: ["Promo 3","Description for promo 3","AUTOMATIC","2025-04-05 20:01:27.692 UTC","2025-04-28 20:01:27.692 UTC",20,0.3,null,"2025-04-08 20:01:27.693 UTC",52]
-2025-04-08T20:01:27.693Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.693Z - INFO: Created promotion: Promo 3, ID: 23
-2025-04-08T20:01:27.693Z - INFO: Creating promotion with manager ID: 52
-2025-04-08T20:01:27.693Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.693Z - INFO: Params: ["Promo 4","Description for promo 4","ONE_TIME","2025-04-06 20:01:27.693 UTC","2025-05-03 20:01:27.693 UTC",25,null,200,"2025-04-08 20:01:27.693 UTC",52]
-2025-04-08T20:01:27.693Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.693Z - INFO: Created promotion: Promo 4, ID: 24
-2025-04-08T20:01:27.693Z - INFO: Creating promotion with manager ID: 52
-2025-04-08T20:01:27.694Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
-2025-04-08T20:01:27.694Z - INFO: Params: ["Promo 5","Description for promo 5","AUTOMATIC","2025-04-07 20:01:27.693 UTC","2025-05-08 20:01:27.693 UTC",30,0.5,null,"2025-04-08 20:01:27.694 UTC",52]
-2025-04-08T20:01:27.694Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.694Z - INFO: Created promotion: Promo 5, ID: 25
-2025-04-08T20:01:27.694Z - INFO: Created 5 promotions
-2025-04-08T20:01:27.694Z - INFO: Creating transactions...
-2025-04-08T20:01:27.694Z - INFO: Creating PURCHASE transactions...
-2025-04-08T20:01:27.694Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.694Z - INFO: Creating PURCHASE transaction for user ID: 55
-2025-04-08T20:01:27.695Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.695Z - INFO: Params: [55,"PURCHASE",50,"PENDING",true,53,25,"PURCHASE 1","2025-04-08 20:01:27.695 UTC"]
-2025-04-08T20:01:27.695Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.695Z - INFO: Created PURCHASE transaction #1 for user 55, ID: 125
-2025-04-08T20:01:27.695Z - INFO: Creating promotion use with promotion ID: 24, transaction ID: 125
-2025-04-08T20:01:27.696Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
-2025-04-08T20:01:27.696Z - INFO: Params: [55,24,125]
-2025-04-08T20:01:27.696Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.696Z - INFO: Created promotion use for transaction 125, promotion 24
-2025-04-08T20:01:27.696Z - INFO: Creating PURCHASE transaction for user ID: 54
-2025-04-08T20:01:27.697Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.697Z - INFO: Params: [54,"PURCHASE",53,"PENDING",true,26.5,"PURCHASE 2","2025-04-08 20:01:27.697 UTC"]
-2025-04-08T20:01:27.697Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.697Z - INFO: Created PURCHASE transaction #2 for user 54, ID: 126
-2025-04-08T20:01:27.697Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.697Z - INFO: Creating PURCHASE transaction for user ID: 53
-2025-04-08T20:01:27.698Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.698Z - INFO: Params: [53,"PURCHASE",100,"APPROVED",false,53,50,"PURCHASE 3","2025-04-08 20:01:27.698 UTC"]
-2025-04-08T20:01:27.698Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.698Z - INFO: Created PURCHASE transaction #3 for user 53, ID: 127
-2025-04-08T20:01:27.698Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.698Z - INFO: Creating PURCHASE transaction for user ID: 57
-2025-04-08T20:01:27.699Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.699Z - INFO: Params: [57,"PURCHASE",108,"PENDING",false,53,54,"PURCHASE 4","2025-04-08 20:01:27.699 UTC"]
-2025-04-08T20:01:27.699Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.699Z - INFO: Created PURCHASE transaction #4 for user 57, ID: 128
-2025-04-08T20:01:27.699Z - INFO: Creating promotion use with promotion ID: 21, transaction ID: 128
-2025-04-08T20:01:27.699Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
-2025-04-08T20:01:27.699Z - INFO: Params: [57,21,128]
-2025-04-08T20:01:27.699Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.699Z - INFO: Created promotion use for transaction 128, promotion 21
-2025-04-08T20:01:27.699Z - INFO: Creating PURCHASE transaction for user ID: 58
-2025-04-08T20:01:27.700Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.700Z - INFO: Params: [58,"PURCHASE",82,"REJECTED",false,41,"PURCHASE 5","2025-04-08 20:01:27.700 UTC"]
-2025-04-08T20:01:27.700Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.700Z - INFO: Created PURCHASE transaction #5 for user 58, ID: 129
-2025-04-08T20:01:27.700Z - INFO: Creating PURCHASE transaction for user ID: 60
-2025-04-08T20:01:27.701Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.702Z - INFO: Params: [60,"PURCHASE",14,"PENDING",false,7,"PURCHASE 6","2025-04-08 20:01:27.701 UTC"]
-2025-04-08T20:01:27.702Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.702Z - INFO: Created PURCHASE transaction #6 for user 60, ID: 130
-2025-04-08T20:01:27.702Z - INFO: Creating PURCHASE transaction for user ID: 51
-2025-04-08T20:01:27.702Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.703Z - INFO: Params: [51,"PURCHASE",73,"PENDING",false,36.5,"PURCHASE 7","2025-04-08 20:01:27.703 UTC"]
-2025-04-08T20:01:27.703Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.703Z - INFO: Created PURCHASE transaction #7 for user 51, ID: 131
-2025-04-08T20:01:27.703Z - INFO: Creating promotion use with promotion ID: 22, transaction ID: 131
-2025-04-08T20:01:27.703Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
-2025-04-08T20:01:27.703Z - INFO: Params: [51,22,131]
-2025-04-08T20:01:27.703Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.703Z - INFO: Created promotion use for transaction 131, promotion 22
-2025-04-08T20:01:27.703Z - INFO: Creating ADJUSTMENT transactions...
-2025-04-08T20:01:27.703Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.704Z - INFO: Creating ADJUSTMENT transaction for user ID: 59
-2025-04-08T20:01:27.704Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.705Z - INFO: Params: [59,"ADJUSTMENT",65,"APPROVED",false,53,"ADJUSTMENT 1","2025-04-08 20:01:27.704 UTC"]
-2025-04-08T20:01:27.705Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.705Z - INFO: Created ADJUSTMENT transaction #1 for user 59, ID: 132
-2025-04-08T20:01:27.705Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.705Z - INFO: Creating ADJUSTMENT transaction for user ID: 57
-2025-04-08T20:01:27.705Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.706Z - INFO: Params: [57,"ADJUSTMENT",73,"APPROVED",false,53,"ADJUSTMENT 2","2025-04-08 20:01:27.705 UTC"]
-2025-04-08T20:01:27.706Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.706Z - INFO: Created ADJUSTMENT transaction #2 for user 57, ID: 133
-2025-04-08T20:01:27.706Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.706Z - INFO: Creating ADJUSTMENT transaction for user ID: 56
-2025-04-08T20:01:27.706Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.706Z - INFO: Params: [56,"ADJUSTMENT",74,"APPROVED",false,53,"ADJUSTMENT 3","2025-04-08 20:01:27.706 UTC"]
-2025-04-08T20:01:27.706Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.706Z - INFO: Created ADJUSTMENT transaction #3 for user 56, ID: 134
-2025-04-08T20:01:27.706Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.706Z - INFO: Creating ADJUSTMENT transaction for user ID: 55
-2025-04-08T20:01:27.707Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.707Z - INFO: Params: [55,"ADJUSTMENT",101,"PENDING",false,53,"ADJUSTMENT 4","2025-04-08 20:01:27.707 UTC"]
-2025-04-08T20:01:27.707Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.707Z - INFO: Created ADJUSTMENT transaction #4 for user 55, ID: 135
-2025-04-08T20:01:27.707Z - INFO: Creating ADJUSTMENT transaction for user ID: 58
-2025-04-08T20:01:27.708Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.708Z - INFO: Params: [58,"ADJUSTMENT",40,"APPROVED",true,"ADJUSTMENT 5","2025-04-08 20:01:27.708 UTC"]
-2025-04-08T20:01:27.708Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.708Z - INFO: Created ADJUSTMENT transaction #5 for user 58, ID: 136
-2025-04-08T20:01:27.708Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.708Z - INFO: Creating ADJUSTMENT transaction for user ID: 51
-2025-04-08T20:01:27.709Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.709Z - INFO: Params: [51,"ADJUSTMENT",74,"REJECTED",true,53,"ADJUSTMENT 6","2025-04-08 20:01:27.709 UTC"]
-2025-04-08T20:01:27.709Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.709Z - INFO: Created ADJUSTMENT transaction #6 for user 51, ID: 137
-2025-04-08T20:01:27.709Z - INFO: Creating REDEMPTION transactions...
-2025-04-08T20:01:27.709Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.709Z - INFO: Creating REDEMPTION transaction for user ID: 57
-2025-04-08T20:01:27.710Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.710Z - INFO: Params: [57,"REDEMPTION",-109,"REJECTED",false,53,"REDEMPTION 1","2025-04-08 20:01:27.710 UTC"]
-2025-04-08T20:01:27.710Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.710Z - INFO: Created REDEMPTION transaction #1 for user 57, ID: 138
-2025-04-08T20:01:27.710Z - INFO: Creating REDEMPTION transaction for user ID: 59
-2025-04-08T20:01:27.710Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.710Z - INFO: Params: [59,"REDEMPTION",-32,"APPROVED",true,"REDEMPTION 2","2025-04-08 20:01:27.710 UTC"]
-2025-04-08T20:01:27.710Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.710Z - INFO: Created REDEMPTION transaction #2 for user 59, ID: 139
-2025-04-08T20:01:27.710Z - INFO: Creating REDEMPTION transaction for user ID: 54
-2025-04-08T20:01:27.711Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.711Z - INFO: Params: [54,"REDEMPTION",-32,"REJECTED",false,"REDEMPTION 3","2025-04-08 20:01:27.711 UTC"]
-2025-04-08T20:01:27.711Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.711Z - INFO: Created REDEMPTION transaction #3 for user 54, ID: 140
-2025-04-08T20:01:27.711Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.711Z - INFO: Creating REDEMPTION transaction for user ID: 55
-2025-04-08T20:01:27.712Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.712Z - INFO: Params: [55,"REDEMPTION",-37,"APPROVED",true,53,"REDEMPTION 4","2025-04-08 20:01:27.712 UTC"]
-2025-04-08T20:01:27.712Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.712Z - INFO: Created REDEMPTION transaction #4 for user 55, ID: 141
-2025-04-08T20:01:27.712Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.712Z - INFO: Creating REDEMPTION transaction for user ID: 58
-2025-04-08T20:01:27.712Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.712Z - INFO: Params: [58,"REDEMPTION",-81,"REJECTED",false,53,"REDEMPTION 5","2025-04-08 20:01:27.712 UTC"]
-2025-04-08T20:01:27.713Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.713Z - INFO: Created REDEMPTION transaction #5 for user 58, ID: 142
-2025-04-08T20:01:27.713Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.713Z - INFO: Creating REDEMPTION transaction for user ID: 57
-2025-04-08T20:01:27.713Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.713Z - INFO: Params: [57,"REDEMPTION",-15,"PENDING",false,53,"REDEMPTION 6","2025-04-08 20:01:27.713 UTC"]
-2025-04-08T20:01:27.713Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.713Z - INFO: Created REDEMPTION transaction #6 for user 57, ID: 143
-2025-04-08T20:01:27.713Z - INFO: Creating TRANSFER transactions...
-2025-04-08T20:01:27.713Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.714Z - INFO: Creating TRANSFER transaction for user ID: 58
-2025-04-08T20:01:27.714Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.714Z - INFO: Params: [58,"TRANSFER",42,"PENDING",false,53,"TRANSFER 1","2025-04-08 20:01:27.714 UTC"]
-2025-04-08T20:01:27.714Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.714Z - INFO: Created TRANSFER transaction #1 for user 58, ID: 144
-2025-04-08T20:01:27.714Z - INFO: Creating TRANSFER transaction for user ID: 60
-2025-04-08T20:01:27.715Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.715Z - INFO: Params: [60,"TRANSFER",26,"REJECTED",true,"TRANSFER 2","2025-04-08 20:01:27.715 UTC"]
-2025-04-08T20:01:27.715Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.715Z - INFO: Created TRANSFER transaction #2 for user 60, ID: 145
-2025-04-08T20:01:27.715Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.715Z - INFO: Creating TRANSFER transaction for user ID: 56
-2025-04-08T20:01:27.716Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.716Z - INFO: Params: [56,"TRANSFER",54,"PENDING",false,53,"TRANSFER 3","2025-04-08 20:01:27.716 UTC"]
-2025-04-08T20:01:27.716Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.716Z - INFO: Created TRANSFER transaction #3 for user 56, ID: 146
-2025-04-08T20:01:27.716Z - INFO: Creating TRANSFER transaction for user ID: 56
-2025-04-08T20:01:27.717Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.717Z - INFO: Params: [56,"TRANSFER",19,"APPROVED",false,"TRANSFER 4","2025-04-08 20:01:27.717 UTC"]
-2025-04-08T20:01:27.717Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.717Z - INFO: Created TRANSFER transaction #4 for user 56, ID: 147
-2025-04-08T20:01:27.717Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.717Z - INFO: Creating TRANSFER transaction for user ID: 56
-2025-04-08T20:01:27.717Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.717Z - INFO: Params: [56,"TRANSFER",19,"PENDING",false,53,"TRANSFER 5","2025-04-08 20:01:27.717 UTC"]
-2025-04-08T20:01:27.718Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.718Z - INFO: Created TRANSFER transaction #5 for user 56, ID: 148
-2025-04-08T20:01:27.718Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.718Z - INFO: Creating TRANSFER transaction for user ID: 57
-2025-04-08T20:01:27.718Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.718Z - INFO: Params: [57,"TRANSFER",45,"APPROVED",true,53,"TRANSFER 6","2025-04-08 20:01:27.718 UTC"]
-2025-04-08T20:01:27.718Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.718Z - INFO: Created TRANSFER transaction #6 for user 57, ID: 149
-2025-04-08T20:01:27.718Z - INFO: Creating EVENT transactions...
-2025-04-08T20:01:27.718Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.718Z - INFO: Creating EVENT transaction for user ID: 53
-2025-04-08T20:01:27.719Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.719Z - INFO: Params: [53,"EVENT",64,"REJECTED",true,53,"EVENT 1","2025-04-08 20:01:27.719 UTC"]
-2025-04-08T20:01:27.719Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.719Z - INFO: Created EVENT transaction #1 for user 53, ID: 150
-2025-04-08T20:01:27.719Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.719Z - INFO: Creating EVENT transaction for user ID: 57
-2025-04-08T20:01:27.720Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.720Z - INFO: Params: [57,"EVENT",84,"APPROVED",true,53,"EVENT 2","2025-04-08 20:01:27.720 UTC"]
-2025-04-08T20:01:27.720Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.720Z - INFO: Created EVENT transaction #2 for user 57, ID: 151
-2025-04-08T20:01:27.720Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.720Z - INFO: Creating EVENT transaction for user ID: 53
-2025-04-08T20:01:27.721Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.721Z - INFO: Params: [53,"EVENT",41,"APPROVED",true,53,"EVENT 3","2025-04-08 20:01:27.721 UTC"]
-2025-04-08T20:01:27.721Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.721Z - INFO: Created EVENT transaction #3 for user 53, ID: 152
-2025-04-08T20:01:27.721Z - INFO: Creating EVENT transaction for user ID: 57
-2025-04-08T20:01:27.722Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.722Z - INFO: Params: [57,"EVENT",101,"PENDING",true,"EVENT 4","2025-04-08 20:01:27.722 UTC"]
-2025-04-08T20:01:27.722Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.722Z - INFO: Created EVENT transaction #4 for user 57, ID: 153
-2025-04-08T20:01:27.722Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.722Z - INFO: Creating EVENT transaction for user ID: 58
-2025-04-08T20:01:27.723Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.723Z - INFO: Params: [58,"EVENT",83,"PENDING",true,53,"EVENT 5","2025-04-08 20:01:27.723 UTC"]
-2025-04-08T20:01:27.723Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.723Z - INFO: Created EVENT transaction #5 for user 58, ID: 154
-2025-04-08T20:01:27.723Z - INFO: Adding processor ID: 53 to transaction
-2025-04-08T20:01:27.723Z - INFO: Creating EVENT transaction for user ID: 57
-2025-04-08T20:01:27.725Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.725Z - INFO: Params: [57,"EVENT",101,"REJECTED",true,53,"EVENT 6","2025-04-08 20:01:27.724 UTC"]
-2025-04-08T20:01:27.725Z - INFO: Duration: 1ms
-2025-04-08T20:01:27.725Z - INFO: Created EVENT transaction #6 for user 57, ID: 155
-2025-04-08T20:01:27.725Z - INFO: Created 31 transactions total
-2025-04-08T20:01:27.725Z - INFO: Creating transfers...
-2025-04-08T20:01:27.725Z - INFO: Creating transfer from user ID: 54 to user ID: 55
-2025-04-08T20:01:27.726Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.726Z - INFO: Params: [54,55,59,"2025-04-08 20:01:27.726 UTC"]
-2025-04-08T20:01:27.726Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.726Z - INFO: Created transfer from johndoe1 to emilywu2, ID: 21
-2025-04-08T20:01:27.726Z - INFO: Creating transfer from user ID: 55 to user ID: 56
-2025-04-08T20:01:27.726Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.726Z - INFO: Params: [55,56,30,"2025-04-08 20:01:27.726 UTC"]
-2025-04-08T20:01:27.726Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.727Z - INFO: Created transfer from emilywu2 to alexng12, ID: 22
-2025-04-08T20:01:27.727Z - INFO: Creating transfer from user ID: 56 to user ID: 57
-2025-04-08T20:01:27.727Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.727Z - INFO: Params: [56,57,10,"2025-04-08 20:01:27.727 UTC"]
-2025-04-08T20:01:27.727Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.727Z - INFO: Created transfer from alexng12 to juliakim, ID: 23
-2025-04-08T20:01:27.727Z - INFO: Creating transfer from user ID: 57 to user ID: 58
-2025-04-08T20:01:27.728Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.728Z - INFO: Params: [57,58,52,"2025-04-08 20:01:27.728 UTC"]
-2025-04-08T20:01:27.728Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.728Z - INFO: Created transfer from juliakim to ryanpark, ID: 24
-2025-04-08T20:01:27.728Z - INFO: Creating transfer from user ID: 58 to user ID: 59
-2025-04-08T20:01:27.728Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
-2025-04-08T20:01:27.728Z - INFO: Params: [58,59,17,"2025-04-08 20:01:27.728 UTC"]
-2025-04-08T20:01:27.728Z - INFO: Duration: 0ms
-2025-04-08T20:01:27.728Z - INFO: Created transfer from ryanpark to liachen, ID: 25
-2025-04-08T20:01:27.728Z - INFO: Created 5 transfers
-2025-04-08T20:01:27.728Z - INFO: Database seeding completed!
-2025-04-08T20:01:27.735Z - INFO: Disconnected from database. Seed process complete.
+=== Seed Log Started at 2025-04-09T00:18:17.227Z ===
+2025-04-09T00:18:17.229Z - INFO: Starting database seeding...
+2025-04-09T00:18:17.230Z - INFO: Clearing existing data...
+2025-04-09T00:18:17.234Z - INFO: Prisma Info: Starting a sqlite pool with 17 connections.
+2025-04-09T00:18:17.235Z - INFO: Query: DELETE FROM `main`.`PromotionUse` WHERE 1=1
+2025-04-09T00:18:17.235Z - INFO: Params: []
+2025-04-09T00:18:17.235Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.236Z - INFO: Query: DELETE FROM `main`.`Promotion` WHERE 1=1
+2025-04-09T00:18:17.236Z - INFO: Params: []
+2025-04-09T00:18:17.236Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.237Z - INFO: Query: DELETE FROM `main`.`RSVP` WHERE 1=1
+2025-04-09T00:18:17.237Z - INFO: Params: []
+2025-04-09T00:18:17.237Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.238Z - INFO: Query: DELETE FROM `main`.`Organizer` WHERE 1=1
+2025-04-09T00:18:17.238Z - INFO: Params: []
+2025-04-09T00:18:17.238Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.239Z - INFO: Query: DELETE FROM `main`.`Event` WHERE 1=1
+2025-04-09T00:18:17.239Z - INFO: Params: []
+2025-04-09T00:18:17.239Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.239Z - INFO: Query: DELETE FROM `main`.`Transfer` WHERE 1=1
+2025-04-09T00:18:17.239Z - INFO: Params: []
+2025-04-09T00:18:17.239Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.240Z - INFO: Query: DELETE FROM `main`.`Transaction` WHERE 1=1
+2025-04-09T00:18:17.240Z - INFO: Params: []
+2025-04-09T00:18:17.240Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.241Z - INFO: Query: DELETE FROM `main`.`User` WHERE 1=1
+2025-04-09T00:18:17.241Z - INFO: Params: []
+2025-04-09T00:18:17.241Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.241Z - INFO: Creating users one by one to identify problematic user...
+2025-04-09T00:18:17.241Z - INFO: Creating superuser...
+2025-04-09T00:18:17.243Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.243Z - INFO: Params: ["sarahlee","sarahlee@mail.utoronto.ca","123456aA!","Sarah Lee",true,"SUPERUSER",true,false,1000,"2025-04-09 00:18:17.243 UTC","2025-04-09 00:18:17.243 UTC","1990-01-01"]
+2025-04-09T00:18:17.243Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.243Z - INFO: Created superuser: sarahlee, ID: 61
+2025-04-09T00:18:17.243Z - INFO: Creating manager...
+2025-04-09T00:18:17.244Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.244Z - INFO: Params: ["mikejohn","mikejohn@mail.utoronto.ca","123456aA!","Mike Johnson",true,"MANAGER",true,false,500,"2025-04-09 00:18:17.244 UTC","2025-04-09 00:18:17.244 UTC","1991-01-01"]
+2025-04-09T00:18:17.244Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.244Z - INFO: Created manager: mikejohn, ID: 62
+2025-04-09T00:18:17.244Z - INFO: Creating cashier...
+2025-04-09T00:18:17.245Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.245Z - INFO: Params: ["amysmith","amysmith@mail.utoronto.ca","123456aA!","Amy Smith",true,"CASHIER",true,false,300,"2025-04-09 00:18:17.245 UTC","2025-04-09 00:18:17.245 UTC","1992-01-01"]
+2025-04-09T00:18:17.245Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.245Z - INFO: Created cashier: amysmith, ID: 63
+2025-04-09T00:18:17.245Z - INFO: Creating regular user: johndoe1...
+2025-04-09T00:18:17.246Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.246Z - INFO: Params: ["johndoe1","johndoe1@mail.utoronto.ca","123456aA!","John Doe",true,"REGULAR",true,false,100,"2025-04-09 00:18:17.246 UTC","2025-04-09 00:18:17.246 UTC","1993-01-01"]
+2025-04-09T00:18:17.246Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.246Z - INFO: Created regular user: johndoe1, ID: 64
+2025-04-09T00:18:17.246Z - INFO: Creating regular user: emilywu2...
+2025-04-09T00:18:17.247Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.247Z - INFO: Params: ["emilywu2","emilywu2@mail.utoronto.ca","123456aA!","Emily Wu",true,"REGULAR",true,false,200,"2025-04-09 00:18:17.247 UTC","2025-04-09 00:18:17.247 UTC","1994-01-01"]
+2025-04-09T00:18:17.247Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.247Z - INFO: Created regular user: emilywu2, ID: 65
+2025-04-09T00:18:17.247Z - INFO: Creating regular user: alexng12...
+2025-04-09T00:18:17.248Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.248Z - INFO: Params: ["alexng12","alexng12@mail.utoronto.ca","123456aA!","Alex Ng",true,"REGULAR",true,false,300,"2025-04-09 00:18:17.248 UTC","2025-04-09 00:18:17.248 UTC","1995-01-01"]
+2025-04-09T00:18:17.248Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.248Z - INFO: Created regular user: alexng12, ID: 66
+2025-04-09T00:18:17.248Z - INFO: Creating regular user: juliakim...
+2025-04-09T00:18:17.248Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.248Z - INFO: Params: ["juliakim","juliakim@mail.utoronto.ca","123456aA!","Julia Kim",true,"REGULAR",true,false,400,"2025-04-09 00:18:17.248 UTC","2025-04-09 00:18:17.248 UTC","1996-01-01"]
+2025-04-09T00:18:17.248Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.249Z - INFO: Created regular user: juliakim, ID: 67
+2025-04-09T00:18:17.249Z - INFO: Creating regular user: ryanpark...
+2025-04-09T00:18:17.249Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.249Z - INFO: Params: ["ryanpark","ryanpark@mail.utoronto.ca","123456aA!","Ryan Park",true,"REGULAR",true,false,500,"2025-04-09 00:18:17.249 UTC","2025-04-09 00:18:17.249 UTC","1997-01-01"]
+2025-04-09T00:18:17.249Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.249Z - INFO: Created regular user: ryanpark, ID: 68
+2025-04-09T00:18:17.249Z - INFO: Creating regular user: liachen...
+2025-04-09T00:18:17.250Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.250Z - INFO: Params: ["liachen","liachen@mail.utoronto.ca","123456aA!","Lia Chen",true,"REGULAR",false,false,600,"2025-04-09 00:18:17.250 UTC","2025-04-09 00:18:17.250 UTC","1998-01-01"]
+2025-04-09T00:18:17.250Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.250Z - INFO: Created regular user: liachen, ID: 69
+2025-04-09T00:18:17.250Z - INFO: Creating regular user: davidlee...
+2025-04-09T00:18:17.251Z - INFO: Query: INSERT INTO `main`.`User` (`username`, `email`, `password`, `name`, `isActivated`, `role`, `verifiedStudent`, `isSuspicious`, `pointsBalance`, `createdAt`, `updatedAt`, `birthday`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `username` AS `username`, `email` AS `email`, `password` AS `password`, `name` AS `name`, `isActivated` AS `isActivated`, `role` AS `role`, `verifiedStudent` AS `verifiedStudent`, `isSuspicious` AS `isSuspicious`, `pointsBalance` AS `pointsBalance`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`, `lastLogin` AS `lastLogin`, `avatarUrl` AS `avatarUrl`, `birthday` AS `birthday`
+2025-04-09T00:18:17.251Z - INFO: Params: ["davidlee","davidlee@mail.utoronto.ca","123456aA!","David Lee",true,"REGULAR",false,false,700,"2025-04-09 00:18:17.251 UTC","2025-04-09 00:18:17.251 UTC","1999-01-01"]
+2025-04-09T00:18:17.251Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.251Z - INFO: Created regular user: davidlee, ID: 70
+2025-04-09T00:18:17.251Z - INFO: Created 10 users
+2025-04-09T00:18:17.251Z - INFO: User IDs: 61, 62, 63, 64, 65, 66, 67, 68, 69, 70
+2025-04-09T00:18:17.251Z - INFO: Creating events...
+2025-04-09T00:18:17.251Z - INFO: Creating event with manager ID: 62
+2025-04-09T00:18:17.252Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.252Z - INFO: Params: ["Event 1","Description for event 1","Location 1","2025-04-09 00:18:17.251 UTC","2025-04-09 03:18:17.251 UTC",50,1000,1000,0,true,0,"2025-04-09 00:18:17.252 UTC",62]
+2025-04-09T00:18:17.252Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.253Z - INFO: Created event: Event 1, ID: 31
+2025-04-09T00:18:17.253Z - INFO: Creating event with manager ID: 63
+2025-04-09T00:18:17.253Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.254Z - INFO: Params: ["Event 2","Description for event 2","Location 2","2025-04-16 00:18:17.253 UTC","2025-04-16 03:18:17.253 UTC",50,1000,1000,0,true,0,"2025-04-09 00:18:17.253 UTC",63]
+2025-04-09T00:18:17.254Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.254Z - INFO: Created event: Event 2, ID: 32
+2025-04-09T00:18:17.254Z - INFO: Creating event with manager ID: 62
+2025-04-09T00:18:17.255Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.255Z - INFO: Params: ["Event 3","Description for event 3","Location 3","2025-04-23 00:18:17.254 UTC","2025-04-23 03:18:17.254 UTC",50,1000,1000,0,true,0,"2025-04-09 00:18:17.254 UTC",62]
+2025-04-09T00:18:17.255Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.255Z - INFO: Created event: Event 3, ID: 33
+2025-04-09T00:18:17.255Z - INFO: Creating event with manager ID: 63
+2025-04-09T00:18:17.256Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.256Z - INFO: Params: ["Event 4","Description for event 4","Location 4","2025-04-30 00:18:17.255 UTC","2025-04-30 03:18:17.255 UTC",50,1000,1000,0,false,0,"2025-04-09 00:18:17.256 UTC",63]
+2025-04-09T00:18:17.257Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.257Z - INFO: Created event: Event 4, ID: 34
+2025-04-09T00:18:17.257Z - INFO: Creating event with manager ID: 62
+2025-04-09T00:18:17.257Z - INFO: Query: INSERT INTO `main`.`Event` (`name`, `description`, `location`, `startTime`, `endTime`, `capacity`, `totalPoints`, `pointsRemain`, `pointsAwarded`, `isPublished`, `numGuests`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `location` AS `location`, `startTime` AS `startTime`, `endTime` AS `endTime`, `capacity` AS `capacity`, `totalPoints` AS `totalPoints`, `pointsRemain` AS `pointsRemain`, `pointsAwarded` AS `pointsAwarded`, `isPublished` AS `isPublished`, `numGuests` AS `numGuests`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.258Z - INFO: Params: ["Event 5","Description for event 5","Location 5","2025-05-07 00:18:17.257 UTC","2025-05-07 03:18:17.257 UTC",50,1000,1000,0,false,0,"2025-04-09 00:18:17.257 UTC",62]
+2025-04-09T00:18:17.258Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.258Z - INFO: Created event: Event 5, ID: 35
+2025-04-09T00:18:17.258Z - INFO: Created 5 events
+2025-04-09T00:18:17.258Z - INFO: Creating event organizers...
+2025-04-09T00:18:17.258Z - INFO: Available users: 10, Available events: 5
+2025-04-09T00:18:17.258Z - INFO: User IDs: 61, 62, 63, 64, 65, 66, 67, 68, 69, 70
+2025-04-09T00:18:17.258Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.258Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.258Z - INFO: Using organizer indices: 3, 4
+2025-04-09T00:18:17.258Z - INFO: Creating organizer with event ID: 31, user ID: 64
+2025-04-09T00:18:17.259Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.259Z - INFO: Params: [31,64]
+2025-04-09T00:18:17.259Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.259Z - INFO: Created organizer for event 31, user 64
+2025-04-09T00:18:17.259Z - INFO: Creating organizer with event ID: 31, user ID: 65
+2025-04-09T00:18:17.260Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.260Z - INFO: Params: [31,65]
+2025-04-09T00:18:17.260Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.260Z - INFO: Created organizer for event 31, user 65
+2025-04-09T00:18:17.260Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.260Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.260Z - INFO: Using organizer indices: 3, 4
+2025-04-09T00:18:17.260Z - INFO: Creating organizer with event ID: 32, user ID: 64
+2025-04-09T00:18:17.260Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.260Z - INFO: Params: [32,64]
+2025-04-09T00:18:17.260Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.260Z - INFO: Created organizer for event 32, user 64
+2025-04-09T00:18:17.261Z - INFO: Creating organizer with event ID: 32, user ID: 65
+2025-04-09T00:18:17.261Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.261Z - INFO: Params: [32,65]
+2025-04-09T00:18:17.261Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.261Z - INFO: Created organizer for event 32, user 65
+2025-04-09T00:18:17.261Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.261Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.261Z - INFO: Using organizer indices: 3, 4
+2025-04-09T00:18:17.261Z - INFO: Creating organizer with event ID: 33, user ID: 64
+2025-04-09T00:18:17.262Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.262Z - INFO: Params: [33,64]
+2025-04-09T00:18:17.262Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.262Z - INFO: Created organizer for event 33, user 64
+2025-04-09T00:18:17.262Z - INFO: Creating organizer with event ID: 33, user ID: 65
+2025-04-09T00:18:17.263Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.263Z - INFO: Params: [33,65]
+2025-04-09T00:18:17.263Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.263Z - INFO: Created organizer for event 33, user 65
+2025-04-09T00:18:17.263Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.263Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.263Z - INFO: Using organizer indices: 3, 4
+2025-04-09T00:18:17.263Z - INFO: Creating organizer with event ID: 34, user ID: 64
+2025-04-09T00:18:17.264Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.264Z - INFO: Params: [34,64]
+2025-04-09T00:18:17.264Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.264Z - INFO: Created organizer for event 34, user 64
+2025-04-09T00:18:17.264Z - INFO: Creating organizer with event ID: 34, user ID: 65
+2025-04-09T00:18:17.265Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.265Z - INFO: Params: [34,65]
+2025-04-09T00:18:17.265Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.265Z - INFO: Created organizer for event 34, user 65
+2025-04-09T00:18:17.265Z - INFO: Regular user indices available: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.265Z - INFO: Valid user indices: 3, 4, 5, 6, 7, 8, 9
+2025-04-09T00:18:17.265Z - INFO: Using organizer indices: 3, 4
+2025-04-09T00:18:17.265Z - INFO: Creating organizer with event ID: 35, user ID: 64
+2025-04-09T00:18:17.265Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.266Z - INFO: Params: [35,64]
+2025-04-09T00:18:17.266Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.266Z - INFO: Created organizer for event 35, user 64
+2025-04-09T00:18:17.266Z - INFO: Creating organizer with event ID: 35, user ID: 65
+2025-04-09T00:18:17.266Z - INFO: Query: INSERT INTO `main`.`Organizer` (`eventId`, `userId`) VALUES (?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`
+2025-04-09T00:18:17.266Z - INFO: Params: [35,65]
+2025-04-09T00:18:17.266Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.266Z - INFO: Created organizer for event 35, user 65
+2025-04-09T00:18:17.266Z - INFO: Created 10 event organizers
+2025-04-09T00:18:17.266Z - INFO: Creating RSVPs...
+2025-04-09T00:18:17.267Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.267Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.267Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.267Z - INFO: Creating RSVP with event ID: 31, user ID: 66
+2025-04-09T00:18:17.268Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.268Z - INFO: Params: [31,66,false]
+2025-04-09T00:18:17.268Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.268Z - INFO: Created RSVP for event 31, user 66
+2025-04-09T00:18:17.268Z - INFO: Creating RSVP with event ID: 31, user ID: 67
+2025-04-09T00:18:17.268Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.268Z - INFO: Params: [31,67,true]
+2025-04-09T00:18:17.268Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.269Z - INFO: Created RSVP for event 31, user 67
+2025-04-09T00:18:17.269Z - INFO: Creating RSVP with event ID: 31, user ID: 68
+2025-04-09T00:18:17.269Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.269Z - INFO: Params: [31,68,false]
+2025-04-09T00:18:17.269Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.269Z - INFO: Created RSVP for event 31, user 68
+2025-04-09T00:18:17.269Z - INFO: Creating RSVP with event ID: 31, user ID: 69
+2025-04-09T00:18:17.271Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.271Z - INFO: Params: [31,69,true]
+2025-04-09T00:18:17.271Z - INFO: Duration: 1ms
+2025-04-09T00:18:17.271Z - INFO: Created RSVP for event 31, user 69
+2025-04-09T00:18:17.271Z - INFO: Creating RSVP with event ID: 31, user ID: 70
+2025-04-09T00:18:17.272Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.272Z - INFO: Params: [31,70,false]
+2025-04-09T00:18:17.272Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.272Z - INFO: Created RSVP for event 31, user 70
+2025-04-09T00:18:17.272Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.272Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.272Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.272Z - INFO: Creating RSVP with event ID: 32, user ID: 66
+2025-04-09T00:18:17.273Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.273Z - INFO: Params: [32,66,false]
+2025-04-09T00:18:17.273Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.273Z - INFO: Created RSVP for event 32, user 66
+2025-04-09T00:18:17.273Z - INFO: Creating RSVP with event ID: 32, user ID: 67
+2025-04-09T00:18:17.274Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.274Z - INFO: Params: [32,67,true]
+2025-04-09T00:18:17.274Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.274Z - INFO: Created RSVP for event 32, user 67
+2025-04-09T00:18:17.274Z - INFO: Creating RSVP with event ID: 32, user ID: 68
+2025-04-09T00:18:17.274Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.274Z - INFO: Params: [32,68,false]
+2025-04-09T00:18:17.274Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.274Z - INFO: Created RSVP for event 32, user 68
+2025-04-09T00:18:17.275Z - INFO: Creating RSVP with event ID: 32, user ID: 69
+2025-04-09T00:18:17.275Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.275Z - INFO: Params: [32,69,true]
+2025-04-09T00:18:17.275Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.275Z - INFO: Created RSVP for event 32, user 69
+2025-04-09T00:18:17.275Z - INFO: Creating RSVP with event ID: 32, user ID: 70
+2025-04-09T00:18:17.276Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.276Z - INFO: Params: [32,70,false]
+2025-04-09T00:18:17.276Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.276Z - INFO: Created RSVP for event 32, user 70
+2025-04-09T00:18:17.276Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.276Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.276Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.276Z - INFO: Creating RSVP with event ID: 33, user ID: 66
+2025-04-09T00:18:17.277Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.277Z - INFO: Params: [33,66,false]
+2025-04-09T00:18:17.277Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.277Z - INFO: Created RSVP for event 33, user 66
+2025-04-09T00:18:17.277Z - INFO: Creating RSVP with event ID: 33, user ID: 67
+2025-04-09T00:18:17.278Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.278Z - INFO: Params: [33,67,true]
+2025-04-09T00:18:17.278Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.278Z - INFO: Created RSVP for event 33, user 67
+2025-04-09T00:18:17.278Z - INFO: Creating RSVP with event ID: 33, user ID: 68
+2025-04-09T00:18:17.278Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.279Z - INFO: Params: [33,68,false]
+2025-04-09T00:18:17.279Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.279Z - INFO: Created RSVP for event 33, user 68
+2025-04-09T00:18:17.279Z - INFO: Creating RSVP with event ID: 33, user ID: 69
+2025-04-09T00:18:17.279Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.279Z - INFO: Params: [33,69,true]
+2025-04-09T00:18:17.279Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.279Z - INFO: Created RSVP for event 33, user 69
+2025-04-09T00:18:17.279Z - INFO: Creating RSVP with event ID: 33, user ID: 70
+2025-04-09T00:18:17.280Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.280Z - INFO: Params: [33,70,false]
+2025-04-09T00:18:17.280Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.280Z - INFO: Created RSVP for event 33, user 70
+2025-04-09T00:18:17.280Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.280Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.280Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.280Z - INFO: Creating RSVP with event ID: 34, user ID: 66
+2025-04-09T00:18:17.281Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.281Z - INFO: Params: [34,66,false]
+2025-04-09T00:18:17.281Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.281Z - INFO: Created RSVP for event 34, user 66
+2025-04-09T00:18:17.281Z - INFO: Creating RSVP with event ID: 34, user ID: 67
+2025-04-09T00:18:17.282Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.282Z - INFO: Params: [34,67,true]
+2025-04-09T00:18:17.282Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.282Z - INFO: Created RSVP for event 34, user 67
+2025-04-09T00:18:17.282Z - INFO: Creating RSVP with event ID: 34, user ID: 68
+2025-04-09T00:18:17.283Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.283Z - INFO: Params: [34,68,false]
+2025-04-09T00:18:17.283Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.283Z - INFO: Created RSVP for event 34, user 68
+2025-04-09T00:18:17.283Z - INFO: Creating RSVP with event ID: 34, user ID: 69
+2025-04-09T00:18:17.284Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.284Z - INFO: Params: [34,69,true]
+2025-04-09T00:18:17.284Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.284Z - INFO: Created RSVP for event 34, user 69
+2025-04-09T00:18:17.284Z - INFO: Creating RSVP with event ID: 34, user ID: 70
+2025-04-09T00:18:17.285Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.285Z - INFO: Params: [34,70,false]
+2025-04-09T00:18:17.285Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.285Z - INFO: Created RSVP for event 34, user 70
+2025-04-09T00:18:17.285Z - INFO: Regular user indices available for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.285Z - INFO: Valid user indices for RSVPs: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.285Z - INFO: Using RSVP user indices: 5, 6, 7, 8, 9
+2025-04-09T00:18:17.285Z - INFO: Creating RSVP with event ID: 35, user ID: 66
+2025-04-09T00:18:17.286Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.286Z - INFO: Params: [35,66,false]
+2025-04-09T00:18:17.286Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.286Z - INFO: Created RSVP for event 35, user 66
+2025-04-09T00:18:17.286Z - INFO: Creating RSVP with event ID: 35, user ID: 67
+2025-04-09T00:18:17.286Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.286Z - INFO: Params: [35,67,true]
+2025-04-09T00:18:17.286Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.286Z - INFO: Created RSVP for event 35, user 67
+2025-04-09T00:18:17.287Z - INFO: Creating RSVP with event ID: 35, user ID: 68
+2025-04-09T00:18:17.287Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.287Z - INFO: Params: [35,68,false]
+2025-04-09T00:18:17.287Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.287Z - INFO: Created RSVP for event 35, user 68
+2025-04-09T00:18:17.287Z - INFO: Creating RSVP with event ID: 35, user ID: 69
+2025-04-09T00:18:17.288Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.288Z - INFO: Params: [35,69,true]
+2025-04-09T00:18:17.288Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.288Z - INFO: Created RSVP for event 35, user 69
+2025-04-09T00:18:17.288Z - INFO: Creating RSVP with event ID: 35, user ID: 70
+2025-04-09T00:18:17.289Z - INFO: Query: INSERT INTO `main`.`RSVP` (`eventId`, `userId`, `confirmed`) VALUES (?,?,?) RETURNING `id` AS `id`, `eventId` AS `eventId`, `userId` AS `userId`, `confirmed` AS `confirmed`
+2025-04-09T00:18:17.289Z - INFO: Params: [35,70,false]
+2025-04-09T00:18:17.289Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.289Z - INFO: Created RSVP for event 35, user 70
+2025-04-09T00:18:17.289Z - INFO: Created 25 RSVPs
+2025-04-09T00:18:17.289Z - INFO: Creating promotions...
+2025-04-09T00:18:17.289Z - INFO: Creating promotion with manager ID: 62
+2025-04-09T00:18:17.289Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.290Z - INFO: Params: ["Promo 1","Description for promo 1","AUTOMATIC","2025-04-04 00:18:17.289 UTC","2025-04-19 00:18:17.289 UTC",10,0.1,null,"2025-04-09 00:18:17.289 UTC",62]
+2025-04-09T00:18:17.290Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.290Z - INFO: Created promotion: Promo 1, ID: 26
+2025-04-09T00:18:17.290Z - INFO: Creating promotion with manager ID: 62
+2025-04-09T00:18:17.290Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.290Z - INFO: Params: ["Promo 2","Description for promo 2","ONE_TIME","2025-04-05 00:18:17.290 UTC","2025-04-24 00:18:17.290 UTC",15,null,100,"2025-04-09 00:18:17.291 UTC",62]
+2025-04-09T00:18:17.291Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.291Z - INFO: Created promotion: Promo 2, ID: 27
+2025-04-09T00:18:17.291Z - INFO: Creating promotion with manager ID: 62
+2025-04-09T00:18:17.291Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.291Z - INFO: Params: ["Promo 3","Description for promo 3","AUTOMATIC","2025-04-06 00:18:17.291 UTC","2025-04-29 00:18:17.291 UTC",20,0.3,null,"2025-04-09 00:18:17.291 UTC",62]
+2025-04-09T00:18:17.291Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.291Z - INFO: Created promotion: Promo 3, ID: 28
+2025-04-09T00:18:17.291Z - INFO: Creating promotion with manager ID: 62
+2025-04-09T00:18:17.292Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.292Z - INFO: Params: ["Promo 4","Description for promo 4","ONE_TIME","2025-04-07 00:18:17.291 UTC","2025-05-04 00:18:17.291 UTC",25,null,200,"2025-04-09 00:18:17.292 UTC",62]
+2025-04-09T00:18:17.292Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.292Z - INFO: Created promotion: Promo 4, ID: 29
+2025-04-09T00:18:17.292Z - INFO: Creating promotion with manager ID: 62
+2025-04-09T00:18:17.293Z - INFO: Query: INSERT INTO `main`.`Promotion` (`name`, `description`, `type`, `startTime`, `endTime`, `minSpend`, `rate`, `points`, `createdAt`, `managerId`) VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `description` AS `description`, `type` AS `type`, `startTime` AS `startTime`, `endTime` AS `endTime`, `minSpend` AS `minSpend`, `rate` AS `rate`, `points` AS `points`, `createdAt` AS `createdAt`, `managerId` AS `managerId`
+2025-04-09T00:18:17.293Z - INFO: Params: ["Promo 5","Description for promo 5","AUTOMATIC","2025-04-08 00:18:17.292 UTC","2025-05-09 00:18:17.292 UTC",30,0.5,null,"2025-04-09 00:18:17.292 UTC",62]
+2025-04-09T00:18:17.293Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.293Z - INFO: Created promotion: Promo 5, ID: 30
+2025-04-09T00:18:17.293Z - INFO: Created 5 promotions
+2025-04-09T00:18:17.293Z - INFO: Creating transactions...
+2025-04-09T00:18:17.293Z - INFO: Creating PURCHASE transactions...
+2025-04-09T00:18:17.293Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.293Z - INFO: Creating PURCHASE transaction for user ID: 69
+2025-04-09T00:18:17.294Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.294Z - INFO: Params: [69,"PURCHASE",101,"APPROVED",true,63,50.5,"PURCHASE 1","2025-04-09 00:18:17.294 UTC"]
+2025-04-09T00:18:17.294Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.294Z - INFO: Created PURCHASE transaction #1 for user 69, ID: 156
+2025-04-09T00:18:17.294Z - INFO: Creating promotion use with promotion ID: 29, transaction ID: 156
+2025-04-09T00:18:17.297Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
+2025-04-09T00:18:17.297Z - INFO: Params: [69,29,156]
+2025-04-09T00:18:17.297Z - INFO: Duration: 3ms
+2025-04-09T00:18:17.297Z - INFO: Created promotion use for transaction 156, promotion 29
+2025-04-09T00:18:17.297Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.297Z - INFO: Creating PURCHASE transaction for user ID: 66
+2025-04-09T00:18:17.298Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.298Z - INFO: Params: [66,"PURCHASE",107,"APPROVED",true,63,53.5,"PURCHASE 2","2025-04-09 00:18:17.298 UTC"]
+2025-04-09T00:18:17.298Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.298Z - INFO: Created PURCHASE transaction #2 for user 66, ID: 157
+2025-04-09T00:18:17.298Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.298Z - INFO: Creating PURCHASE transaction for user ID: 63
+2025-04-09T00:18:17.299Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.299Z - INFO: Params: [63,"PURCHASE",27,"PENDING",true,63,13.5,"PURCHASE 3","2025-04-09 00:18:17.299 UTC"]
+2025-04-09T00:18:17.299Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.299Z - INFO: Created PURCHASE transaction #3 for user 63, ID: 158
+2025-04-09T00:18:17.299Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.299Z - INFO: Creating PURCHASE transaction for user ID: 61
+2025-04-09T00:18:17.300Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.300Z - INFO: Params: [61,"PURCHASE",97,"PENDING",false,63,48.5,"PURCHASE 4","2025-04-09 00:18:17.300 UTC"]
+2025-04-09T00:18:17.300Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.300Z - INFO: Created PURCHASE transaction #4 for user 61, ID: 159
+2025-04-09T00:18:17.300Z - INFO: Creating promotion use with promotion ID: 27, transaction ID: 159
+2025-04-09T00:18:17.301Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
+2025-04-09T00:18:17.301Z - INFO: Params: [61,27,159]
+2025-04-09T00:18:17.301Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.301Z - INFO: Created promotion use for transaction 159, promotion 27
+2025-04-09T00:18:17.301Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.301Z - INFO: Creating PURCHASE transaction for user ID: 63
+2025-04-09T00:18:17.302Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.302Z - INFO: Params: [63,"PURCHASE",23,"PENDING",true,63,11.5,"PURCHASE 5","2025-04-09 00:18:17.302 UTC"]
+2025-04-09T00:18:17.302Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.302Z - INFO: Created PURCHASE transaction #5 for user 63, ID: 160
+2025-04-09T00:18:17.302Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.302Z - INFO: Creating PURCHASE transaction for user ID: 64
+2025-04-09T00:18:17.303Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.303Z - INFO: Params: [64,"PURCHASE",35,"PENDING",true,63,17.5,"PURCHASE 6","2025-04-09 00:18:17.303 UTC"]
+2025-04-09T00:18:17.303Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.303Z - INFO: Created PURCHASE transaction #6 for user 64, ID: 161
+2025-04-09T00:18:17.303Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.303Z - INFO: Creating PURCHASE transaction for user ID: 70
+2025-04-09T00:18:17.303Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `spent`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.303Z - INFO: Params: [70,"PURCHASE",17,"PENDING",false,63,8.5,"PURCHASE 7","2025-04-09 00:18:17.304 UTC"]
+2025-04-09T00:18:17.304Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.304Z - INFO: Created PURCHASE transaction #7 for user 70, ID: 162
+2025-04-09T00:18:17.304Z - INFO: Creating promotion use with promotion ID: 29, transaction ID: 162
+2025-04-09T00:18:17.304Z - INFO: Query: INSERT INTO `main`.`PromotionUse` (`userId`, `promotionId`, `transactionId`) VALUES (?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `promotionId` AS `promotionId`, `transactionId` AS `transactionId`
+2025-04-09T00:18:17.304Z - INFO: Params: [70,29,162]
+2025-04-09T00:18:17.304Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.304Z - INFO: Created promotion use for transaction 162, promotion 29
+2025-04-09T00:18:17.304Z - INFO: Creating ADJUSTMENT transactions...
+2025-04-09T00:18:17.304Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.304Z - INFO: Creating ADJUSTMENT transaction for user ID: 61
+2025-04-09T00:18:17.305Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.305Z - INFO: Params: [61,"ADJUSTMENT",14,"APPROVED",true,63,"ADJUSTMENT 1","2025-04-09 00:18:17.305 UTC"]
+2025-04-09T00:18:17.305Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.305Z - INFO: Created ADJUSTMENT transaction #1 for user 61, ID: 163
+2025-04-09T00:18:17.305Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.305Z - INFO: Creating ADJUSTMENT transaction for user ID: 70
+2025-04-09T00:18:17.306Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.306Z - INFO: Params: [70,"ADJUSTMENT",53,"REJECTED",false,63,"ADJUSTMENT 2","2025-04-09 00:18:17.306 UTC"]
+2025-04-09T00:18:17.306Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.306Z - INFO: Created ADJUSTMENT transaction #2 for user 70, ID: 164
+2025-04-09T00:18:17.306Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.306Z - INFO: Creating ADJUSTMENT transaction for user ID: 67
+2025-04-09T00:18:17.307Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.307Z - INFO: Params: [67,"ADJUSTMENT",55,"APPROVED",true,63,"ADJUSTMENT 3","2025-04-09 00:18:17.307 UTC"]
+2025-04-09T00:18:17.307Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.307Z - INFO: Created ADJUSTMENT transaction #3 for user 67, ID: 165
+2025-04-09T00:18:17.307Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.307Z - INFO: Creating ADJUSTMENT transaction for user ID: 67
+2025-04-09T00:18:17.308Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.308Z - INFO: Params: [67,"ADJUSTMENT",33,"APPROVED",false,63,"ADJUSTMENT 4","2025-04-09 00:18:17.307 UTC"]
+2025-04-09T00:18:17.308Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.308Z - INFO: Created ADJUSTMENT transaction #4 for user 67, ID: 166
+2025-04-09T00:18:17.308Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.308Z - INFO: Creating ADJUSTMENT transaction for user ID: 62
+2025-04-09T00:18:17.308Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.308Z - INFO: Params: [62,"ADJUSTMENT",22,"PENDING",false,63,"ADJUSTMENT 5","2025-04-09 00:18:17.308 UTC"]
+2025-04-09T00:18:17.308Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.309Z - INFO: Created ADJUSTMENT transaction #5 for user 62, ID: 167
+2025-04-09T00:18:17.309Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.309Z - INFO: Creating ADJUSTMENT transaction for user ID: 64
+2025-04-09T00:18:17.309Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.309Z - INFO: Params: [64,"ADJUSTMENT",63,"PENDING",false,63,"ADJUSTMENT 6","2025-04-09 00:18:17.309 UTC"]
+2025-04-09T00:18:17.309Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.309Z - INFO: Created ADJUSTMENT transaction #6 for user 64, ID: 168
+2025-04-09T00:18:17.309Z - INFO: Creating REDEMPTION transactions...
+2025-04-09T00:18:17.309Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.310Z - INFO: Creating REDEMPTION transaction for user ID: 65
+2025-04-09T00:18:17.310Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.310Z - INFO: Params: [65,"REDEMPTION",-100,"PENDING",false,63,"REDEMPTION 1","2025-04-09 00:18:17.310 UTC"]
+2025-04-09T00:18:17.310Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.310Z - INFO: Created REDEMPTION transaction #1 for user 65, ID: 169
+2025-04-09T00:18:17.310Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.310Z - INFO: Creating REDEMPTION transaction for user ID: 67
+2025-04-09T00:18:17.311Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.311Z - INFO: Params: [67,"REDEMPTION",-84,"REJECTED",false,63,"REDEMPTION 2","2025-04-09 00:18:17.311 UTC"]
+2025-04-09T00:18:17.311Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.311Z - INFO: Created REDEMPTION transaction #2 for user 67, ID: 170
+2025-04-09T00:18:17.311Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.311Z - INFO: Creating REDEMPTION transaction for user ID: 70
+2025-04-09T00:18:17.311Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.311Z - INFO: Params: [70,"REDEMPTION",-73,"REJECTED",false,63,"REDEMPTION 3","2025-04-09 00:18:17.311 UTC"]
+2025-04-09T00:18:17.311Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.311Z - INFO: Created REDEMPTION transaction #3 for user 70, ID: 171
+2025-04-09T00:18:17.311Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.311Z - INFO: Creating REDEMPTION transaction for user ID: 68
+2025-04-09T00:18:17.312Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.312Z - INFO: Params: [68,"REDEMPTION",-21,"APPROVED",true,63,"REDEMPTION 4","2025-04-09 00:18:17.312 UTC"]
+2025-04-09T00:18:17.312Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.312Z - INFO: Created REDEMPTION transaction #4 for user 68, ID: 172
+2025-04-09T00:18:17.312Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.312Z - INFO: Creating REDEMPTION transaction for user ID: 62
+2025-04-09T00:18:17.313Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.313Z - INFO: Params: [62,"REDEMPTION",-103,"APPROVED",false,63,"REDEMPTION 5","2025-04-09 00:18:17.313 UTC"]
+2025-04-09T00:18:17.313Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.313Z - INFO: Created REDEMPTION transaction #5 for user 62, ID: 173
+2025-04-09T00:18:17.313Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.313Z - INFO: Creating REDEMPTION transaction for user ID: 65
+2025-04-09T00:18:17.314Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.314Z - INFO: Params: [65,"REDEMPTION",-39,"REJECTED",true,63,"REDEMPTION 6","2025-04-09 00:18:17.314 UTC"]
+2025-04-09T00:18:17.314Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.314Z - INFO: Created REDEMPTION transaction #6 for user 65, ID: 174
+2025-04-09T00:18:17.314Z - INFO: Creating TRANSFER transactions...
+2025-04-09T00:18:17.314Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.314Z - INFO: Creating TRANSFER transaction for user ID: 64
+2025-04-09T00:18:17.314Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.314Z - INFO: Params: [64,"TRANSFER",44,"APPROVED",false,63,"TRANSFER 1","2025-04-09 00:18:17.314 UTC"]
+2025-04-09T00:18:17.314Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.314Z - INFO: Created TRANSFER transaction #1 for user 64, ID: 175
+2025-04-09T00:18:17.314Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.314Z - INFO: Creating TRANSFER transaction for user ID: 67
+2025-04-09T00:18:17.315Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.315Z - INFO: Params: [67,"TRANSFER",52,"PENDING",false,63,"TRANSFER 2","2025-04-09 00:18:17.315 UTC"]
+2025-04-09T00:18:17.315Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.315Z - INFO: Created TRANSFER transaction #2 for user 67, ID: 176
+2025-04-09T00:18:17.315Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.315Z - INFO: Creating TRANSFER transaction for user ID: 66
+2025-04-09T00:18:17.318Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.318Z - INFO: Params: [66,"TRANSFER",19,"PENDING",false,63,"TRANSFER 3","2025-04-09 00:18:17.317 UTC"]
+2025-04-09T00:18:17.318Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.318Z - INFO: Created TRANSFER transaction #3 for user 66, ID: 177
+2025-04-09T00:18:17.319Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.319Z - INFO: Creating TRANSFER transaction for user ID: 70
+2025-04-09T00:18:17.320Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.320Z - INFO: Params: [70,"TRANSFER",32,"REJECTED",true,63,"TRANSFER 4","2025-04-09 00:18:17.320 UTC"]
+2025-04-09T00:18:17.320Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.320Z - INFO: Created TRANSFER transaction #4 for user 70, ID: 178
+2025-04-09T00:18:17.320Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.320Z - INFO: Creating TRANSFER transaction for user ID: 65
+2025-04-09T00:18:17.321Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.321Z - INFO: Params: [65,"TRANSFER",24,"PENDING",true,63,"TRANSFER 5","2025-04-09 00:18:17.321 UTC"]
+2025-04-09T00:18:17.321Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.321Z - INFO: Created TRANSFER transaction #5 for user 65, ID: 179
+2025-04-09T00:18:17.321Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.321Z - INFO: Creating TRANSFER transaction for user ID: 63
+2025-04-09T00:18:17.322Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.322Z - INFO: Params: [63,"TRANSFER",56,"APPROVED",false,63,"TRANSFER 6","2025-04-09 00:18:17.322 UTC"]
+2025-04-09T00:18:17.322Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.322Z - INFO: Created TRANSFER transaction #6 for user 63, ID: 180
+2025-04-09T00:18:17.322Z - INFO: Creating EVENT transactions...
+2025-04-09T00:18:17.322Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.322Z - INFO: Creating EVENT transaction for user ID: 61
+2025-04-09T00:18:17.323Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.323Z - INFO: Params: [61,"EVENT",104,"REJECTED",true,63,"EVENT 1","2025-04-09 00:18:17.323 UTC"]
+2025-04-09T00:18:17.323Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.323Z - INFO: Created EVENT transaction #1 for user 61, ID: 181
+2025-04-09T00:18:17.323Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.323Z - INFO: Creating EVENT transaction for user ID: 69
+2025-04-09T00:18:17.324Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.324Z - INFO: Params: [69,"EVENT",73,"REJECTED",false,63,"EVENT 2","2025-04-09 00:18:17.324 UTC"]
+2025-04-09T00:18:17.324Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.324Z - INFO: Created EVENT transaction #2 for user 69, ID: 182
+2025-04-09T00:18:17.324Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.324Z - INFO: Creating EVENT transaction for user ID: 64
+2025-04-09T00:18:17.324Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.324Z - INFO: Params: [64,"EVENT",22,"PENDING",false,63,"EVENT 3","2025-04-09 00:18:17.324 UTC"]
+2025-04-09T00:18:17.324Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.324Z - INFO: Created EVENT transaction #3 for user 64, ID: 183
+2025-04-09T00:18:17.324Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.325Z - INFO: Creating EVENT transaction for user ID: 68
+2025-04-09T00:18:17.325Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.325Z - INFO: Params: [68,"EVENT",34,"PENDING",false,63,"EVENT 4","2025-04-09 00:18:17.325 UTC"]
+2025-04-09T00:18:17.325Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.325Z - INFO: Created EVENT transaction #4 for user 68, ID: 184
+2025-04-09T00:18:17.325Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.325Z - INFO: Creating EVENT transaction for user ID: 68
+2025-04-09T00:18:17.326Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.326Z - INFO: Params: [68,"EVENT",35,"PENDING",false,63,"EVENT 5","2025-04-09 00:18:17.326 UTC"]
+2025-04-09T00:18:17.326Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.326Z - INFO: Created EVENT transaction #5 for user 68, ID: 185
+2025-04-09T00:18:17.326Z - INFO: Adding processor ID: 63 to transaction
+2025-04-09T00:18:17.326Z - INFO: Creating EVENT transaction for user ID: 70
+2025-04-09T00:18:17.327Z - INFO: Query: INSERT INTO `main`.`Transaction` (`userId`, `type`, `points`, `status`, `needsVerification`, `processedBy`, `remark`, `createdAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `userId` AS `userId`, `type` AS `type`, `points` AS `points`, `status` AS `status`, `needsVerification` AS `needsVerification`, `processedBy` AS `processedBy`, `relatedId` AS `relatedId`, `spent` AS `spent`, `remark` AS `remark`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.327Z - INFO: Params: [70,"EVENT",41,"APPROVED",true,63,"EVENT 6","2025-04-09 00:18:17.327 UTC"]
+2025-04-09T00:18:17.327Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.327Z - INFO: Created EVENT transaction #6 for user 70, ID: 186
+2025-04-09T00:18:17.327Z - INFO: Created 31 transactions total
+2025-04-09T00:18:17.327Z - INFO: Creating transfers...
+2025-04-09T00:18:17.327Z - INFO: Creating transfer from user ID: 64 to user ID: 65
+2025-04-09T00:18:17.328Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.328Z - INFO: Params: [64,65,40,"2025-04-09 00:18:17.328 UTC"]
+2025-04-09T00:18:17.328Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.328Z - INFO: Created transfer from johndoe1 to emilywu2, ID: 26
+2025-04-09T00:18:17.328Z - INFO: Creating transfer from user ID: 65 to user ID: 66
+2025-04-09T00:18:17.329Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.329Z - INFO: Params: [65,66,27,"2025-04-09 00:18:17.329 UTC"]
+2025-04-09T00:18:17.329Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.329Z - INFO: Created transfer from emilywu2 to alexng12, ID: 27
+2025-04-09T00:18:17.329Z - INFO: Creating transfer from user ID: 66 to user ID: 67
+2025-04-09T00:18:17.330Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.330Z - INFO: Params: [66,67,17,"2025-04-09 00:18:17.330 UTC"]
+2025-04-09T00:18:17.330Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.330Z - INFO: Created transfer from alexng12 to juliakim, ID: 28
+2025-04-09T00:18:17.330Z - INFO: Creating transfer from user ID: 67 to user ID: 68
+2025-04-09T00:18:17.330Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.330Z - INFO: Params: [67,68,41,"2025-04-09 00:18:17.330 UTC"]
+2025-04-09T00:18:17.330Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.330Z - INFO: Created transfer from juliakim to ryanpark, ID: 29
+2025-04-09T00:18:17.330Z - INFO: Creating transfer from user ID: 68 to user ID: 69
+2025-04-09T00:18:17.331Z - INFO: Query: INSERT INTO `main`.`Transfer` (`senderId`, `receiverId`, `points`, `createdAt`) VALUES (?,?,?,?) RETURNING `id` AS `id`, `senderId` AS `senderId`, `receiverId` AS `receiverId`, `points` AS `points`, `createdAt` AS `createdAt`
+2025-04-09T00:18:17.331Z - INFO: Params: [68,69,25,"2025-04-09 00:18:17.331 UTC"]
+2025-04-09T00:18:17.331Z - INFO: Duration: 0ms
+2025-04-09T00:18:17.331Z - INFO: Created transfer from ryanpark to liachen, ID: 30
+2025-04-09T00:18:17.331Z - INFO: Created 5 transfers
+2025-04-09T00:18:17.331Z - INFO: Database seeding completed!
+2025-04-09T00:18:17.337Z - INFO: Disconnected from database. Seed process complete.

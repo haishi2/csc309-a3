@@ -446,7 +446,7 @@ async function seed() {
                     };
 
                     // For some transactions, add a cashier if available
-                    if (Math.random() > 0.3 && users.length > 2) {
+                    if (users.length > 2) {
                         data.processedBy = users[2].id; // Cashier
                         logger.log(`Adding processor ID: ${users[2].id} to transaction`);
                     }
