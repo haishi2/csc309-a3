@@ -63,6 +63,7 @@ export default function TransactionHistory() {
     user?.role.toUpperCase() === Role.MANAGER ||
     user?.role.toUpperCase() === Role.SUPERUSER;
 
+
   const [activeTab, setActiveTab] = useState(0);
   const [selectedTransaction, setSelectedTransaction] = useState<number | null>(
     null
@@ -180,6 +181,7 @@ export default function TransactionHistory() {
   };
 
   const renderTransactionDetails = (transaction: Transaction) => {
+    console.log(transaction);
     return (
       <Box sx={{ mt: 2 }}>
         <Typography color="text.secondary">
@@ -191,7 +193,7 @@ export default function TransactionHistory() {
 
         {transaction.relatedId !== undefined && (
           <Typography color="text.secondary">
-            Related Transaction: #{transaction.relatedId}
+            Recipient: {transaction.utorid}
           </Typography>
         )}
 
@@ -207,9 +209,9 @@ export default function TransactionHistory() {
           </Typography>
         )}
 
-        <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-          Created by: {transaction.createBy}
-        </Typography>
+        {transaction.type !== "transfer" && (<Typography variant="caption" display="block" sx={{ mt: 1 }}>
+          Created by: {transaction.createBy || transaction.createdBy}
+        </Typography>)}
       </Box>
     );
   };
@@ -351,7 +353,7 @@ export default function TransactionHistory() {
               >
                 <Typography variant="h6">
                   Transaction #{transaction.id}
-                  {isManager && ` - ${transaction.utorid}`}
+                  {isManager && transaction.type !== "event" && ` - ${transaction.utorid}`}
                 </Typography>
                 <Stack direction="row" spacing={1}>
                   <Chip
