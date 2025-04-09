@@ -355,6 +355,7 @@ router
         result.relatedId = t.relatedId;
       } else if (t.type.toUpperCase() === "EVENT") {
         result.amount = t.points;
+        result.utorid = t.user.username;
         result.relatedId = t.relatedId;
         result.createBy = t.processor?.username;
       }
@@ -424,6 +425,7 @@ router
       result.relatedId = transaction.relatedId;
     } else if (transaction.type.toUpperCase() === "EVENT") {
       result.amount = transaction.points;
+      result.utorid = transaction.user.username;
       result.relatedId = transaction.relatedId;
       result.createBy = transaction.processor?.username;
     }
