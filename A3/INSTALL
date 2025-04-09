@@ -95,3 +95,4 @@ We used AI tools to assist with site styling and debugging, any section with sx 
 Component Attribution:
 The majority of the components used in our frontend code are components from Material-UI.
 The login page is from a MUI example. (link in file for login)
+All Icons and fonts used are from MaterialUI.
